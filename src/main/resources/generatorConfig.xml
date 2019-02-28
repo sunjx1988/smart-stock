@@ -37,7 +37,8 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
-        <table tableName="grid_cupboard" domainObjectName="GridCupboard" >
+        <table tableName="user" domainObjectName="User" >
+            <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
     </context>

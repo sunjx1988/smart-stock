@@ -14,22 +14,113 @@ function download(url, data, method){
     }
 }
 
+$.fn.resetSearch = function(){
+    $(f.form).find("input:text").val("");
+    $(f.form).find("input:hidden").val("");
+    $(f.form).find("select").val("").trigger("change");
+};
 
-$.extend( $.fn.dataTable.defaults, {
-    //本地数据搜索开关
-    searching:false,
-    //分页条数设置开关
-    lengthChange:false,
-    //排序开关
-    ordering:false,
-    processing: true,
-    serverSide: false,
-    ajax:{
-      type: 'post'
-    },
-    //国际化
-    language:{
-        url: "/plugins/datatable/zh-CN.lang"
+//表格
+$.fn.datagrid = function (p) {
+
+    this.templateHtml = $(this).data("templateHtml");
+    if(!this.templateHtml){
+        this.templateHtml = $(this).find("script").html();
+        $(this).data("templateHtml",this.templateHtml);
     }
-} );
+    var _this = this;
+    var options = {
+        pagination:true,
+        pageNo:1,
+        pageSize:10,
+        page:1,
+        currentCount:0
+    };
+    if(!p){
+        p = {};
+        options = $(this).data("options");
+        p = options;
+    }else{
+        p.data = p.data?p.data:{};
+        options = p?$.extend(options,p):options;
+        $(this).data("options",options);
+    }
+
+    var postData = function (){
+        var formData = options.data;
+        if(formData){
+            for(var key in formData){
+                formData[key] = $.trim(formData[key]);
+            }
+            $.extend(options,{data:options});
+        }
+        $.ajax($.extend({
+            type: 'POST',
+            dataType:'json',
+            success:function (data) {
+                //列表数据
+                var array = [];
+                if(options.pagination){
+                    array = data.list;
+                }else{
+                    array = data;
+                }
+                var html = "";
+
+                _this.children().remove();
+                if(null == array || array.length <= 0){
+                    var tdLength = _this.prev().children().children().size();
+                    html = "<tr><td align='center' colspan='"+tdLength+"'>暂无数据</td></tr>";
+                    $(_this).parent().parent().parent().parent().children(".box-footer.dataTables_paginate").empty();
+                }else{
+                    var render = template.compile(_this.templateHtml);
+                    html = render({list:array,page:(options.data.page==null?1:options.data.page),pageSize:(data.pageSize==null?options.pageSize:data.pageSize)});
+                }
+                _this.append(html);
+                //开启分页功能
+                if(options.pagination){
+                    initPage(data);
+                }
+                if(p.callback)
+                {
+                    p.callback(data);
+                }
+            }
+        },options));
+    }
+    var pagination;
+    var initPage = function (opt) {
+        if(pagination){
+            pagination.off("page");
+        }
+        var pageDom = $(_this).parent().parent().parent().parent().children(".box-footer.dataTables_paginate");
+        pagination = pageDom.bootpag({
+            total: opt.pages,
+            page: opt.pageNum,
+            maxVisible: 10,
+            firstLastUse: true,
+            prev: '上一页',
+            next: '下一页',
+            first: '首页',
+            last: '末页',
+            leaps: true
+        }).on("page", function (event, num) {
+            $('#allChk').attr('checked',false);
+        });
+
+        pagination.on("page", function(event, num){
+            var opt = $(_this).data("options");
+            if(opt){
+                options = opt;
+            }
+            $.extend(options.data,{
+                page:num,
+                row:options.pageSize
+            });
+            $(_this).data("options",options);
+            postData();
+        });
+    }
+    postData();
+}
 

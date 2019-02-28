@@ -22,46 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">设备号：</label>
-                        <div class="col-sm-8 ">
-                            <input class="form-control" type="text" name="paramDeviceNo" placeholder="设备号" autocomplete="off" style="width: 100%"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">状态：</label>
-                        <div class="col-sm-8 ">
-                            <select name="paramState" id="paramState"  class="form-control" style="width: 100%">
-                                <option value="">全部</option>
-                                <option th:each="state : ${states}" th:value="${state.key}" th:text="${state.text}"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">版本号：</label>
-                        <div class="col-sm-8 ">
-                            <select name="paramVersion" id="paramVersion"  class="form-control" style="width: 100%">
-                                <option value="">全部</option>
-                                <option th:each="version : ${versions}" th:value="${version.key}" th:text="${version.text}"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">时间：</label>
-                        <div class="col-sm-8 ">
-                            <input class="form-control" type="text" name="paramTime" id="paramTime" placeholder="时间" autocomplete="off" style="width: 100%"/>
-                            <input class="form-control" type="hidden" name="paramCreateBegin" id="paramCreateBegin" placeholder="" autocomplete="off" style="width: 100%"/>
-                            <input class="form-control" type="hidden" name="paramCreateEnd" id="paramCreateEnd" placeholder="" autocomplete="off" style="width: 100%"/>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="row">
                 <div class="col-sm-12">
@@ -84,10 +45,38 @@
                         </div>
                     </div>
                     <div class="box-body no-padding">
-                        <table id="table" class="display">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">编号</th>
+                                <th>用户</th>
+                                <th>添加时间</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td  class="text-center">
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td>{{tab.name}}</td>
+                                    <td>{{tab.createTime}}</td>
+                                    <td class="text-center">
+                                        <div class='icon-flex'>
+                                            <a class="btn btn-default" href="#">编辑</a>
+                                            <a class="btn btn-primary" href="#">删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
                         </table>
                     </div>
                 </div>
+                <p class="box-footer dataTables_paginate"></p>
             </div>
         </div>
     </section>

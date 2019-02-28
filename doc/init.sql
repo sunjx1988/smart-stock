@@ -1,12 +1,12 @@
 -- 用户表
-drop table if exists `t_user`;
+DROP TABLE IF EXISTS `user`;
 
-create table `t_user`(
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `user` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR (255) NOT NULL COMMENT '姓名',
+	`create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
 
 -- 基金信息
 -- 现金余额
