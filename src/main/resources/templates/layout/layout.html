@@ -9,12 +9,22 @@
 
     <script th:src="@{/plugins/jquery/jQuery-2.2.0.min.js}"></script>
     <script th:src="@{/plugins/bootstrap/js/bootstrap.js}"></script>
+    <script th:src="@{/app.js}"></script>
     <script th:src="@{/plugins/art-template/template-web.js}"></script>
     <script th:src="@{/plugins/jquery-bootpag/jquery.bootpag.js}"></script>
     <script th:src="@{/plugins/common/common.js}"></script>
 </head>
 <body>
-<div class="container-fluid" layout:fragment="content">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="layout/sidebar :: sidebar" />
+        </div>
+        <div class="col-md-10" layout:fragment="content">
+
+        </div>
+    </div>
 
 </div>
 </body>

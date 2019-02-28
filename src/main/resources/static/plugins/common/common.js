@@ -14,7 +14,40 @@ function download(url, data, method){
     }
 }
 
-$.fn.resetSearch = function(){
+function getAllMenu() {
+    $(".sidebar a").each(function () {
+        var url = $(this).attr("href");
+        if (url != "#") {
+            urls.push(url);
+        }
+    });
+}
+
+var urls = [];
+$(function () {
+    /**
+     * 子菜单 弹开
+     *
+     *获取路径
+     *
+     */
+    getAllMenu();
+    var url = window.location.pathname;
+    $("._active").removeClass("active");
+    $(".sidebar a").each(function () {
+        var _this = $(this);
+        if ($.inArray(url, urls) != -1) {
+            if (_this.attr("href") == url) {
+                _this.parents("li").addClass("active");
+                _this.parents("ul").first().addClass("menu-open");
+                return false;
+            }
+        }
+    });
+});
+
+//重置表格查询条件
+function resetSearch(f){
     $(f.form).find("input:text").val("");
     $(f.form).find("input:hidden").val("");
     $(f.form).find("select").val("").trigger("change");

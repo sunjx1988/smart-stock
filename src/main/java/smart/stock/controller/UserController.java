@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String listPage(Model model){
         return LIST_PAGE;
     }
@@ -40,3 +40,4 @@ public class UserController {
         return new PageInfo(userService.list());
     }
 }
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/layout/layout">
+<head>
+    <title>Smart Stock</title>
+    <script th:src="@{/user/list.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content-header">
+        <h1>用户列表</h1>
+    </section>
+    <section class="content">
+        <form id="searchform" class="form-horizontal form-search" role="form" >
+            <div class="row">
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-right">
+                            <a class="btn btn-info" onclick="searchList()">&nbsp;查 询&nbsp;</a>&nbsp;&nbsp;&nbsp;
+                            <a class="btn btn-info" onclick="resetSearch(this)" type="reset">&nbsp;重 置&nbsp;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">编号</th>
+                                <th>用户</th>
+                                <th>添加时间</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td  class="text-center">
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td>{{tab.name}}</td>
+                                    <td>{{tab.createTime}}</td>
+                                    <td class="text-center">
+                                        <div class='icon-flex'>
+                                            <a class="btn btn-default" href="#">编辑</a>
+                                            <a class="btn btn-primary" href="#">删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
