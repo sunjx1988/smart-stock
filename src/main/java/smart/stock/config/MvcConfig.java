@@ -1,6 +1,7 @@
 package smart.stock.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @Auther: sunjx
@@ -8,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  */
 @Configuration
-public class MvcConfig {
+public class MvcConfig extends WebMvcConfigurerAdapter {
 
 }
