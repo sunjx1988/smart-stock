@@ -2,21 +2,19 @@
 <head>
 </head>
 <body>
-<aside class="main-sidebar" th:fragment="sidebar">
-    <section class="sidebar">
-        <ul class="sidebar-menu">
-            <li>
-                <a href="/">
-                    <i class="oicon oicon-home"></i><span>首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="/user">
-                    <i class="oicon oicon-home"></i><span>用户</span>
-                </a>
-            </li>
-        </ul>
-    </section>
-</aside>
+<div th:fragment="sidebar">
+    <ul class="menu_ul">
+        <li>
+            <a href="/">
+                <i class="oicon oicon-home"></i><span>首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="/user">
+                <i class="oicon oicon-home"></i><span>用户</span>
+            </a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>
