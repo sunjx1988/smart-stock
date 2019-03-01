@@ -176,5 +176,14 @@
 	NAME,
 	create_time AS createTime
     FROM `user`
+    order by create_time desc
   </select>
+    <select id="countByNameAndId" resultType="java.lang.Integer">
+      select count(0) from `user`
+      where
+      name = #{name}
+      <if test="id != null">
+        and id != #{id}
+      </if>
+    </select>
 </mapper>

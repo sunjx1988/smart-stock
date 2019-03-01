@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="/layout/layout">
 <head>
-    <title>Smart Stock</title>
+    <title>Smart Stock - 用户</title>
     <script th:src="@{/js/user/list.js}"></script>
 </head>
 <body>
@@ -12,27 +12,13 @@
         <h1 class="page_name">用户</h1>
     </section>
     <section class="content">
-        <form id="searchform" class="form-horizontal form-search" role="form" >
-            <div class="row">
-
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="col-xs-12 text-right">
-                            <a class="btn btn-info" onclick="searchList()">&nbsp;查 询&nbsp;</a>&nbsp;&nbsp;&nbsp;
-                            <a class="btn btn-info" onclick="resetSearch(this)" type="reset">&nbsp;重 置&nbsp;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-round">
                     <div class="box-header">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-12 text-right">
+                                <a class="btn btn-primary" href="/user/insert">新增用户</a>
                             </div>
                         </div>
                     </div>
@@ -53,11 +39,11 @@
                                     <td  class="text-center">
                                         {{pageSize*(page-1) + index + 1}}
                                     </td>
-                                    <td>{{tab.name}}</td>
+                                    <td><a href="/user/detail/{{tab.id}}">{{tab.name}}</a></td>
                                     <td>{{tab.createTime}}</td>
                                     <td class="text-center">
                                         <div class='icon-flex'>
-                                            <a class="btn btn-default" href="#">编辑</a>
+                                            <a class="btn btn-default" href="/user/edit/{{tab.id}}">编辑</a>
                                             <a class="btn btn-primary" href="#">删除</a>
                                         </div>
                                     </td>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/layout/layout">
+<head>
+    <title>Smart Stock - 用户</title>
+    <script th:src="@{/js/user/detail.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content-header">
+        <h1 class="page_name">用户</h1>
+    </section>
+    <section class="content">
+        <form id="form" class="form-horizontal">
+            <input id="id" name="id" th:value="${id}" type="hidden" />
+            <input id="mode" th:value="${mode}" type="hidden" />
+            <script id="tpl" type="text/html">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">姓名<i style="color: red">*</i></label>
+                    <div class="col-md-5">
+                        <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{name}}" id="name" name="name" class="form-control" placeholder="姓名" autocomplete="off" type="text"/>
+                        <span th:if="${mode == 'detail'}" class="form_text">{{name}}</span>
+                    </div>
+                </div>
+                <div th:if="${mode == 'detail' || mode == 'edit'}" class="form-group">
+                    <label class="col-md-2 control-label" >创建时间<i style="color: red">*</i></label>
+                    <div class="col-md-5">
+                        <span class="form_text">{{createTime}}</span>
+                    </div>
+                </div>
+            </script>
+        </form>
+        <div class="btns">
+            <a th:if="${mode == 'insert' || mode == 'edit'}" class="btn btn-primary" href="javascript:;" id="saveBtn">保存</a>
+            <a class="btn btn-default" href="/user">取消</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>

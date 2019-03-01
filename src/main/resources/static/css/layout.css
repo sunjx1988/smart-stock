@@ -11,6 +11,12 @@ ul{
     margin: 0px;
     padding: 2px;
 }
+/* bootstrap 样式 开始*/
+.form-control{
+    border-radius: 0px;
+}
+/* bootstrap 样式 结束*/
+
 .container-fluid{
     padding: 0px;
     margin: 0px;
@@ -51,5 +57,21 @@ ul{
 .page_name{
     margin: 0px;
     padding: 0px;
+    border-bottom: 1px solid #c0c0c0;
 }
+.content-header{
+    margin-bottom: 35px;
+}
+.content{
 
+}
+.form_text{
+    padding-top: 7px;
+    display: inline-block;
+}
+.pagination{
+    float: right;
+}
+.btns{
+    text-align: right;
+}

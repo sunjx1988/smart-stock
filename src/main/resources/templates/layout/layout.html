@@ -10,22 +10,42 @@
 
     <script th:src="@{/plugins/jquery/jQuery-2.2.0.min.js}"></script>
     <script th:src="@{/plugins/bootstrap/js/bootstrap.js}"></script>
-    <!--<script th:src="@{/app.js}"></script>-->
-    <script th:src="@{/plugins/art-template/template-web.js}"></script>
     <script th:src="@{/plugins/jquery-bootpag/jquery.bootpag.js}"></script>
+    <script th:src="@{/plugins/art-template/template-web.js}"></script>
     <script th:src="@{/plugins/common/common.js}"></script>
 </head>
 <body>
-<div class="container-fluid wrapper">
+<div class="wrapper">
     <div class="content_top">
     </div>
     <div class="content_bottom">
         <div class="content_left">
             <div th:replace="layout/sidebar :: sidebar" />
         </div>
-        <div class="content_right" layout:fragment="content">
+        <div class="container-fluid content_right" layout:fragment="content">
         </div>
     </div>
+
+
+    <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+        <script id="modal-tpl" type="text/html">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">{{title}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{content}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button id="sureBtn" type="button" class="btn btn-primary">确认</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </script>
+    </div><!-- /.modal -->
 </div>
 </body>
 </html>

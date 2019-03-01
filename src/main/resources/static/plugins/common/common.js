@@ -1,3 +1,4 @@
+//下载 url data参数, method post\get
 function download(url, data, method){
     if(url){
         var inputs ='';
@@ -8,43 +9,51 @@ function download(url, data, method){
                 inputs+='<input type="hidden" name="'+ pair[0]+'" value="'+ pair[1]+'" />';
             });
         }
-
         jQuery('<form action="'+ url +'" method="'+(method||'post')+'">'+(inputs||'')+'</form>')
             .appendTo('body').submit().remove();
     }
 }
 
-function getAllMenu() {
-    $(".sidebar a").each(function () {
-        var url = $(this).attr("href");
-        if (url != "#") {
-            urls.push(url);
-        }
+//模态框
+function modal(content, title, sureEvent){
+    $("#modal").html(template("modal-tpl",{title: title, content: content})).modal('show');
+    $("#sureBtn").on("click", sureEvent);
+}
+
+//关闭模态框
+function closeModal(){
+    $("#modal").modal('hide');
+    $("#sureBtn").off("click");
+}
+
+//消息
+function message(msg){
+    modal(msg, "消息" , function () {
+        closeModal();
     });
 }
 
-var urls = [];
-$(function () {
-    /**
-     * 子菜单 弹开
-     *
-     *获取路径
-     *
-     */
-    getAllMenu();
-    var url = window.location.pathname;
-    $("._active").removeClass("active");
-    $(".sidebar a").each(function () {
-        var _this = $(this);
-        if ($.inArray(url, urls) != -1) {
-            if (_this.attr("href") == url) {
-                _this.parents("li").addClass("active");
-                _this.parents("ul").first().addClass("menu-open");
-                return false;
+//请确认
+function comfirm(msg, sureEvent){
+    modal(msg, "请确认" , sureEvent);
+}
+
+$.fn.serializeObject = function () {
+    var object = {};
+    var array = this.serializeArray();
+    if(array){
+        $.each(array,function (i,e) {
+            if(null != array[i].value && "" != array[i].value){
+                if(array[i].name in object){
+                    object[array[i].name] = object[array[i].name]+","+array[i].value;
+                }else{
+                    object[array[i].name] = array[i].value;
+                }
             }
-        }
-    });
-});
+        });
+    }
+    return object;
+}
 
 //重置表格查询条件
 function resetSearch(f){

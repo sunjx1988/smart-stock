@@ -29,4 +29,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> list();
+
+    //与其他人名字相同
+    int countByNameAndId(User user);
 }
