@@ -10,6 +10,12 @@ public class Trustee {
 
     private String name;
 
+    private String phone;
+
+    private String loginPwd;
+
+    private String loginSalt;
+
     private Integer status;
 
     private BigDecimal principal;
@@ -35,6 +41,30 @@ public class Trustee {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getLoginPwd() {
+        return loginPwd;
+    }
+
+    public void setLoginPwd(String loginPwd) {
+        this.loginPwd = loginPwd == null ? null : loginPwd.trim();
+    }
+
+    public String getLoginSalt() {
+        return loginSalt;
+    }
+
+    public void setLoginSalt(String loginSalt) {
+        this.loginSalt = loginSalt == null ? null : loginSalt.trim();
     }
 
     public Integer getStatus() {

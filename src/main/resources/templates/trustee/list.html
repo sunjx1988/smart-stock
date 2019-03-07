@@ -28,6 +28,7 @@
                             <tr>
                                 <th class="col-md-1 text-center">编号</th>
                                 <th class="col-md-1">姓名</th>
+                                <th class="col-md-1">电话</th>
                                 <th class="col-md-1">状态</th>
                                 <th class="col-md-1">本金</th>
                                 <th class="col-md-1">份额</th>
@@ -44,6 +45,7 @@
                                         {{pageSize*(page-1) + index + 1}}
                                     </td>
                                     <td><a href="/trustee/detail/{{tab.id}}">{{tab.name}}</a></td>
+                                    <td>{{tab.phone}}</td>
                                     <td>{{tab.statusText}}</td>
                                     <td>{{tab.principal}}</td>
                                     <td>{{tab.totalUnit}}</td>

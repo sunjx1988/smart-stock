@@ -40,7 +40,7 @@
         <table tableName="trustee" domainObjectName="Trustee" >
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
-
+<!--
         <table tableName="trustee_by_day" domainObjectName="TrusteeByDay" >
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
@@ -71,7 +71,7 @@
 
         <table tableName="stock_price" domainObjectName="StockPrice" >
             <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        </table>-->
 
     </context>
 </generatorConfiguration>

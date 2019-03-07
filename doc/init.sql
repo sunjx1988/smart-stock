@@ -4,6 +4,9 @@ DROP TABLE IF EXISTS `trustee`;
 CREATE TABLE `trustee` (
 	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR (255) NOT NULL COMMENT '姓名',
+	`phone` VARCHAR (255) NOT NULL COMMENT '手机号',
+	`login_pwd` VARCHAR (255) NOT NULL COMMENT '密码',
+	`login_salt` VARCHAR (255) NOT NULL COMMENT '加密盐',
 	`status` INT (1) NOT NULL COMMENT '持有状态 0持有 1不持有',
 	`principal` DECIMAL (10, 2) NOT NULL COMMENT '总投资额(本金)',
 	`total_unit` INT (8) NOT NULL COMMENT '份额',
@@ -153,3 +156,49 @@ CREATE TABLE `stock_price` (
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '股票收盘记录';
 
+-- 角色
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR (20) NOT NULL COMMENT '角色名',
+	`code` VARCHAR (20) NOT NULL COMMENT '代码',
+	`status` INT(1) NOT NULL COMMENT '状态 0启用 1禁用',
+	`create_time` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '角色';
+
+-- 权限
+DROP TABLE IF EXISTS `permission`;
+
+CREATE TABLE `permission` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR (20) NOT NULL COMMENT '权限名',
+	`code` VARCHAR (50) NOT NULL COMMENT '代码',
+	`url`  VARCHAR (255) NULL COMMENT '资源链接',
+	`status` INT(1) NOT NULL COMMENT '状态 0启用 1禁用',
+	`create_time` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '权限';
+
+-- 用户角色表
+DROP TABLE IF EXISTS `user_role`;
+
+CREATE TABLE `trustee_role` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`trustee_id` BIGINT (20) NOT NULL COMMENT '用户ID',
+	`role_id` BIGINT (20) NOT NULL COMMENT '角色ID',
+	`create_time` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '用户角色表';
+
+-- 角色权限表
+DROP TABLE IF EXISTS `role_permission`;
+
+CREATE TABLE `role_permission` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`permission_id` BIGINT (20) NOT NULL COMMENT '权限ID',
+	`role_id` BIGINT (20) NOT NULL COMMENT '角色ID',
+	`create_time` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '角色权限表';

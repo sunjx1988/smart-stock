@@ -35,4 +35,6 @@ public interface TrusteeMapper {
     int countByNameAndId(Trustee user);
 
     TrusteeDto selectById(Long id);
+
+    int countByPhoneAndId(Trustee user);
 }

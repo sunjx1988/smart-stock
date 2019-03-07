@@ -4,6 +4,9 @@
   <resultMap id="BaseResultMap" type="smart.stock.entity.Trustee">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="login_salt" jdbcType="VARCHAR" property="loginSalt" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="principal" jdbcType="DECIMAL" property="principal" />
     <result column="total_unit" jdbcType="INTEGER" property="totalUnit" />
@@ -69,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, status, principal, total_unit, total, create_time
+    id, name, phone, login_pwd, login_salt, status, principal, total_unit, total, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeExample" resultMap="BaseResultMap">
     select
@@ -102,10 +105,12 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Trustee" useGeneratedKeys="true">
-    insert into trustee (name, status, principal,
+    insert into trustee (name, phone, login_pwd,
+      login_salt, status, principal,
       total_unit, total, create_time
       )
-    values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{principal,jdbcType=DECIMAL},
+    values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR},
+      #{loginSalt,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{principal,jdbcType=DECIMAL},
       #{totalUnit,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -114,6 +119,15 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="loginPwd != null">
+        login_pwd,
+      </if>
+      <if test="loginSalt != null">
+        login_salt,
       </if>
       <if test="status != null">
         status,
@@ -134,6 +148,15 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="loginSalt != null">
+        #{loginSalt,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -167,6 +190,15 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginPwd != null">
+        login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginSalt != null">
+        login_salt = #{record.loginSalt,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -191,6 +223,9 @@
     update trustee
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      login_salt = #{record.loginSalt,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       principal = #{record.principal,jdbcType=DECIMAL},
       total_unit = #{record.totalUnit,jdbcType=INTEGER},
@@ -205,6 +240,15 @@
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="loginSalt != null">
+        login_salt = #{loginSalt,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -227,6 +271,9 @@
   <update id="updateByPrimaryKey" parameterType="smart.stock.entity.Trustee">
     update trustee
     set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      login_salt = #{loginSalt,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       principal = #{principal,jdbcType=DECIMAL},
       total_unit = #{totalUnit,jdbcType=INTEGER},
@@ -239,13 +286,14 @@
     SELECT
 	id,
 	name,
+	phone,
 	status,
 	principal,
-	total_unit as totalUnit,
+	total_unit AS totalUnit,
 	total,
 	create_time AS createTime
     FROM `trustee`
-    order by create_time desc
+    ORDER BY create_time DESC
   </select>
   <select id="countByNameAndId" resultType="java.lang.Integer">
     select count(0) from `trustee`
@@ -259,6 +307,7 @@
     SELECT
 	id,
 	name,
+	phone,
 	status,
 	principal,
 	total_unit as totalUnit,
@@ -266,5 +315,13 @@
 	create_time AS createTime
     FROM `trustee`
     WHERE id = #{id}
+  </select>
+  <select id="countByPhoneAndId" resultType="java.lang.Integer">
+    select count(0) from `trustee`
+    where
+    phone = #{phone}
+    <if test="id != null">
+      and id != #{id}
+    </if>
   </select>
 </mapper>

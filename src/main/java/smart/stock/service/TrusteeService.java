@@ -55,6 +55,11 @@ public class TrusteeService {
             throw BaseException.error("不能与他人名字相同",null);
         }
 
+        //与其他人电话相同
+        if(trusteeMapper.countByPhoneAndId(trustee) > 0){
+            throw BaseException.error("不能与他人电话相同",null);
+        }
+
         trustee.setPrincipal(BigDecimal.ZERO);
         trustee.setTotal(BigDecimal.ZERO);
         trustee.setTotalUnit(0);
