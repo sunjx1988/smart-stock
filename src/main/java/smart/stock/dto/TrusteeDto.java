@@ -1,7 +1,7 @@
 package smart.stock.dto;
 
 import lombok.Data;
-import smart.stock.entity.User;
+import smart.stock.entity.Trustee;
 
 /**
  * @Auther: sunjx
@@ -9,7 +9,9 @@ import smart.stock.entity.User;
  * @Description:
  */
 @Data
-public class UserDto extends User {
+public class TrusteeDto extends Trustee {
+
+    private String statusText;
 
     //查询条件
     private int page = 1;

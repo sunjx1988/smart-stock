@@ -4,6 +4,6 @@ $(function () {
 
 function searchList() {
     $("#tbody").datagrid({
-        url:'/user/list'
+        url:'/trustee/list'
     });
 }

@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 			BaseException exception = (BaseException)e;
 			return new BaseResult<>(exception.getCode(), exception.getMsg(), exception.getData());
 		}else{
-			return BaseResult.error(e.getMessage(), null);
+			return BaseResult.error(null);
 		}
 	}
 

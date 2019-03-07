@@ -3,13 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="/layout/layout">
 <head>
-    <title>Smart Stock - 用户</title>
-    <script th:src="@{/js/user/list.js}"></script>
+    <title>Smart Stock - 信托人</title>
+    <script th:src="@{/js/trustee/list.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
     <section class="content-header">
-        <h1 class="page_name">用户</h1>
+        <h1 class="page_name">信托人</h1>
     </section>
     <section class="content">
         <div class="row">
@@ -18,7 +18,7 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12 text-right">
-                                <a class="btn btn-primary" href="/user/insert">新增用户</a>
+                                <a class="btn btn-primary" href="/trustee/insert">新增</a>
                             </div>
                         </div>
                     </div>
@@ -26,10 +26,14 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">编号</th>
-                                <th>用户</th>
-                                <th>添加时间</th>
-                                <th class="text-center">操作</th>
+                                <th class="col-md-1 text-center">编号</th>
+                                <th class="col-md-1">姓名</th>
+                                <th class="col-md-1">状态</th>
+                                <th class="col-md-1">本金</th>
+                                <th class="col-md-1">份额</th>
+                                <th class="col-md-1">总资产</th>
+                                <th class="col-md-2">添加时间</th>
+                                <th class="col-md-2 text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody id="tbody">
@@ -39,11 +43,15 @@
                                     <td  class="text-center">
                                         {{pageSize*(page-1) + index + 1}}
                                     </td>
-                                    <td><a href="/user/detail/{{tab.id}}">{{tab.name}}</a></td>
+                                    <td><a href="/trustee/detail/{{tab.id}}">{{tab.name}}</a></td>
+                                    <td>{{tab.statusText}}</td>
+                                    <td>{{tab.principal}}</td>
+                                    <td>{{tab.totalUnit}}</td>
+                                    <td>{{tab.total}}</td>
                                     <td>{{tab.createTime}}</td>
                                     <td class="text-center">
                                         <div class='icon-flex'>
-                                            <a class="btn btn-default" href="/user/edit/{{tab.id}}">编辑</a>
+                                            <a class="btn btn-default" href="/trustee/edit/{{tab.id}}">编辑</a>
                                             <a class="btn btn-primary" href="#">删除</a>
                                         </div>
                                     </td>

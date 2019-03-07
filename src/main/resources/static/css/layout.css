@@ -11,7 +11,13 @@ ul{
     margin: 0px;
     padding: 2px;
 }
-/* bootstrap 样式 开始*/
+
+/* 通用工具类样式 开始 */
+
+/* 通用工具类样式 结束 */
+
+
+/* 修改bootstrap 样式 开始*/
 .form-control{
     border-radius: 0px;
 }

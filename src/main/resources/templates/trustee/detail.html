@@ -3,13 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="/layout/layout">
 <head>
-    <title>Smart Stock - 用户</title>
-    <script th:src="@{/js/user/detail.js}"></script>
+    <title>Smart Stock - 信托人</title>
+    <script th:src="@{/js/trustee/detail.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
     <section class="content-header">
-        <h1 class="page_name">用户</h1>
+        <h1 class="page_name">信托人</h1>
     </section>
     <section class="content">
         <form id="form" class="form-horizontal">
@@ -23,17 +23,42 @@
                         <span th:if="${mode == 'detail'}" class="form_text">{{name}}</span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">状态<i style="color: red">*</i></label>
+                    <div class="col-md-5">
+                        <span class="form_text">{{statusText}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">本金<i style="color: red">*</i></label>
+                    <div class="col-md-5">
+                        <span class="form_text">{{principal}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">份额<i style="color: red">*</i></label>
+                    <div class="col-md-5">
+                        <span class="form_text">{{totalUnit}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">总资产<i style="color: red">*</i></label>
+                    <div class="col-md-5">
+                        <span class="form_text">{{total}}</span>
+                    </div>
+                </div>
                 <div th:if="${mode == 'detail' || mode == 'edit'}" class="form-group">
                     <label class="col-md-2 control-label" >创建时间<i style="color: red">*</i></label>
                     <div class="col-md-5">
                         <span class="form_text">{{createTime}}</span>
                     </div>
                 </div>
+
             </script>
         </form>
         <div class="btns">
             <a th:if="${mode == 'insert' || mode == 'edit'}" class="btn btn-primary" href="javascript:;" id="saveBtn">保存</a>
-            <a class="btn btn-default" href="/user">取消</a>
+            <a class="btn btn-default" href="/trustee">取消</a>
         </div>
     </section>
 </div>

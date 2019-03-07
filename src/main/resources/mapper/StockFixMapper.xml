@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="smart.stock.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="smart.stock.entity.User">
+<mapper namespace="smart.stock.mapper.StockFixMapper">
+  <resultMap id="BaseResultMap" type="smart.stock.entity.StockFix">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="unit" jdbcType="INTEGER" property="unit" />
+    <result column="cash" jdbcType="DECIMAL" property="cash" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, create_time
+    id, name, code, unit, cash, reason, date, create_time
   </sql>
-  <select id="selectByExample" parameterType="smart.stock.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="smart.stock.entity.StockFixExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from stock_fix
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,30 +87,49 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
-    from user
+    from stock_fix
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
+    delete from stock_fix
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="smart.stock.entity.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="smart.stock.entity.StockFixExample">
+    delete from stock_fix
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.User" useGeneratedKeys="true">
-    insert into user (name, create_time)
-    values (#{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockFix" useGeneratedKeys="true">
+    insert into stock_fix (name, code, unit, 
+      cash, reason, date, 
+      create_time)
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{unit,jdbcType=INTEGER}, 
+      #{cash,jdbcType=DECIMAL}, #{reason,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.User" useGeneratedKeys="true">
-    insert into user
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockFix" useGeneratedKeys="true">
+    insert into stock_fix
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="cash != null">
+        cash,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="date != null">
+        date,
       </if>
       <if test="createTime != null">
         create_time,
@@ -115,25 +139,55 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=INTEGER},
+      </if>
+      <if test="cash != null">
+        #{cash,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="smart.stock.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="smart.stock.entity.StockFixExample" resultType="java.lang.Long">
+    select count(*) from stock_fix
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update stock_fix
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=INTEGER},
+      </if>
+      <if test="record.cash != null">
+        cash = #{record.cash,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -144,19 +198,39 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update stock_fix
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=INTEGER},
+      cash = #{record.cash,jdbcType=DECIMAL},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="smart.stock.entity.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="smart.stock.entity.StockFix">
+    update stock_fix
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=INTEGER},
+      </if>
+      <if test="cash != null">
+        cash = #{cash,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -164,26 +238,15 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="smart.stock.entity.User">
-    update user
+  <update id="updateByPrimaryKey" parameterType="smart.stock.entity.StockFix">
+    update stock_fix
     set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=INTEGER},
+      cash = #{cash,jdbcType=DECIMAL},
+      reason = #{reason,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="list" resultType="smart.stock.entity.User">
-    SELECT
-	id,
-	NAME,
-	create_time AS createTime
-    FROM `user`
-    order by create_time desc
-  </select>
-    <select id="countByNameAndId" resultType="java.lang.Integer">
-      select count(0) from `user`
-      where
-      name = #{name}
-      <if test="id != null">
-        and id != #{id}
-      </if>
-    </select>
 </mapper>

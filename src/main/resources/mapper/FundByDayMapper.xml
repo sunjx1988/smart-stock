@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="smart.stock.mapper.FundByDayMapper">
+  <resultMap id="BaseResultMap" type="smart.stock.entity.FundByDay">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="fund_id" jdbcType="BIGINT" property="fundId" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="banlance" jdbcType="DECIMAL" property="banlance" />
+    <result column="principal" jdbcType="DECIMAL" property="principal" />
+    <result column="position" jdbcType="DECIMAL" property="position" />
+    <result column="total_unit" jdbcType="INTEGER" property="totalUnit" />
+    <result column="num_of_trustee" jdbcType="INTEGER" property="numOfTrustee" />
+    <result column="market_value" jdbcType="DECIMAL" property="marketValue" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="net_unit_value" jdbcType="DECIMAL" property="netUnitValue" />
+    <result column="income" jdbcType="DECIMAL" property="income" />
+    <result column="rate_of_return" jdbcType="DECIMAL" property="rateOfReturn" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, fund_id, date, name, banlance, principal, position, total_unit, num_of_trustee, 
+    market_value, total, net_unit_value, income, rate_of_return, create_time
+  </sql>
+  <select id="selectByExample" parameterType="smart.stock.entity.FundByDayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fund_by_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fund_by_day
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fund_by_day
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="smart.stock.entity.FundByDayExample">
+    delete from fund_by_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.FundByDay" useGeneratedKeys="true">
+    insert into fund_by_day (fund_id, date, name, 
+      banlance, principal, position, 
+      total_unit, num_of_trustee, market_value, 
+      total, net_unit_value, income, 
+      rate_of_return, create_time)
+    values (#{fundId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{banlance,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, #{position,jdbcType=DECIMAL}, 
+      #{totalUnit,jdbcType=INTEGER}, #{numOfTrustee,jdbcType=INTEGER}, #{marketValue,jdbcType=DECIMAL}, 
+      #{total,jdbcType=DECIMAL}, #{netUnitValue,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, 
+      #{rateOfReturn,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.FundByDay" useGeneratedKeys="true">
+    insert into fund_by_day
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fundId != null">
+        fund_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="banlance != null">
+        banlance,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="totalUnit != null">
+        total_unit,
+      </if>
+      <if test="numOfTrustee != null">
+        num_of_trustee,
+      </if>
+      <if test="marketValue != null">
+        market_value,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="netUnitValue != null">
+        net_unit_value,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="rateOfReturn != null">
+        rate_of_return,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fundId != null">
+        #{fundId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="banlance != null">
+        #{banlance,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=DECIMAL},
+      </if>
+      <if test="totalUnit != null">
+        #{totalUnit,jdbcType=INTEGER},
+      </if>
+      <if test="numOfTrustee != null">
+        #{numOfTrustee,jdbcType=INTEGER},
+      </if>
+      <if test="marketValue != null">
+        #{marketValue,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="netUnitValue != null">
+        #{netUnitValue,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="rateOfReturn != null">
+        #{rateOfReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="smart.stock.entity.FundByDayExample" resultType="java.lang.Long">
+    select count(*) from fund_by_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fund_by_day
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.fundId != null">
+        fund_id = #{record.fundId,jdbcType=BIGINT},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.banlance != null">
+        banlance = #{record.banlance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.principal != null">
+        principal = #{record.principal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalUnit != null">
+        total_unit = #{record.totalUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.numOfTrustee != null">
+        num_of_trustee = #{record.numOfTrustee,jdbcType=INTEGER},
+      </if>
+      <if test="record.marketValue != null">
+        market_value = #{record.marketValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=DECIMAL},
+      </if>
+      <if test="record.netUnitValue != null">
+        net_unit_value = #{record.netUnitValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.income != null">
+        income = #{record.income,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rateOfReturn != null">
+        rate_of_return = #{record.rateOfReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fund_by_day
+    set id = #{record.id,jdbcType=BIGINT},
+      fund_id = #{record.fundId,jdbcType=BIGINT},
+      date = #{record.date,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      banlance = #{record.banlance,jdbcType=DECIMAL},
+      principal = #{record.principal,jdbcType=DECIMAL},
+      position = #{record.position,jdbcType=DECIMAL},
+      total_unit = #{record.totalUnit,jdbcType=INTEGER},
+      num_of_trustee = #{record.numOfTrustee,jdbcType=INTEGER},
+      market_value = #{record.marketValue,jdbcType=DECIMAL},
+      total = #{record.total,jdbcType=DECIMAL},
+      net_unit_value = #{record.netUnitValue,jdbcType=DECIMAL},
+      income = #{record.income,jdbcType=DECIMAL},
+      rate_of_return = #{record.rateOfReturn,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="smart.stock.entity.FundByDay">
+    update fund_by_day
+    <set>
+      <if test="fundId != null">
+        fund_id = #{fundId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="banlance != null">
+        banlance = #{banlance,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=DECIMAL},
+      </if>
+      <if test="totalUnit != null">
+        total_unit = #{totalUnit,jdbcType=INTEGER},
+      </if>
+      <if test="numOfTrustee != null">
+        num_of_trustee = #{numOfTrustee,jdbcType=INTEGER},
+      </if>
+      <if test="marketValue != null">
+        market_value = #{marketValue,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="netUnitValue != null">
+        net_unit_value = #{netUnitValue,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null">
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="rateOfReturn != null">
+        rate_of_return = #{rateOfReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="smart.stock.entity.FundByDay">
+    update fund_by_day
+    set fund_id = #{fundId,jdbcType=BIGINT},
+      date = #{date,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      banlance = #{banlance,jdbcType=DECIMAL},
+      principal = #{principal,jdbcType=DECIMAL},
+      position = #{position,jdbcType=DECIMAL},
+      total_unit = #{totalUnit,jdbcType=INTEGER},
+      num_of_trustee = #{numOfTrustee,jdbcType=INTEGER},
+      market_value = #{marketValue,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      net_unit_value = #{netUnitValue,jdbcType=DECIMAL},
+      income = #{income,jdbcType=DECIMAL},
+      rate_of_return = #{rateOfReturn,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

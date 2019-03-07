@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="smart.stock.mapper.TrusteeByDayMapper">
+  <resultMap id="BaseResultMap" type="smart.stock.entity.TrusteeByDay">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="trustee_id" jdbcType="BIGINT" property="trusteeId" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="principal" jdbcType="DECIMAL" property="principal" />
+    <result column="total_unit" jdbcType="INTEGER" property="totalUnit" />
+    <result column="net_unit_value" jdbcType="DECIMAL" property="netUnitValue" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="income" jdbcType="DECIMAL" property="income" />
+    <result column="rate_of_return" jdbcType="DECIMAL" property="rateOfReturn" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, trustee_id, date, name, principal, total_unit, net_unit_value, total, income, 
+    rate_of_return, create_time
+  </sql>
+  <select id="selectByExample" parameterType="smart.stock.entity.TrusteeByDayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from trustee_by_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from trustee_by_day
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from trustee_by_day
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="smart.stock.entity.TrusteeByDayExample">
+    delete from trustee_by_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeByDay" useGeneratedKeys="true">
+    insert into trustee_by_day (trustee_id, date, name, 
+      principal, total_unit, net_unit_value, 
+      total, income, rate_of_return, 
+      create_time)
+    values (#{trusteeId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{principal,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{netUnitValue,jdbcType=DECIMAL}, 
+      #{total,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, #{rateOfReturn,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeByDay" useGeneratedKeys="true">
+    insert into trustee_by_day
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="trusteeId != null">
+        trustee_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="totalUnit != null">
+        total_unit,
+      </if>
+      <if test="netUnitValue != null">
+        net_unit_value,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="rateOfReturn != null">
+        rate_of_return,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="trusteeId != null">
+        #{trusteeId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="totalUnit != null">
+        #{totalUnit,jdbcType=INTEGER},
+      </if>
+      <if test="netUnitValue != null">
+        #{netUnitValue,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="rateOfReturn != null">
+        #{rateOfReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="smart.stock.entity.TrusteeByDayExample" resultType="java.lang.Long">
+    select count(*) from trustee_by_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update trustee_by_day
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.trusteeId != null">
+        trustee_id = #{record.trusteeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null">
+        principal = #{record.principal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalUnit != null">
+        total_unit = #{record.totalUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.netUnitValue != null">
+        net_unit_value = #{record.netUnitValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=DECIMAL},
+      </if>
+      <if test="record.income != null">
+        income = #{record.income,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rateOfReturn != null">
+        rate_of_return = #{record.rateOfReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update trustee_by_day
+    set id = #{record.id,jdbcType=BIGINT},
+      trustee_id = #{record.trusteeId,jdbcType=BIGINT},
+      date = #{record.date,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=DECIMAL},
+      total_unit = #{record.totalUnit,jdbcType=INTEGER},
+      net_unit_value = #{record.netUnitValue,jdbcType=DECIMAL},
+      total = #{record.total,jdbcType=DECIMAL},
+      income = #{record.income,jdbcType=DECIMAL},
+      rate_of_return = #{record.rateOfReturn,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="smart.stock.entity.TrusteeByDay">
+    update trustee_by_day
+    <set>
+      <if test="trusteeId != null">
+        trustee_id = #{trusteeId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="totalUnit != null">
+        total_unit = #{totalUnit,jdbcType=INTEGER},
+      </if>
+      <if test="netUnitValue != null">
+        net_unit_value = #{netUnitValue,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null">
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="rateOfReturn != null">
+        rate_of_return = #{rateOfReturn,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="smart.stock.entity.TrusteeByDay">
+    update trustee_by_day
+    set trustee_id = #{trusteeId,jdbcType=BIGINT},
+      date = #{date,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=DECIMAL},
+      total_unit = #{totalUnit,jdbcType=INTEGER},
+      net_unit_value = #{netUnitValue,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      income = #{income,jdbcType=DECIMAL},
+      rate_of_return = #{rateOfReturn,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

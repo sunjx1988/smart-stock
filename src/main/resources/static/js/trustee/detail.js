@@ -9,7 +9,7 @@ var PAGE = (function () {
         if(id){
             $.ajax({
                 type:"post",
-                url: "/user/" + id,
+                url: "/trustee/" + id,
                 success: function (result) {
                     initHtmlData(result.data);
                 }
@@ -32,7 +32,7 @@ var PAGE = (function () {
             $.ajax({
                 type: "post",
                 contentType: 'application/json;charset=UTF-8',
-                url: "/user/save",
+                url: "/trustee/save",
                 data: getFormData(),
                 success: function (result) {
                     message(result.msg);

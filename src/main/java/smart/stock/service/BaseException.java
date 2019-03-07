@@ -1,6 +1,7 @@
 package smart.stock.service;
 
 import lombok.Data;
+import smart.stock.constant.ResultCode;
 
 /**
  * @Auther: sunjx
@@ -9,8 +10,6 @@ import lombok.Data;
  */
 @Data
 public class BaseException extends RuntimeException{
-
-    private static final String SYS_ERROR = "0001";
 
     private String code;
     private String msg;
@@ -24,6 +23,6 @@ public class BaseException extends RuntimeException{
     }
 
     public static BaseException error(String msg, Object data){
-        return new BaseException(SYS_ERROR, msg, data);
+        return new BaseException(ResultCode.SYS.FAIL.getCode(), msg, data);
     }
 }

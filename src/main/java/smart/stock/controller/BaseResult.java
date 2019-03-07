@@ -1,6 +1,7 @@
 package smart.stock.controller;
 
 import lombok.Data;
+import smart.stock.constant.ResultCode;
 
 /**
  * @Auther: sunjx
@@ -20,11 +21,11 @@ public class BaseResult<T> {
     }
 
     public static BaseResult success(Object data){
-        return new BaseResult("0000", null, data);
+        return new BaseResult(ResultCode.SYS.SUCCESS.getCode(), ResultCode.SYS.SUCCESS.getText(), data);
     }
 
-    public static BaseResult error(String msg, Object data){
-        return new BaseResult("0001", msg, data);
+    public static BaseResult error(Object data){
+        return new BaseResult(ResultCode.SYS.FAIL.getCode(), ResultCode.SYS.FAIL.getText(), data);
     }
 
 }
