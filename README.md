@@ -105,3 +105,8 @@ http://stockdata.stock.hexun.com/2008/yszk.aspx?stockid=000536&accountdate=2018.
 //2018年度
 http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=2018.12.31
 ```
+- 可改进功能
+    -
+```
+动态url权限控制 https://jinnianshilongnian.iteye.com/blog/2040929
+```

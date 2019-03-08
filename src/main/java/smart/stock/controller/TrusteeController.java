@@ -3,6 +3,7 @@ package smart.stock.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import smart.stock.dto.TrusteeDto;
 import smart.stock.entity.Trustee;
 import smart.stock.service.TrusteeService;
+import smart.stock.shiro.ShiroService;
+import smart.stock.shiro.ShiroUser;
 
 /**
  * @Auther: sunjx
@@ -27,6 +30,9 @@ public class TrusteeController {
 
     @Autowired
     private TrusteeService trusteeService;
+
+    @Autowired
+    private ShiroService shiroService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String listPage(Model model){
@@ -61,12 +67,12 @@ public class TrusteeController {
 
     @ResponseBody
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public BaseResult<Trustee> save(@RequestBody Trustee trustee){
-        Long id = trusteeService.save(trustee);
+    public BaseResult<Trustee> save(@RequestBody ShiroUser user){
+        Long id = shiroService.save(user);
         if(id > 0){
-            return BaseResult.success(trustee);
+            return BaseResult.success(user);
         }else{
-            return BaseResult.error(trustee);
+            return BaseResult.error(user);
         }
     }
 }

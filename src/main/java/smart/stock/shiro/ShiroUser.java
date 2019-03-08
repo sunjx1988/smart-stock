@@ -1,7 +1,9 @@
 package smart.stock.shiro;
 
 import lombok.Data;
+import smart.stock.entity.Trustee;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -10,15 +12,14 @@ import java.util.Set;
  * @Description:
  */
 @Data
-public class ShiroUser {
+public class ShiroUser extends Trustee {
 
-    private Long id;
+    //用户输入的密码
+    private String commitPwd;
 
-    private String pwd;
+    private Set<String> roles = new HashSet<>();
 
-    private String salt;
+    private Set<String> perms = new HashSet<>();;
 
-    private Set<String> roles;
-
-    private Set<String> perms;
+    private boolean isAdmin = false;
 }

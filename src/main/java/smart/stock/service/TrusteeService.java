@@ -1,16 +1,13 @@
 package smart.stock.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import smart.stock.constant.Constants;
 import smart.stock.dto.TrusteeDto;
-import smart.stock.entity.Trustee;
 import smart.stock.mapper.TrusteeMapper;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -44,28 +41,4 @@ public class TrusteeService {
         return dto;
     }
 
-    public Long save(Trustee trustee) {
-        //名字不能为空
-        if(StringUtils.isEmpty(trustee.getName())){
-            throw BaseException.error("名字不能为空",null);
-        }
-
-        //与其他人名字相同
-        if(trusteeMapper.countByNameAndId(trustee) > 0){
-            throw BaseException.error("不能与他人名字相同",null);
-        }
-
-        //与其他人电话相同
-        if(trusteeMapper.countByPhoneAndId(trustee) > 0){
-            throw BaseException.error("不能与他人电话相同",null);
-        }
-
-        trustee.setPrincipal(BigDecimal.ZERO);
-        trustee.setTotal(BigDecimal.ZERO);
-        trustee.setTotalUnit(0);
-        trustee.setStatus(Constants.TrusteeStatus.Disabled.getKey());
-
-        trusteeMapper.insert(trustee);
-        return trustee.getId();
-    }
 }

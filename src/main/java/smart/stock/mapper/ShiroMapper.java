@@ -1,5 +1,6 @@
 package smart.stock.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import smart.stock.shiro.ShiroUser;
 
 import java.util.Set;
@@ -10,9 +11,14 @@ import java.util.Set;
  * @Description:
  */
 public interface ShiroMapper {
-    ShiroUser findUserByName(String name);
 
-    Set<String> getRolesByUserId(Long id);
+    ShiroUser findUserByPhone(String name);
 
-    Set<String> getPermsByUserId(Long id);
+    Set<String> getRolesByUserId(Long userId);
+
+    Set<String> getPermsByUserId(Long userId);
+
+    int batchDeleteUserRole(Long userId);
+
+    int batchSaveUserRole(@Param("userId") Long userId, @Param("roleKeys") Set<String> roleKeys);
 }

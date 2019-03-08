@@ -1,6 +1,7 @@
 package smart.stock.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,8 +13,10 @@ public class Trustee {
 
     private String phone;
 
+    @JsonIgnore
     private String loginPwd;
 
+    @JsonIgnore
     private String loginSalt;
 
     private Integer status;

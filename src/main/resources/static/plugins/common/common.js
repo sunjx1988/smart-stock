@@ -166,3 +166,9 @@ $.fn.datagrid = function (p) {
     postData();
 }
 
+function logout() {
+    $.post("/logout",null, function () {
+        location.href = "/";
+    });
+}
+

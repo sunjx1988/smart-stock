@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
 			BaseException exception = (BaseException)e;
 			return new BaseResult<>(exception.getCode(), exception.getMsg(), exception.getData());
 		}else{
+			log.error("未知错误", e);
 			return BaseResult.error(null);
 		}
 	}

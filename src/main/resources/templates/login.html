@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Stock</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+
+    <script th:src="@{/plugins/jquery/jQuery-2.2.0.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.js}"></script>
+    <script th:src="@{/plugins/art-template/template-web.js}"></script>
+    <script th:src="@{/plugins/common/common.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" style="margin-top: 25%; border: 1px solid #cccccc; padding: 30px ">
+            <form id="form" class="form-horizontal">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="phone">手机号<i style="color: red">*</i></label>
+                        <div class="col-md-8">
+                            <input id="phone" name="phone" class="form-control" placeholder="手机号" autocomplete="off" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="commitPwd">密码<i style="color: red">*</i></label>
+                        <div class="col-md-8">
+                            <input id="commitPwd" name="commitPwd" class="form-control" placeholder="密码" autocomplete="off" type="password"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-lg btn-primary" style="min-width: 100%" href="javascript:;" id="loginBtn">登录</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <script id="modal-tpl" type="text/html">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{content}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button id="sureBtn" type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </script>
+</div><!-- /.modal -->
+</body>
+<script>
+$(function () {
+    $("#loginBtn").on("click", function () {
+        var formData = $("#form").serializeObject();
+
+        if(formData.phone == null || formData.phone == ''){
+            message("手机号码不能为空");
+            return;
+        }
+
+        if(formData.commitPwd == null || formData.commitPwd == ''){
+            message("密码不能为空");
+            return;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "/login",
+            data: formData,
+            success: function (result) {
+                if(result.code != '0000'){
+                    message(result.msg);
+                }else{
+                    location.href = "/";
+                }
+            }
+        })
+    })
+})
+</script>
+</html>
