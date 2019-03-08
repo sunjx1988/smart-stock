@@ -202,3 +202,9 @@ CREATE TABLE `role_permission` (
 	`create_time` TIMESTAMP NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '角色权限表';
+
+
+-- 测试数据 phone:100 pwd:000
+INSERT INTO `role` VALUES ('1', '系统管理员', 'admin', '0', '2019-03-08 22:06:53');
+INSERT INTO `trustee_role` VALUES ('1', '1', '1', '2019-03-08 22:07:03');
+INSERT INTO `trustee` VALUES ('1', 'sun', '100', '0cLUnxHdkemzwUwhCmSYhW4J4hey+mgrFW4onKmMbcw=', 'GdrucpP6szbow28+aFOXSw==', '1', '0.00', '0', '0.00', '2019-03-08 21:05:54');
