@@ -1,0 +1,46 @@
+server:
+  port: 80
+
+logging:
+  level:
+    root: info
+    org.springframework.boot: info
+    org.thymeleaf: error
+    smart.stock: debug
+  path: C:\\Users\\Administrator\\Desktop\\test
+
+spring:
+  http:
+    multipart:
+      max-file-size: 5mb
+      max-request-size: 50mb
+      enabled: true
+
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/stock?useUnicode=true&amp;characterEncoding=utf-8&amp;connectTimeout=30000&socketTimeout=60000
+      username: root
+      password: 000000s
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 1000
+      initialSize: 100
+      maxWait: 60000
+      minIdle: 10
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+shiro:
+  loginUrl: /login
+  unauthorizedUrl: /403
+
+

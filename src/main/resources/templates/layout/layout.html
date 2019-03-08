@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,7 +20,9 @@
 <body>
 <div class="wrapper">
     <div class="content_top">
-        <a href="javascript:logout();">注销登录</a>
+        <shiro:user>
+            <span >用户[<shiro:principal property="name" />],已登录 <a href="javascript:logout();">注销登录</a></span>
+        </shiro:user>
     </div>
     <div class="content_bottom">
         <div class="content_left">

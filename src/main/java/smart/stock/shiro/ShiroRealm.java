@@ -1,5 +1,6 @@
 package smart.stock.shiro;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.PasswordMatcher;
@@ -34,16 +35,11 @@ public class ShiroRealm extends AuthorizingRealm {
     //定义如何获取用户的角色和权限的逻辑，给shiro做权限判断
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        //null usernames are invalid
         if (principals == null) {
-            throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
+            throw new AuthorizationException("手机号不能为空");
         }
-
         ShiroUser user = (ShiroUser) getAvailablePrincipal(principals);
-
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        log.info("获取角色信息：", user.getRoles());
-        log.info("获取权限信息：", user.getPerms());
         info.setRoles(user.getRoles());
         info.setStringPermissions(user.getPerms());
         return info;
@@ -56,9 +52,8 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
         String username = upToken.getUsername();
 
-        // Null username is invalid
         if (username == null) {
-            throw new AccountException("Null usernames are not allowed by this realm.");
+            throw new AccountException("手机号不能为空");
         }
 
         ShiroUser userDB = shiroService.findUserByPhone(username);

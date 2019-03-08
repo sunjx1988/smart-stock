@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
       layout:decorator="/layout/layout">
 <head>
     <title>Smart Stock - 信托人</title>
@@ -18,7 +19,7 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12 text-right">
-                                <a class="btn btn-primary" href="/trustee/insert">新增</a>
+                                <a shiro:hasRole="admin" class="btn btn-primary" href="/trustee/insert">新增</a>
                             </div>
                         </div>
                     </div>

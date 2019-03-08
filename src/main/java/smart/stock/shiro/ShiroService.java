@@ -78,6 +78,7 @@ public class ShiroService {
         }
 
         if(null == user.getId()){
+
             if(null == user.getPrincipal()){
                 user.setPrincipal(BigDecimal.ZERO);
             }
