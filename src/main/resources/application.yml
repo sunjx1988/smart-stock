@@ -3,10 +3,8 @@ server:
 
 logging:
   level:
-    root: info
-    org.springframework.boot: info
-    org.thymeleaf: error
-    smart.stock: debug
+    root: error
+    smart.stock.mapper: debug
   path: C:\\Users\\Administrator\\Desktop\\test
 
 spring:
@@ -39,8 +37,11 @@ spring:
     view:
       prefix: /templates/
       suffix: .html
+  thymeleaf:
+    cache: false
 shiro:
   loginUrl: /login
   unauthorizedUrl: /403
+
 
 
