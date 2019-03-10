@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      layout:decorator="/layout/layout">
+<head>
+    <title>Smart Stock - 股票</title>
+    <script th:src="@{/js/stock/detail.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content-header">
+        <h1 class="page_name">股票</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <form id="form" class="form-horizontal">
+                <input id="id" name="id" th:value="${id}" type="hidden" />
+                <input id="mode" th:value="${mode}" type="hidden" />
+                <script id="tpl" type="text/html">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="name">名称<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{name}}" id="name" name="name" class="form-control" placeholder="名称" autocomplete="off" type="text"/>
+                            <span th:if="${mode == 'detail'}" class="form_text">{{name}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="code">代码<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{code}}" id="code" name="code" class="form-control" placeholder="代码" autocomplete="off" type="text"/>
+                            <span th:if="${mode == 'detail'}" class="form_text">{{code}}</span>
+                        </div>
+                    </div>
+                    <div th:if="${mode == 'detail' || mode == 'edit'}" class="form-group">
+                        <label class="col-md-2 control-label" >创建时间<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <span class="form_text">{{createTime}}</span>
+                        </div>
+                    </div>
+
+                </script>
+            </form>
+            <div shiro:hasRole="admin" class="btns">
+                <a th:if="${mode == 'insert' || mode == 'edit'}" class="btn btn-primary" href="javascript:;" id="saveBtn">保存</a>
+                <a class="btn btn-default" href="/stock/">取消</a>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
+            <div class="col-md-12">
+                <p>报表,待开发...</p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

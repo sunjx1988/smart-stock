@@ -6,10 +6,12 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import smart.stock.shiro.ShiroRealm;
 
 import javax.servlet.Filter;
@@ -53,19 +55,14 @@ public class ShiroConfig {
         return new ShiroDialect();
     }
 
-//    @Bean
-//    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager) {
-//        final ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-//        factoryBean.setSecurityManager(securityManager);
-//        final LinkedHashMap<String, Filter> filters = new LinkedHashMap<>();
-//        factoryBean.setFilterChainDefinitions("/*/insert/** = authc,roles[admin]");
-//        factoryBean.setFilterChainDefinitions("/*/save/** = authc,roles[admin]");
-//        factoryBean.setFilterChainDefinitions("/*/edit/** = authc,roles[admin]");
-//        factoryBean.setFilterChainDefinitions("/*/delete/** = authc,roles[admin]");
-//        factoryBean.setSuccessUrl("/");
-//        factoryBean.setLoginUrl("/login");
-//        factoryBean.setUnauthorizedUrl("/403");
-//        factoryBean.setFilters(filters);
-//        return factoryBean;
-//    }
+    @Bean
+    @DependsOn("lifecycleBeanPostProcessor")
+    public static DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
+        creator.setProxyTargetClass(true);
+        return creator;
+
+
+    }
+
 }

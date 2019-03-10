@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      layout:decorator="/layout/layout">
+<head>
+    <title>Smart Stock - 股票</title>
+    <script th:src="@{/js/stock/list.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content-header">
+        <h1 class="page_name">股票</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <a shiro:hasRole="admin" class="btn btn-primary" href="/stock/insert">新增</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="col-md-1 text-center">编号</th>
+                                <th class="col-md-1">名称</th>
+                                <th class="col-md-1">代码</th>
+                                <th class="col-md-2">添加时间</th>
+                                <th class="col-md-2 text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td  class="text-center">
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td><a href="/stock/detail/{{tab.id}}">{{tab.name}}</a></td>
+                                    <td>{{tab.code}}</td>
+                                    <td>{{tab.createTime}}</td>
+                                    <td class="text-center">
+                                        <div class='icon-flex'>
+                                            <a class="btn btn-default" href="/stock/edit/{{tab.id}}">编辑</a>
+                                            <a class="btn btn-primary" href="#">删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

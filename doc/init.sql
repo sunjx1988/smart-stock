@@ -203,6 +203,15 @@ CREATE TABLE `role_permission` (
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '角色权限表';
 
+DROP TABLE IF EXISTS `stock`;
+
+CREATE TABLE `stock` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR (6) NOT NULL COMMENT '股票名称',
+	`code` VARCHAR (6) NOT NULL COMMENT '股票代码',
+	`create_time` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '股票';
 
 -- 测试数据 phone:100 pwd:000
 INSERT INTO `trustee` VALUES ('1', 'sun', '100', '0cLUnxHdkemzwUwhCmSYhW4J4hey+mgrFW4onKmMbcw=', 'GdrucpP6szbow28+aFOXSw==', '1', '0.00', '0', '0.00', '2019-03-08 21:05:54');
@@ -210,3 +219,4 @@ INSERT INTO `role` VALUES ('1', '系统管理员', 'admin', '0', '2019-03-08 22:
 INSERT INTO `trustee_role` VALUES ('1', '1', '1', '2019-03-08 22:07:03');
 
 INSERT INTO `fund` VALUES ('1', '企业号', '0.00', '0.00', '0.00', '0', '0', '2019-03-10 15:56:17', '2019-03-10 15:56:13');
+INSERT INTO `stock` VALUES ('1', '浦发银行', '600000', '2019-03-10 18:23:28');

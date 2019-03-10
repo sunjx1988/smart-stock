@@ -1,5 +1,7 @@
 package smart.stock.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Stock {
@@ -9,6 +11,7 @@ public class Stock {
 
     private String code;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     public Long getId() {
