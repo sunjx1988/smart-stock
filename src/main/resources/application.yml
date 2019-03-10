@@ -3,7 +3,7 @@ server:
 
 logging:
   level:
-    root: error
+    root: info
     smart.stock.mapper: debug
   path: C:\\Users\\Administrator\\Desktop\\test
 
@@ -39,6 +39,8 @@ spring:
       suffix: .html
   thymeleaf:
     cache: false
+  aop:
+    proxy-target-class: true
 shiro:
   loginUrl: /login
   unauthorizedUrl: /403

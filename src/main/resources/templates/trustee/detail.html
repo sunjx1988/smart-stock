@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
       layout:decorator="/layout/layout">
 <head>
     <title>Smart Stock - 信托人</title>
@@ -70,7 +71,7 @@
 
                 </script>
             </form>
-            <div class="btns">
+            <div shiro:hasRole="admin" class="btns">
                 <a th:if="${mode == 'insert' || mode == 'edit'}" class="btn btn-primary" href="javascript:;" id="saveBtn">保存</a>
                 <a class="btn btn-default" href="/trustee">取消</a>
             </div>

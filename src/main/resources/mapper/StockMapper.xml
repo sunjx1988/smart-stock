@@ -83,7 +83,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from stock
     where id = #{id,jdbcType=BIGINT}
@@ -135,7 +135,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+
+    <update id="updateByExampleSelective" parameterType="map">
     update stock
     <set>
       <if test="record.id != null">
@@ -187,4 +188,25 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="list" resultType="smart.stock.dto.StockDto">
+    SELECT
+        id,
+        NAME,
+        CODE,
+        create_time AS createTime
+    FROM
+        stock
+    ORDER BY CODE DESC
+  </select>
+  <select id="detail" resultType="smart.stock.dto.StockDto">
+    SELECT
+        id,
+        NAME,
+        CODE,
+        create_time AS createTime
+    FROM
+        stock
+    WHERE id = #{id}
+  </select>
 </mapper>

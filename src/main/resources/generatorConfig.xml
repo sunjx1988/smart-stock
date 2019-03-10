@@ -37,41 +37,9 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
-        <table tableName="trustee" domainObjectName="Trustee" >
+        <table tableName="stock" domainObjectName="Stock" >
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
-<!--
-        <table tableName="trustee_by_day" domainObjectName="TrusteeByDay" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="fund" domainObjectName="Fund" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="fund_by_day" domainObjectName="FundByDay" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="trustee_trade" domainObjectName="TrusteeTrade" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="fund_stock" domainObjectName="FundStock" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="stock_trade" domainObjectName="StockTrade" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="stock_fix" domainObjectName="StockFix" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-
-        <table tableName="stock_price" domainObjectName="StockPrice" >
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>-->
 
     </context>
 </generatorConfiguration>

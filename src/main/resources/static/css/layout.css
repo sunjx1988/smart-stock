@@ -11,6 +11,9 @@ ul{
     margin: 0px;
     padding: 2px;
 }
+select{
+    width: 100% !important;
+}
 
 /* 通用工具类样式 开始 */
 
