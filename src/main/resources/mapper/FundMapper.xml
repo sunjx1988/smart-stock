@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, banlance, principal, position, total_unit, num_of_trustee, create_time, 
+    id, name, banlance, principal, position, total_unit, num_of_trustee, create_time,
     update_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.FundExample" resultMap="BaseResultMap">
@@ -89,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from fund
     where id = #{id,jdbcType=BIGINT}
@@ -105,11 +105,11 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Fund" useGeneratedKeys="true">
-    insert into fund (name, banlance, principal, 
-      position, total_unit, num_of_trustee, 
+    insert into fund (name, banlance, principal,
+      position, total_unit, num_of_trustee,
       create_time, update_time)
-    values (#{name,jdbcType=VARCHAR}, #{banlance,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, 
-      #{position,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{numOfTrustee,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR}, #{banlance,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL},
+      #{position,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{numOfTrustee,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Fund" useGeneratedKeys="true">
@@ -173,7 +173,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+
+    <update id="updateByExampleSelective" parameterType="map">
     update fund
     <set>
       <if test="record.id != null">
@@ -265,4 +266,20 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="detail" resultType="smart.stock.dto.FundDto">
+    SELECT
+        id,
+        NAME,
+        banlance,
+        principal,
+        position,
+        total_unit AS totalunit,
+        num_of_trustee AS numOfTrustee,
+        create_time AS createTime,
+        update_time AS updateTime
+    FROM
+        fund
+    WHERE id = #{id}
+  </select>
 </mapper>

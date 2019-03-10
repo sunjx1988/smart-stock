@@ -12,66 +12,74 @@
         <h1 class="page_name">信托人</h1>
     </section>
     <section class="content">
-        <form id="form" class="form-horizontal">
-            <input id="id" name="id" th:value="${id}" type="hidden" />
-            <input id="mode" th:value="${mode}" type="hidden" />
-            <script id="tpl" type="text/html">
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="name">姓名<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{name}}" id="name" name="name" class="form-control" placeholder="姓名" autocomplete="off" type="text"/>
-                        <span th:if="${mode == 'detail'}" class="form_text">{{name}}</span>
+        <div class="row">
+            <form id="form" class="form-horizontal">
+                <input id="id" name="id" th:value="${id}" type="hidden" />
+                <input id="mode" th:value="${mode}" type="hidden" />
+                <script id="tpl" type="text/html">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="name">姓名<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{name}}" id="name" name="name" class="form-control" placeholder="姓名" autocomplete="off" type="text"/>
+                            <span th:if="${mode == 'detail'}" class="form_text">{{name}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="phone">电话<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{phone}}" id="phone" name="phone" class="form-control" placeholder="电话" autocomplete="off" type="text"/>
-                        <span th:if="${mode == 'detail'}" class="form_text">{{phone}}</span>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="phone">电话<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{phone}}" id="phone" name="phone" class="form-control" placeholder="电话" autocomplete="off" type="text"/>
+                            <span th:if="${mode == 'detail'}" class="form_text">{{phone}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group" th:if="${mode == 'insert' || mode == 'edit'}">
-                    <label class="col-md-2 control-label" for="commitPwd">密码<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <input value="{{commitPwd}}" id="commitPwd" name="commitPwd" class="form-control" placeholder="密码" autocomplete="off" type="password"/>
+                    <div class="form-group" th:if="${mode == 'insert' || mode == 'edit'}">
+                        <label class="col-md-2 control-label" for="commitPwd">密码<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <input value="{{commitPwd}}" id="commitPwd" name="commitPwd" class="form-control" placeholder="密码" autocomplete="off" type="password"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="name">状态<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <span class="form_text">{{statusText}}</span>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">状态<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <span class="form_text">{{statusText}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="name">本金<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <span class="form_text">{{principal}}</span>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">本金<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <span class="form_text">{{principal}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="name">份额<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <span class="form_text">{{totalUnit}}</span>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">份额<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <span class="form_text">{{totalUnit}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="name">总资产<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <span class="form_text">{{total}}</span>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">总资产<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <span class="form_text">{{total}}</span>
+                        </div>
                     </div>
-                </div>
-                <div th:if="${mode == 'detail' || mode == 'edit'}" class="form-group">
-                    <label class="col-md-2 control-label" >创建时间<i style="color: red">*</i></label>
-                    <div class="col-md-5">
-                        <span class="form_text">{{createTime}}</span>
+                    <div th:if="${mode == 'detail' || mode == 'edit'}" class="form-group">
+                        <label class="col-md-2 control-label" >创建时间<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <span class="form_text">{{createTime}}</span>
+                        </div>
                     </div>
-                </div>
 
-            </script>
-        </form>
-        <div class="btns">
-            <a th:if="${mode == 'insert' || mode == 'edit'}" class="btn btn-primary" href="javascript:;" id="saveBtn">保存</a>
-            <a class="btn btn-default" href="/trustee">取消</a>
+                </script>
+            </form>
+            <div class="btns">
+                <a th:if="${mode == 'insert' || mode == 'edit'}" class="btn btn-primary" href="javascript:;" id="saveBtn">保存</a>
+                <a class="btn btn-default" href="/trustee">取消</a>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
+            <div class="col-md-12">
+                <p>报表,待开发...</p>
+            </div>
         </div>
     </section>
 </div>
