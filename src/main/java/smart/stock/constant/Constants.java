@@ -39,4 +39,37 @@ public class Constants {
             return null;
         }
     }
+
+    /**
+     * 股票交易类型
+     */
+    public enum StockTradeTypes{
+        Buy(0,"买入"),
+        Sale(1,"卖出"),
+        ;
+        private int key;
+        private String text;
+
+        StockTradeTypes(int key, String text) {
+            this.key = key;
+            this.text = text;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public static String getTextByKey(int key){
+            for (StockTradeTypes type :StockTradeTypes.values()){
+                if(type.key == key){
+                    return type.text;
+                }
+            }
+            return null;
+        }
+    }
 }

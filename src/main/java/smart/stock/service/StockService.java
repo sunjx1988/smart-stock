@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import smart.stock.dto.Options;
 import smart.stock.dto.StockDto;
 import smart.stock.entity.Stock;
 import smart.stock.mapper.StockMapper;
@@ -26,7 +27,6 @@ public class StockService {
     private StockMapper stockMapper;
 
     public List<StockDto> list(StockDto stockDto) {
-        PageHelper.startPage(stockDto.getPage(), stockDto.getRows());
         return stockMapper.list(stockDto);
     }
 
@@ -54,5 +54,9 @@ public class StockService {
             stockMapper.insert(stock);
         }
         return stock.getId();
+    }
+
+    public List<Options> options() {
+        return stockMapper.options();
     }
 }

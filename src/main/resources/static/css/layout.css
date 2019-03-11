@@ -14,7 +14,9 @@ ul{
 select{
     width: 100% !important;
 }
-
+label{
+    text-align: right !important;
+}
 /* 通用工具类样式 开始 */
 
 /* 通用工具类样式 结束 */
@@ -23,6 +25,14 @@ select{
 /* 修改bootstrap 样式 开始*/
 .form-control{
     border-radius: 0px;
+}
+.row .form-group{
+    margin-bottom: 20px;
+}
+.input-group[class*=col-] {
+    float: none;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 /* bootstrap 样式 结束*/
 

@@ -90,7 +90,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from stock_trade
     where id = #{id,jdbcType=BIGINT}
@@ -106,13 +106,13 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockTrade" useGeneratedKeys="true">
-    insert into stock_trade (name, code, fund_id, 
-      fund_name, unit, unit_price, 
-      total, type, date, 
+    insert into stock_trade (name, code, fund_id,
+      fund_name, unit, unit_price,
+      total, type, date,
       create_time)
-    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{fundId,jdbcType=BIGINT}, 
-      #{fundName,jdbcType=VARCHAR}, #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, 
-      #{total,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{fundId,jdbcType=BIGINT},
+      #{fundName,jdbcType=VARCHAR}, #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL},
+      #{total,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockTrade" useGeneratedKeys="true">
@@ -188,7 +188,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+
+    <update id="updateByExampleSelective" parameterType="map">
     update stock_trade
     <set>
       <if test="record.id != null">
@@ -296,4 +297,22 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="list" resultType="smart.stock.dto.StockTradeDto">
+    SELECT
+        st.id,
+        st.`name`,
+        st.`code`,
+        st.fund_id AS fundId,
+        st.fund_name AS fundName,
+        st.unit,
+        st.unit_price AS unitPrice,
+        st.total,
+        st.type,
+        st.date,
+        st.create_time AS createTime
+    FROM
+        stock_trade st
+    ORDER BY st.create_time DESC
+  </select>
 </mapper>

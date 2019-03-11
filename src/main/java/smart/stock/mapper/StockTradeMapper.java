@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.StockTradeDto;
 import smart.stock.entity.StockTrade;
 import smart.stock.entity.StockTradeExample;
 
@@ -27,4 +28,7 @@ public interface StockTradeMapper {
     int updateByPrimaryKeySelective(StockTrade record);
 
     int updateByPrimaryKey(StockTrade record);
+
+    List<StockTradeDto> list(StockTradeDto stockTradeDto);
+
 }

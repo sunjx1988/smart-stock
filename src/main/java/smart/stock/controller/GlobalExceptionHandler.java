@@ -1,5 +1,6 @@
 package smart.stock.controller;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +21,7 @@ public class GlobalExceptionHandler {
 	public BaseResult<?> jsonErrorHandler(Exception e) {
 		if(e instanceof BaseException){
 			BaseException exception = (BaseException)e;
+			log.error("错误码 -> {}, 信息 -> {}",((BaseException) e).getCode(), ((BaseException) e).getMsg(), e);
 			return new BaseResult<>(exception.getCode(), exception.getMsg(), exception.getData());
 		}else{
 			log.error("未知错误", e);

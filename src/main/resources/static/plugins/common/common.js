@@ -166,9 +166,64 @@ $.fn.datagrid = function (p) {
     postData();
 }
 
+//登出方法
 function logout() {
     $.post("/logout",null, function () {
         location.href = "/";
     });
 }
 
+//下拉框
+$.fn.selecter = function (options) {
+    var _this = this;
+    var defaults = {
+        url: '',
+        type: 'POST',
+        data: [{
+                value: '',
+                text: "-- 请选择 --",
+                selected: true
+            }]
+        //onselected: function(){}
+    }
+    $.extend(defaults,options);
+
+    //加载数据
+    function loadData() {
+        $.ajax({
+            url: defaults.url,
+            type: defaults.type,
+            success: function (ret) {
+                if(ret.code = '0000' && ret.data != null && ret.data.length > 0){
+                    defaults.data = defaults.data.concat(ret.data);
+                    loadDom();
+                }
+            }
+        })
+    }
+
+    //处理dom
+    function loadDom() {
+        for(var i in defaults.data){
+            var data = defaults.data;
+            var option = new Option(data[i].text, data[i].value, null, data[i].selected);
+            $(_this).append(option);
+        }
+    }
+
+    (function () {
+        loadData();
+    })();
+
+    return {
+        //选择
+        select: function(value) {
+            $(_this).val(value).trigger("change");
+        },
+
+        //重置
+        reset: function() {
+            $(_this).val(null).trigger("change");
+        }
+    }
+}

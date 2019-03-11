@@ -4,8 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import smart.stock.dto.FundDto;
+import smart.stock.dto.Options;
 import smart.stock.entity.Fund;
 import smart.stock.mapper.FundMapper;
+
+import java.util.List;
 
 /**
  * @Auther: sunjx
@@ -26,5 +29,9 @@ public class FundService {
 
     public Long save(Fund fund) {
         return null;
+    }
+
+    public List<Options> options() {
+        return fundMapper.options();
     }
 }

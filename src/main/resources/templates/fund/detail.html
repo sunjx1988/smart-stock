@@ -89,52 +89,51 @@
 
         <div shiro:hasRole="admin" id="tradeStockModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
-                <div class="modal-content"  style="min-width: 800px;">
+                <div class="modal-content"  style="min-width: 1000px;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">交易股票</h4>
                     </div>
                     <div class="modal-body" style="min-height: 150px">
-                        <form id="tradeStockForm" class="form-horizontal form-inline">
+                        <form id="tradeStockForm" class="form-inline">
+                            <input type="hidden" name="fundId" th:value="${id}" />
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    <label class="col-md-6 control-label">选择基金<i style="color: red">*</i></label>
-                                    <div class="col-md-6">
-                                        <select class="form-control">
-                                            <option value="1">企业号</option>
+                                    <label class="col-md-4 control-label">股票<i style="color: red">*</i></label>
+                                    <div class="col-md-8">
+                                        <select id="code" name="code" class="form-control" >
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label class="col-md-6 control-label">股票<i style="color: red">*</i></label>
-                                    <div class="col-md-6">
-
+                                    <label class="col-md-4 control-label">交易类型<i style="color: red">*</i></label>
+                                    <div class="col-md-8">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="type" id="type1" value="0" checked="checked" />&nbsp;买入&nbsp;
+                                            </label>
+                                            &nbsp;
+                                            <label>
+                                                <input type="radio" name="type" id="type2" value="1" />&nbsp;卖出&nbsp;
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-6 control-label">交易类型<i style="color: red">*</i></label>
-                                    <div class="col-md-6">
-
+                                <div class="col-md-4 form-group">
+                                    <label class="col-md-4 control-label">成本价<i style="color: red">*</i></label>
+                                    <div class="col-md-8 input-group">
+                                        <div class="input-group-addon">￥</div>
+                                        <input name="unitPrice" type="text" class="form-control"  placeholder="成本价" autocomplete="off"/>
+                                        <div class="input-group-addon">元</div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label class="col-md-6 control-label">成交成本价<i style="color: red">*</i></label>
-                                    <div class="col-md-6">
-
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-6 control-label">成交数量<i style="color: red">*</i></label>
-                                    <div class="col-md-6">
-
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-6 control-label">成交总额<i style="color: red">*</i></label>
-                                    <div class="col-md-6">
-
+                                    <label class="col-md-4 control-label">成交数量<i style="color: red">*</i></label>
+                                    <div class="col-md-8 input-group">
+                                        <input name="unit" type="text" class="form-control"  placeholder="成交数量"  autocomplete="off"/>
+                                        <div class="input-group-addon">股</div>
                                     </div>
                                 </div>
                             </div>
@@ -146,14 +145,6 @@
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-
-            <script type="text/javascript">
-                $(function () {
-                    $("#tradeStockBtn").on("click", function () {
-                        $("#tradeStockModal").modal("show");
-                    });
-                });
-            </script>
         </div><!-- /.modal -->
 
     </section>

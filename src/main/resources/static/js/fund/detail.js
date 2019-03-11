@@ -17,10 +17,36 @@ var PAGE = (function () {
         }else{
             initHtmlData();
         }
+
+        $("#tradeStockBtn").on("click", function () {
+            $("#tradeStockModal").modal("show");
+        });
+
+        $("#tradeStockCommitBtn").on("click", function () {
+            $.ajax({
+                url: '/stocktrade/save',
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify($("#tradeStockForm").serializeObject()),
+                success: function (ret) {
+                    if(ret.code != '0000'){
+                        message(ret.msg);
+                    }else{
+                        location.href = "/stocktrade"
+                    }
+                }
+            })
+        });
     }
 
     function initHtmlData(data) {
         $("#form").append(template('tpl', data));
+        $("#fundId").selecter({
+            url: '/fund/options'
+        })
+        $("#code").selecter({
+            url: '/stock/options'
+        })
     }
 
     return {

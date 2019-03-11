@@ -109,4 +109,8 @@ http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=201
     -
 ```
 动态url权限控制 https://jinnianshilongnian.iteye.com/blog/2040929
+
+防止重复提交
+
+前端校验
 ```

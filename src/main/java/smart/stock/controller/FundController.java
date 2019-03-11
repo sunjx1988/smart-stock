@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import smart.stock.dto.FundDto;
+import smart.stock.dto.Options;
 import smart.stock.entity.Fund;
 import smart.stock.service.FundService;
+
+import java.util.List;
 
 /**
  * @Auther: sunjx
@@ -41,6 +44,12 @@ public class FundController {
     @RequestMapping(value = "{id}", method = RequestMethod.POST)
     public BaseResult<FundDto> detail(@PathVariable("id") Long id, Model model){
         return BaseResult.success(fundService.detail(id));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "options", method = RequestMethod.POST)
+    public BaseResult<List<Options>> options(){
+        return BaseResult.success(fundService.options());
     }
 
     @ResponseBody

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      layout:decorator="/layout/layout">
+<head>
+    <title>Smart Stock - 股票交易</title>
+    <script th:src="@{/js/stocktrade/list.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content-header">
+        <h1 class="page_name">股票交易</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-header">
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="col-md-1 text-center">编号</th>
+                                <th class="col-md-1">名称</th>
+                                <th class="col-md-1">代码</th>
+                                <th class="col-md-1">类型</th>
+                                <th class="col-md-1">数量</th>
+                                <th class="col-md-1">价格</th>
+                                <th class="col-md-1">总额</th>
+                                <th class="col-md-2">时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td  class="text-center">
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td>{{tab.name}}</td>
+                                    <td>{{tab.code}}</td>
+                                    <td>{{tab.typeText}}</td>
+                                    <td>{{tab.unit}}</td>
+                                    <td>{{tab.unitPrice}}</td>
+                                    <td>{{tab.total}}</td>
+                                    <td>{{tab.createTime}}</td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

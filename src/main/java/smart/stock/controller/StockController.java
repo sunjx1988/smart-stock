@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import smart.stock.dto.Options;
 import smart.stock.dto.StockDto;
 import smart.stock.entity.Stock;
 import smart.stock.service.StockService;
+
+import java.util.List;
 
 /**
  * @Auther: sunjx
@@ -38,6 +41,12 @@ public class StockController {
     public PageInfo<StockDto> list(StockDto stockDto){
         PageHelper.startPage(stockDto.getPage(), stockDto.getRows());
         return new PageInfo(stockService.list(stockDto));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "options", method = RequestMethod.POST)
+    public BaseResult<List<Options>> options(){
+        return BaseResult.success(stockService.options());
     }
 
     @RequestMapping(value = "{mode}/{id}", method = RequestMethod.GET)

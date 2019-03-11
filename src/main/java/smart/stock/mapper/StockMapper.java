@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.Options;
 import smart.stock.dto.StockDto;
 import smart.stock.entity.Stock;
 import smart.stock.entity.StockExample;
@@ -32,4 +33,8 @@ public interface StockMapper {
     List<StockDto> list(StockDto stockDto);
 
     StockDto detail(Long id);
+
+    List<Options> options();
+
+    StockDto selectByCode(String code);
 }
