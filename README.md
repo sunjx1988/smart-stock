@@ -129,4 +129,12 @@ http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=201
 赎回价,
 
 利率计算,分成计算
+
+定时任务：
+    爬虫任务
+    股票收盘价更新
+    认购自动确认
+    到期自动赎回
+    基金报表
+    信托人报表
 ```
