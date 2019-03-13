@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.Options;
 import smart.stock.dto.TrusteeDto;
 import smart.stock.entity.Trustee;
 import smart.stock.entity.TrusteeExample;
@@ -37,4 +38,6 @@ public interface TrusteeMapper {
     TrusteeDto selectById(Long id);
 
     int countByPhoneAndId(Trustee user);
+
+    List<Options> options();
 }

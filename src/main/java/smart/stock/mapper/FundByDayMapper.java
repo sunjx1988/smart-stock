@@ -27,4 +27,6 @@ public interface FundByDayMapper {
     int updateByPrimaryKeySelective(FundByDay record);
 
     int updateByPrimaryKey(FundByDay record);
+
+    FundByDay selectByLastDay(Long fundId);
 }

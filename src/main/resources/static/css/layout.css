@@ -14,6 +14,9 @@ ul{
 select{
     width: 100% !important;
 }
+option{
+    text-align: center;
+}
 label{
     text-align: right !important;
 }

@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.TrusteeTradeDto;
 import smart.stock.entity.TrusteeTrade;
 import smart.stock.entity.TrusteeTradeExample;
 
@@ -27,4 +28,8 @@ public interface TrusteeTradeMapper {
     int updateByPrimaryKeySelective(TrusteeTrade record);
 
     int updateByPrimaryKey(TrusteeTrade record);
+
+    List<TrusteeTradeDto> list(TrusteeTradeDto trusteeTradeDto);
+
+    TrusteeTradeDto findById(Long id);
 }

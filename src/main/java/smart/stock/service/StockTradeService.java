@@ -106,7 +106,7 @@ public class StockTradeService {
         //扣减基金现金余额
         fund.setBanlance(fund.getBanlance().subtract(stockTrade.getTotal()));
         //重新计算仓位 保留两位,四舍五入
-        fund.setPosition(fund.getPrincipal().subtract(fund.getBanlance()).divide(fund.getPrincipal()).setScale(2, BigDecimal.ROUND_HALF_UP));
+        fund.setPosition(fund.getPrincipal().subtract(fund.getBanlance()).divide(fund.getPrincipal(),2, BigDecimal.ROUND_HALF_UP));
         fundMapper.updateByPrimaryKey(fund);
 
         return stockTrade.getId();

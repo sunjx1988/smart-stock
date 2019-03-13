@@ -5,13 +5,14 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="trustee_id" jdbcType="BIGINT" property="trusteeId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="fund_id" jdbcType="BIGINT" property="fundId" />
     <result column="fund_name" jdbcType="VARCHAR" property="fundName" />
     <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
     <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
     <result column="unit" jdbcType="INTEGER" property="unit" />
     <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="interest_rate" jdbcType="INTEGER" property="interestRate" />
     <result column="total" jdbcType="DECIMAL" property="total" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, trustee_id, name, fund_id, fund_name, start_date, end_date, unit, unit_price, 
-    type, total, create_time
+    id, trustee_id, name, status, fund_id, fund_name, start_date, end_date, unit, unit_price,
+    interest_rate, total, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeTradeExample" resultMap="BaseResultMap">
     select
@@ -92,7 +93,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from trustee_trade
     where id = #{id,jdbcType=BIGINT}
@@ -108,14 +109,16 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeTrade" useGeneratedKeys="true">
-    insert into trustee_trade (trustee_id, name, fund_id, 
-      fund_name, start_date, end_date, 
-      unit, unit_price, type, 
-      total, create_time)
-    values (#{trusteeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{fundId,jdbcType=BIGINT}, 
-      #{fundName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
-      #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
-      #{total,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+    insert into trustee_trade (trustee_id, name, status,
+      fund_id, fund_name, start_date,
+      end_date, unit, unit_price,
+      interest_rate, total, create_time
+      )
+    values (#{trusteeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{fundId,jdbcType=BIGINT}, #{fundName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
+      #{endDate,jdbcType=TIMESTAMP}, #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL},
+      #{interestRate,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeTrade" useGeneratedKeys="true">
     insert into trustee_trade
@@ -125,6 +128,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="fundId != null">
         fund_id,
@@ -144,8 +150,8 @@
       <if test="unitPrice != null">
         unit_price,
       </if>
-      <if test="type != null">
-        type,
+      <if test="interestRate != null">
+        interest_rate,
       </if>
       <if test="total != null">
         total,
@@ -160,6 +166,9 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="fundId != null">
         #{fundId,jdbcType=BIGINT},
@@ -179,8 +188,8 @@
       <if test="unitPrice != null">
         #{unitPrice,jdbcType=DECIMAL},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="interestRate != null">
+        #{interestRate,jdbcType=INTEGER},
       </if>
       <if test="total != null">
         #{total,jdbcType=DECIMAL},
@@ -208,6 +217,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.fundId != null">
         fund_id = #{record.fundId,jdbcType=BIGINT},
       </if>
@@ -226,8 +238,8 @@
       <if test="record.unitPrice != null">
         unit_price = #{record.unitPrice,jdbcType=DECIMAL},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.interestRate != null">
+        interest_rate = #{record.interestRate,jdbcType=INTEGER},
       </if>
       <if test="record.total != null">
         total = #{record.total,jdbcType=DECIMAL},
@@ -245,13 +257,14 @@
     set id = #{record.id,jdbcType=BIGINT},
       trustee_id = #{record.trusteeId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
       fund_id = #{record.fundId,jdbcType=BIGINT},
       fund_name = #{record.fundName,jdbcType=VARCHAR},
       start_date = #{record.startDate,jdbcType=TIMESTAMP},
       end_date = #{record.endDate,jdbcType=TIMESTAMP},
       unit = #{record.unit,jdbcType=INTEGER},
       unit_price = #{record.unitPrice,jdbcType=DECIMAL},
-      type = #{record.type,jdbcType=INTEGER},
+      interest_rate = #{record.interestRate,jdbcType=INTEGER},
       total = #{record.total,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -266,6 +279,9 @@
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="fundId != null">
         fund_id = #{fundId,jdbcType=BIGINT},
@@ -285,8 +301,8 @@
       <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=DECIMAL},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="interestRate != null">
+        interest_rate = #{interestRate,jdbcType=INTEGER},
       </if>
       <if test="total != null">
         total = #{total,jdbcType=DECIMAL},
@@ -301,15 +317,54 @@
     update trustee_trade
     set trustee_id = #{trusteeId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       fund_id = #{fundId,jdbcType=BIGINT},
       fund_name = #{fundName,jdbcType=VARCHAR},
       start_date = #{startDate,jdbcType=TIMESTAMP},
       end_date = #{endDate,jdbcType=TIMESTAMP},
       unit = #{unit,jdbcType=INTEGER},
       unit_price = #{unitPrice,jdbcType=DECIMAL},
-      type = #{type,jdbcType=INTEGER},
+      interest_rate = #{interestRate,jdbcType=INTEGER},
       total = #{total,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="list" resultType="smart.stock.dto.TrusteeTradeDto">
+    SELECT
+        id,
+        status,
+        trustee_id as trusteeId,
+        NAME,
+        fund_id as fundId,
+        fund_name as fundName,
+        start_date as startDate,
+        end_date as endDate,
+        unit,
+        unit_price as unitPrice,
+        interest_rate as interestRate,
+        total,
+        create_time as createTime
+    FROM
+        trustee_trade
+    order by create_time desc
+  </select>
+  <select id="findById" resultType="smart.stock.dto.TrusteeTradeDto">
+        SELECT
+            id,
+            status,
+            trustee_id as trusteeId,
+            NAME,
+            fund_id as fundId,
+            fund_name as fundName,
+            start_date as startDate,
+            end_date as endDate,
+            unit,
+            unit_price as unitPrice,
+            interest_rate as interestRate,
+            total,
+            create_time as createTime
+        FROM
+            trustee_trade
+        WHERE id = #{id}
+  </select>
 </mapper>

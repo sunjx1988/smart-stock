@@ -72,4 +72,70 @@ public class Constants {
             return null;
         }
     }
+
+    /**
+     * 信托年化利率
+     */
+    public enum InterestRate{
+        Five(5,"5% / 年"),
+        ;
+        private int key;
+        private String text;
+
+        InterestRate(int key, String text) {
+            this.key = key;
+            this.text = text;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public static String getTextByKey(int key){
+            for (InterestRate type :InterestRate.values()){
+                if(type.key == key){
+                    return type.text;
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
+     * 信托交易状态
+     */
+    public enum TrusteeTradeStatus{
+        Confirming(0,"确认中"),
+        Confirmed(1,"已确认"),
+        Sold(2,"已赎回"),
+        ;
+        private int key;
+        private String text;
+
+        TrusteeTradeStatus(int key, String text) {
+            this.key = key;
+            this.text = text;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public static String getTextByKey(int key){
+            for (TrusteeTradeStatus type :TrusteeTradeStatus.values()){
+                if(type.key == key){
+                    return type.text;
+                }
+            }
+            return null;
+        }
+    }
 }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      layout:decorator="/layout/layout">
+<head>
+    <title>Smart Stock - 信托交易</title>
+    <script th:src="@{/js/trusteetrade/list.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content-header">
+        <h1 class="page_name">信托交易</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-header">
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="col-md-1 text-center">编号</th>
+                                <th class="col-md-1">信托人</th>
+                                <th class="col-md-1">金额</th>
+                                <th class="col-md-1">利率</th>
+                                <th class="col-md-1">状态</th>
+                                <th class="col-md-1">认购价</th>
+                                <th class="col-md-1">赎回价</th>
+                                <th class="col-md-1">份额</th>
+                                <th class="col-md-2">锁定时间</th>
+                                <th class="col-md-2">时间</th>
+                                <th shiro:hasRole="admin" class="col-md-1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td  class="text-center">
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td>{{tab.name}}</td>
+                                    <td>{{tab.total}}</td>
+                                    <td>{{tab.interestRateText}}</td>
+                                    <td>{{tab.statusText}}</td>
+                                    <td>
+                                        {{if tab.status == 0}}
+                                            待确认
+                                        {{else}}
+                                            {{tab.unitPrice}}
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        {{if tab.status == 3}}
+                                            待开发
+                                        {{else}}
+                                            -
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        {{if tab.status == 0}}
+                                            待确认
+                                        {{else}}
+                                            {{tab.unit}}
+                                        {{/if}}
+                                    </td>
+                                    <td>{{tab.startDate}} 至 {{tab.endDate}}</td>
+                                    <td>{{tab.createTime}}</td>
+                                    <td shiro:hasRole="admin" class="text-center">
+                                        <div class='icon-flex'>
+                                            <a class="btn btn-default" href="javascript:;" onclick="confirmTrade({{tab.id}})">确认</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

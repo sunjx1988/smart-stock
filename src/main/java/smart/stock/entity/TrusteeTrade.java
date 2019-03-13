@@ -12,21 +12,23 @@ public class TrusteeTrade {
 
     private String name;
 
+    private Integer status;
+
     private Long fundId;
 
     private String fundName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date startDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date endDate;
 
     private Integer unit;
 
     private BigDecimal unitPrice;
 
-    private Integer type;
+    private Integer interestRate;
 
     private BigDecimal total;
 
@@ -55,6 +57,14 @@ public class TrusteeTrade {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Long getFundId() {
@@ -105,12 +115,12 @@ public class TrusteeTrade {
         this.unitPrice = unitPrice;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getInterestRate() {
+        return interestRate;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setInterestRate(Integer interestRate) {
+        this.interestRate = interestRate;
     }
 
     public BigDecimal getTotal() {

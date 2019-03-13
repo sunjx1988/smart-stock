@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import smart.stock.constant.Constants;
+import smart.stock.dto.Options;
 import smart.stock.dto.TrusteeDto;
 import smart.stock.mapper.TrusteeMapper;
 
@@ -39,6 +40,10 @@ public class TrusteeService {
         TrusteeDto dto = trusteeMapper.selectById(id);
         dto.setStatusText(Constants.TrusteeStatus.getTextByKey(dto.getStatus()));
         return dto;
+    }
+
+    public List<Options> options() {
+        return trusteeMapper.options();
     }
 
 }

@@ -324,4 +324,11 @@
       and id != #{id}
     </if>
   </select>
+    <select id="options" resultType="smart.stock.dto.Options">
+      SELECT
+        id AS value,
+        name AS text
+      FROM `trustee`
+      ORDER BY name
+    </select>
 </mapper>

@@ -77,7 +77,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, fund_id, date, name, banlance, principal, position, total_unit, num_of_trustee, 
+    id, fund_id, date, name, banlance, principal, position, total_unit, num_of_trustee,
     market_value, total, net_unit_value, income, rate_of_return, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.FundByDayExample" resultMap="BaseResultMap">
@@ -95,7 +95,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from fund_by_day
     where id = #{id,jdbcType=BIGINT}
@@ -111,15 +111,15 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.FundByDay" useGeneratedKeys="true">
-    insert into fund_by_day (fund_id, date, name, 
-      banlance, principal, position, 
-      total_unit, num_of_trustee, market_value, 
-      total, net_unit_value, income, 
+    insert into fund_by_day (fund_id, date, name,
+      banlance, principal, position,
+      total_unit, num_of_trustee, market_value,
+      total, net_unit_value, income,
       rate_of_return, create_time)
-    values (#{fundId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{banlance,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, #{position,jdbcType=DECIMAL}, 
-      #{totalUnit,jdbcType=INTEGER}, #{numOfTrustee,jdbcType=INTEGER}, #{marketValue,jdbcType=DECIMAL}, 
-      #{total,jdbcType=DECIMAL}, #{netUnitValue,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, 
+    values (#{fundId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{banlance,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, #{position,jdbcType=DECIMAL},
+      #{totalUnit,jdbcType=INTEGER}, #{numOfTrustee,jdbcType=INTEGER}, #{marketValue,jdbcType=DECIMAL},
+      #{total,jdbcType=DECIMAL}, #{netUnitValue,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL},
       #{rateOfReturn,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.FundByDay" useGeneratedKeys="true">
@@ -219,7 +219,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+
+    <update id="updateByExampleSelective" parameterType="map">
     update fund_by_day
     <set>
       <if test="record.id != null">
@@ -359,4 +360,30 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByLastDay" resultType="smart.stock.entity.FundByDay">
+    SELECT
+        id,
+        fund_id as fundId,
+        date,
+        NAME,
+        banlance,
+        principal,
+        position,
+        total_unit as totalUnit,
+        num_of_trustee as numOfTrustee,
+        market_value as marketValue,
+        total,
+        net_unit_value as netUnitValue,
+        income,
+        rate_of_return as rateOfReturn,
+        create_time as createTime
+    FROM
+        fund_by_day
+    WHERE
+        fund_id = ''
+    ORDER BY
+        create_time DESC
+    LIMIT 1
+  </select>
 </mapper>

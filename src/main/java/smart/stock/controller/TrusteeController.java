@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import smart.stock.dto.Options;
 import smart.stock.dto.TrusteeDto;
 import smart.stock.entity.Trustee;
 import smart.stock.service.TrusteeService;
 import smart.stock.shiro.ShiroService;
 import smart.stock.shiro.ShiroUser;
+
+import java.util.List;
 
 /**
  * @Auther: sunjx
@@ -74,6 +77,12 @@ public class TrusteeController {
         }else{
             return BaseResult.error(user);
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "options", method = RequestMethod.POST)
+    public BaseResult<List<Options>> options(){
+        return BaseResult.success(trusteeService.options());
     }
 }
 

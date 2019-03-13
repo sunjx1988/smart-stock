@@ -13,4 +13,10 @@ public class Options {
     private String value;
     private String text;
 
+    public Options(){}
+
+    public Options(String value, String text) {
+        this.value = value;
+        this.text = text;
+    }
 }

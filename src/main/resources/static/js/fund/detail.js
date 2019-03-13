@@ -37,16 +37,42 @@ var PAGE = (function () {
                 }
             })
         });
+
+        $("#trusteeTradeBtn").on("click", function () {
+            $("#trusteeTradeModal").modal("show");
+        });
+
+        $("#trusteeTradeCommitBtn").on("click", function () {
+            $.ajax({
+                url: '/trusteetrade/save',
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify($("#trusteeTradeForm").serializeObject()),
+                success: function (ret) {
+                    if(ret.code != '0000'){
+                        message(ret.msg);
+                    }else{
+                        location.href = "/trusteetrade"
+                    }
+                }
+            })
+        });
     }
 
     function initHtmlData(data) {
         $("#form").append(template('tpl', data));
         $("#fundId").selecter({
-            url: '/fund/options'
-        })
+           url: '/fund/options'
+        });
         $("#code").selecter({
-            url: '/stock/options'
-        })
+           url: '/stock/options'
+        });
+        $("#trusteeId").selecter({
+           url: '/trustee/options'
+        });
+        $("#interestRate").selecter({
+           url : '/trusteetrade/interestrate/options'
+        });
     }
 
     return {
