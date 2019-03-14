@@ -32,6 +32,13 @@
                             <span th:if="${mode == 'detail'}" class="form_text">{{phone}}</span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="email">E-mail<i style="color: red">*</i></label>
+                        <div class="col-md-5">
+                            <input th:if="${mode == 'insert' || mode == 'edit'}" value="{{email}}" id="email" name="email" class="form-control" placeholder="E-mail" autocomplete="off" type="text"/>
+                            <span th:if="${mode == 'detail'}" class="form_text">{{email}}</span>
+                        </div>
+                    </div>
                     <div class="form-group" th:if="${mode == 'insert' || mode == 'edit'}">
                         <label class="col-md-2 control-label" for="commitPwd">密码<i style="color: red">*</i></label>
                         <div class="col-md-5">

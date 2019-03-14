@@ -25,8 +25,6 @@ public class TrusteeTradeAutoSaleTask {
     @Autowired
     private TrusteeTradeService trusteeTradeService;
 
-
-//    @Scheduled(cron = "0/20 * * * * ?")
     @Scheduled(cron = "0 0 2 * * ?")
     public void task(){
         //查询到期已确认状态的认购

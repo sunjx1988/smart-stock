@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
     <result column="login_salt" jdbcType="VARCHAR" property="loginSalt" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, phone, login_pwd, login_salt, status, principal, total_unit, create_time
+    id, name, phone, email, login_pwd, login_salt, status, principal, total_unit, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeExample" resultMap="BaseResultMap">
     select
@@ -104,12 +105,14 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Trustee" useGeneratedKeys="true">
-    insert into trustee (name, phone, login_pwd,
-      login_salt, status, principal,
-      total_unit, create_time)
-    values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR},
-      #{loginSalt,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{principal,jdbcType=DECIMAL},
-      #{totalUnit,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+    insert into trustee (name, phone, email,
+      login_pwd, login_salt, status,
+      principal, total_unit, create_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+      #{loginPwd,jdbcType=VARCHAR}, #{loginSalt,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{principal,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Trustee" useGeneratedKeys="true">
     insert into trustee
@@ -119,6 +122,9 @@
       </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="email != null">
+        email,
       </if>
       <if test="loginPwd != null">
         login_pwd,
@@ -145,6 +151,9 @@
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="loginPwd != null">
         #{loginPwd,jdbcType=VARCHAR},
@@ -184,6 +193,9 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.loginPwd != null">
         login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
       </if>
@@ -212,6 +224,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
       login_salt = #{record.loginSalt,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
@@ -230,6 +243,9 @@
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="loginPwd != null">
         login_pwd = #{loginPwd,jdbcType=VARCHAR},
@@ -256,6 +272,7 @@
     update trustee
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       login_pwd = #{loginPwd,jdbcType=VARCHAR},
       login_salt = #{loginSalt,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
@@ -264,12 +281,12 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <select id="list" resultType="smart.stock.dto.TrusteeDto">
     SELECT
 	id,
 	name,
 	phone,
+	email,
 	status,
 	principal,
 	total_unit AS totalUnit,
@@ -290,6 +307,7 @@
 	id,
 	name,
 	phone,
+	email,
 	status,
 	principal,
 	total_unit as totalUnit,

@@ -13,6 +13,8 @@ public class Trustee {
 
     private String phone;
 
+    private String email;
+
     @JsonIgnore
     private String loginPwd;
 
@@ -50,6 +52,14 @@ public class Trustee {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
     public String getLoginPwd() {
