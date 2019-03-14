@@ -139,4 +139,37 @@ public class Constants {
             return null;
         }
     }
+
+    /**
+     * 基金持有股票状态
+     */
+    public enum FundStockStatus{
+        Holding(0,"持有"),
+        UnHolding(1,"不持有"),
+        ;
+        private int key;
+        private String text;
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        FundStockStatus(int key, String text) {
+            this.key = key;
+            this.text = text;
+        }
+
+        public static String getTextByKey(int key){
+            for (FundStockStatus type :FundStockStatus.values()){
+                if(type.key == key){
+                    return type.text;
+                }
+            }
+            return null;
+        }
+    }
 }

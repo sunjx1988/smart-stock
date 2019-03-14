@@ -40,4 +40,6 @@ public interface TrusteeMapper {
     int countByPhoneAndId(Trustee user);
 
     List<Options> options();
+
+    int trusteeNum(Long fundId);
 }

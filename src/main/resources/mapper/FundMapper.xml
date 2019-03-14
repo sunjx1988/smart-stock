@@ -290,4 +290,19 @@
             fund
         ORDER BY name
     </select>
+    <select id="list" resultType="smart.stock.dto.FundDto">
+      SELECT
+          id,
+          NAME,
+          banlance,
+          principal,
+          position,
+          total_unit AS totalunit,
+          num_of_trustee AS numOfTrustee,
+          create_time AS createTime,
+          update_time AS updateTime
+      FROM
+          fund
+      WHERE 1 = 1
+    </select>
 </mapper>

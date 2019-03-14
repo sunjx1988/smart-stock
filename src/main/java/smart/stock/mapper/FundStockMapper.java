@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.FundStockDto;
 import smart.stock.entity.FundStock;
 import smart.stock.entity.FundStockExample;
 
@@ -27,4 +28,6 @@ public interface FundStockMapper {
     int updateByPrimaryKeySelective(FundStock record);
 
     int updateByPrimaryKey(FundStock record);
+
+    List<FundStockDto> list(FundStockDto fundStockParam);
 }

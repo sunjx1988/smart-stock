@@ -1,13 +1,14 @@
 package smart.stock.task;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import smart.stock.constant.Constants;
+import smart.stock.dto.FundDto;
 import smart.stock.dto.TrusteeTradeDto;
+import smart.stock.service.FundService;
 import smart.stock.service.TrusteeTradeService;
 
 import java.util.Date;
@@ -25,10 +26,11 @@ public class TrusteeTradeAutoSaleTask {
     @Autowired
     private TrusteeTradeService trusteeTradeService;
 
+    @Autowired
+    private FundService fundService;
+
     @Scheduled(cron = "0 0 2 * * ?")
     public void task(){
-        //查询到期已确认状态的认购
-
         log.info("清算到期赎回 -> 开始");
         int success = 0;
         int total = 0;
@@ -48,6 +50,14 @@ public class TrusteeTradeAutoSaleTask {
                 } catch (Exception e) {
                     log.error("清算到期赎回失败,ID={}", dto.getId(), e);
                     fail ++;
+                }
+            }
+
+            List<FundDto> funds = fundService.list(null);
+            if(!CollectionUtils.isEmpty(funds)){
+                for(FundDto fund: funds){
+                    //计算信托人数
+                    fundService.trusteeNum(fund.getId());
                 }
             }
         }

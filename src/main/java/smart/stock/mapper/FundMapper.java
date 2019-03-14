@@ -33,4 +33,6 @@ public interface FundMapper {
     FundDto detail(Long id);
 
     List<Options> options();
+
+    List<FundDto> list(FundDto param);
 }

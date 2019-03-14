@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, code, market_type, status, fund_id, fund_name, unit, unit_price, total, 
+    id, name, code, market_type, status, fund_id, fund_name, unit, unit_price, total,
     now_unit_price, now_total, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.FundStockExample" resultMap="BaseResultMap">
@@ -93,7 +93,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from fund_stock
     where id = #{id,jdbcType=BIGINT}
@@ -109,14 +109,14 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.FundStock" useGeneratedKeys="true">
-    insert into fund_stock (name, code, market_type, 
-      status, fund_id, fund_name, 
-      unit, unit_price, total, 
+    insert into fund_stock (name, code, market_type,
+      status, fund_id, fund_name,
+      unit, unit_price, total,
       now_unit_price, now_total, create_time
       )
-    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{marketType,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{fundId,jdbcType=BIGINT}, #{fundName,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, 
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{marketType,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{fundId,jdbcType=BIGINT}, #{fundName,jdbcType=VARCHAR},
+      #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL},
       #{nowUnitPrice,jdbcType=DECIMAL}, #{nowTotal,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -205,7 +205,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update fund_stock
     <set>
       <if test="record.id != null">
@@ -329,4 +329,31 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="list" resultType="smart.stock.dto.FundStockDto">
+    SELECT
+        id,
+        NAME,
+        CODE,
+        market_type as marketType,
+        STATUS,
+        fund_id as fundId,
+        fund_name as fundName,
+        unit,
+        unit_price as unitPrice,
+        total,
+        now_unit_price as nowUnitPrice,
+        now_total as nowTotal,
+        create_time as createTime
+    FROM
+        fund_stock
+    WHERE 1 = 1
+    <if test="fundId != null">
+      AND fund_id = #{paramFundId}
+    </if>
+    <if test="paramStatus != null">
+      AND status = #{paramStatus}
+    </if>
+    ORDER BY create_time DESC
+  </select>
 </mapper>

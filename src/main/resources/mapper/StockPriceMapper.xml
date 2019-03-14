@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from stock_price
     where id = #{id,jdbcType=BIGINT}
@@ -101,9 +101,9 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockPrice" useGeneratedKeys="true">
-    insert into stock_price (name, code, price, 
+    insert into stock_price (name, code, price,
       date, create_time)
-    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
       #{date,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockPrice" useGeneratedKeys="true">
@@ -149,7 +149,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update stock_price
     <set>
       <if test="record.id != null">
@@ -217,4 +217,20 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getLastPrice" resultType="smart.stock.entity.StockPrice">
+    SELECT
+        id,
+        NAME,
+        CODE,
+        price,
+        date,
+        create_time AS createTime
+    FROM
+        fund_stock
+    WHERE
+        CODE = #{code}
+    ORDER BY
+        create_time DESC
+    LIMIT 1
+  </select>
 </mapper>

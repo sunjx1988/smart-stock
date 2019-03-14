@@ -27,4 +27,6 @@ public interface StockPriceMapper {
     int updateByPrimaryKeySelective(StockPrice record);
 
     int updateByPrimaryKey(StockPrice record);
+
+    StockPrice getLastPrice(String code);
 }
