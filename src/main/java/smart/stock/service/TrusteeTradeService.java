@@ -48,6 +48,10 @@ public class TrusteeTradeService {
             for(TrusteeTradeDto dto: list){
                 dto.setStatusText(Constants.TrusteeTradeStatus.getTextByKey(dto.getStatus()));
                 dto.setInterestRateText(Constants.InterestRate.getTextByKey(dto.getInterestRate()));
+                if(dto.getStatus() == Constants.TrusteeTradeStatus.Sold.getKey()){
+                    dto.setIncome(dto.getSaleTotal().subtract(dto.getTotal()));
+                    dto.setIncomeRate(dto.getIncome().divide(dto.getTotal(), 2, BigDecimal.ROUND_HALF_UP));
+                }
             }
         }
         return list;
@@ -163,9 +167,18 @@ public class TrusteeTradeService {
         }
 
         // 赎回总金额 = 最新净值 * 份额 + 本金 * 利率 * 年限
+        trusteeTradeDto.setSaleTotal(trusteeTradeDto.getSaleUnitPrice().multiply(new BigDecimal(trusteeTradeDto.getUnit())));
+        trusteeTradeDto.setSaleTotal(trusteeTradeDto.getSaleTotal()
+                .add(trusteeTradeDto.getTotal()
+                        .multiply(new BigDecimal(trusteeTradeDto.getInterestRate()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP))
+                        .multiply(new BigDecimal(trusteeTradeDto.getCycle()))));
+
+        //计算盈利 \ 盈利率
+        trusteeTradeDto.setIncome(trusteeTradeDto.getSaleTotal().subtract(trusteeTradeDto.getTotal()));
+        trusteeTradeDto.setIncomeRate(trusteeTradeDto.getIncome().divide(trusteeTradeDto.getTotal(), 2, BigDecimal.ROUND_HALF_UP));
 
         //使用现金支付赎回金额
-        fund.setBanlance(fund.getBanlance().subtract(trusteeTradeDto.getSaleUnitPrice().multiply(new BigDecimal(trusteeTradeDto.getUnit()))));
+        fund.setBanlance(fund.getBanlance().subtract(trusteeTradeDto.getSaleTotal()));
         fund.setPrincipal(fund.getPrincipal().subtract(trusteeTradeDto.getTotal()));
         fund.setTotalUnit(fund.getTotalUnit() - trusteeTradeDto.getUnit());
         fundMapper.updateByPrimaryKey(fund);

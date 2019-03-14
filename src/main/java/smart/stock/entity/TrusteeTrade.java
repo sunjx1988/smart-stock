@@ -24,15 +24,23 @@ public class TrusteeTrade {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date endDate;
 
+    private Integer cycle;
+
     private Integer unit;
 
     private BigDecimal unitPrice;
 
+    private BigDecimal total;
+
     private BigDecimal saleUnitPrice;
+
+    private BigDecimal saleTotal;
 
     private Integer interestRate;
 
-    private BigDecimal total;
+    private BigDecimal income;
+
+    private BigDecimal incomeRate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
@@ -101,6 +109,14 @@ public class TrusteeTrade {
         this.endDate = endDate;
     }
 
+    public Integer getCycle() {
+        return cycle;
+    }
+
+    public void setCycle(Integer cycle) {
+        this.cycle = cycle;
+    }
+
     public Integer getUnit() {
         return unit;
     }
@@ -117,12 +133,28 @@ public class TrusteeTrade {
         this.unitPrice = unitPrice;
     }
 
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
     public BigDecimal getSaleUnitPrice() {
         return saleUnitPrice;
     }
 
     public void setSaleUnitPrice(BigDecimal saleUnitPrice) {
         this.saleUnitPrice = saleUnitPrice;
+    }
+
+    public BigDecimal getSaleTotal() {
+        return saleTotal;
+    }
+
+    public void setSaleTotal(BigDecimal saleTotal) {
+        this.saleTotal = saleTotal;
     }
 
     public Integer getInterestRate() {
@@ -133,12 +165,20 @@ public class TrusteeTrade {
         this.interestRate = interestRate;
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public BigDecimal getIncome() {
+        return income;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setIncome(BigDecimal income) {
+        this.income = income;
+    }
+
+    public BigDecimal getIncomeRate() {
+        return incomeRate;
+    }
+
+    public void setIncomeRate(BigDecimal incomeRate) {
+        this.incomeRate = incomeRate;
     }
 
     public Date getCreateTime() {

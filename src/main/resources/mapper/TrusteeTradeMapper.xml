@@ -10,11 +10,15 @@
     <result column="fund_name" jdbcType="VARCHAR" property="fundName" />
     <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
     <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="cycle" jdbcType="INTEGER" property="cycle" />
     <result column="unit" jdbcType="INTEGER" property="unit" />
     <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
-    <result column="sale_unit_price" jdbcType="DECIMAL" property="saleUnitPrice" />
-    <result column="interest_rate" jdbcType="INTEGER" property="interestRate" />
     <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="sale_unit_price" jdbcType="DECIMAL" property="saleUnitPrice" />
+    <result column="sale_total" jdbcType="DECIMAL" property="saleTotal" />
+    <result column="interest_rate" jdbcType="INTEGER" property="interestRate" />
+    <result column="income" jdbcType="DECIMAL" property="income" />
+    <result column="income_rate" jdbcType="DECIMAL" property="incomeRate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,8 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, trustee_id, name, status, fund_id, fund_name, start_date, end_date, unit, unit_price,
-    sale_unit_price, interest_rate, total, create_time
+    id, trustee_id, name, status, fund_id, fund_name, start_date, end_date, cycle, unit,
+    unit_price, total, sale_unit_price, sale_total, interest_rate, income, income_rate,
+    create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeTradeExample" resultMap="BaseResultMap">
     select
@@ -112,14 +117,16 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeTrade" useGeneratedKeys="true">
     insert into trustee_trade (trustee_id, name, status,
       fund_id, fund_name, start_date,
-      end_date, unit, unit_price,
-      sale_unit_price, interest_rate, total,
-      create_time)
+      end_date, cycle, unit,
+      unit_price, total, sale_unit_price,
+      sale_total, interest_rate, income,
+      income_rate, create_time)
     values (#{trusteeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{fundId,jdbcType=BIGINT}, #{fundName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
-      #{endDate,jdbcType=TIMESTAMP}, #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL},
-      #{saleUnitPrice,jdbcType=DECIMAL}, #{interestRate,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL},
-      #{createTime,jdbcType=TIMESTAMP})
+      #{endDate,jdbcType=TIMESTAMP}, #{cycle,jdbcType=INTEGER}, #{unit,jdbcType=INTEGER},
+      #{unitPrice,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, #{saleUnitPrice,jdbcType=DECIMAL},
+      #{saleTotal,jdbcType=DECIMAL}, #{interestRate,jdbcType=INTEGER}, #{income,jdbcType=DECIMAL},
+      #{incomeRate,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeTrade" useGeneratedKeys="true">
     insert into trustee_trade
@@ -145,20 +152,32 @@
       <if test="endDate != null">
         end_date,
       </if>
+      <if test="cycle != null">
+        cycle,
+      </if>
       <if test="unit != null">
         unit,
       </if>
       <if test="unitPrice != null">
         unit_price,
       </if>
+      <if test="total != null">
+        total,
+      </if>
       <if test="saleUnitPrice != null">
         sale_unit_price,
+      </if>
+      <if test="saleTotal != null">
+        sale_total,
       </if>
       <if test="interestRate != null">
         interest_rate,
       </if>
-      <if test="total != null">
-        total,
+      <if test="income != null">
+        income,
+      </if>
+      <if test="incomeRate != null">
+        income_rate,
       </if>
       <if test="createTime != null">
         create_time,
@@ -186,20 +205,32 @@
       <if test="endDate != null">
         #{endDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=INTEGER},
+      </if>
       <if test="unit != null">
         #{unit,jdbcType=INTEGER},
       </if>
       <if test="unitPrice != null">
         #{unitPrice,jdbcType=DECIMAL},
       </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
       <if test="saleUnitPrice != null">
         #{saleUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleTotal != null">
+        #{saleTotal,jdbcType=DECIMAL},
       </if>
       <if test="interestRate != null">
         #{interestRate,jdbcType=INTEGER},
       </if>
-      <if test="total != null">
-        #{total,jdbcType=DECIMAL},
+      <if test="income != null">
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeRate != null">
+        #{incomeRate,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -239,20 +270,32 @@
       <if test="record.endDate != null">
         end_date = #{record.endDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.cycle != null">
+        cycle = #{record.cycle,jdbcType=INTEGER},
+      </if>
       <if test="record.unit != null">
         unit = #{record.unit,jdbcType=INTEGER},
       </if>
       <if test="record.unitPrice != null">
         unit_price = #{record.unitPrice,jdbcType=DECIMAL},
       </if>
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=DECIMAL},
+      </if>
       <if test="record.saleUnitPrice != null">
         sale_unit_price = #{record.saleUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.saleTotal != null">
+        sale_total = #{record.saleTotal,jdbcType=DECIMAL},
       </if>
       <if test="record.interestRate != null">
         interest_rate = #{record.interestRate,jdbcType=INTEGER},
       </if>
-      <if test="record.total != null">
-        total = #{record.total,jdbcType=DECIMAL},
+      <if test="record.income != null">
+        income = #{record.income,jdbcType=DECIMAL},
+      </if>
+      <if test="record.incomeRate != null">
+        income_rate = #{record.incomeRate,jdbcType=DECIMAL},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -272,11 +315,15 @@
       fund_name = #{record.fundName,jdbcType=VARCHAR},
       start_date = #{record.startDate,jdbcType=TIMESTAMP},
       end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      cycle = #{record.cycle,jdbcType=INTEGER},
       unit = #{record.unit,jdbcType=INTEGER},
       unit_price = #{record.unitPrice,jdbcType=DECIMAL},
-      sale_unit_price = #{record.saleUnitPrice,jdbcType=DECIMAL},
-      interest_rate = #{record.interestRate,jdbcType=INTEGER},
       total = #{record.total,jdbcType=DECIMAL},
+      sale_unit_price = #{record.saleUnitPrice,jdbcType=DECIMAL},
+      sale_total = #{record.saleTotal,jdbcType=DECIMAL},
+      interest_rate = #{record.interestRate,jdbcType=INTEGER},
+      income = #{record.income,jdbcType=DECIMAL},
+      income_rate = #{record.incomeRate,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -306,20 +353,32 @@
       <if test="endDate != null">
         end_date = #{endDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="cycle != null">
+        cycle = #{cycle,jdbcType=INTEGER},
+      </if>
       <if test="unit != null">
         unit = #{unit,jdbcType=INTEGER},
       </if>
       <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=DECIMAL},
       </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
       <if test="saleUnitPrice != null">
         sale_unit_price = #{saleUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleTotal != null">
+        sale_total = #{saleTotal,jdbcType=DECIMAL},
       </if>
       <if test="interestRate != null">
         interest_rate = #{interestRate,jdbcType=INTEGER},
       </if>
-      <if test="total != null">
-        total = #{total,jdbcType=DECIMAL},
+      <if test="income != null">
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeRate != null">
+        income_rate = #{incomeRate,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -336,11 +395,15 @@
       fund_name = #{fundName,jdbcType=VARCHAR},
       start_date = #{startDate,jdbcType=TIMESTAMP},
       end_date = #{endDate,jdbcType=TIMESTAMP},
+      cycle = #{cycle,jdbcType=INTEGER},
       unit = #{unit,jdbcType=INTEGER},
       unit_price = #{unitPrice,jdbcType=DECIMAL},
-      sale_unit_price = #{saleUnitPrice,jdbcType=DECIMAL},
-      interest_rate = #{interestRate,jdbcType=INTEGER},
       total = #{total,jdbcType=DECIMAL},
+      sale_unit_price = #{saleUnitPrice,jdbcType=DECIMAL},
+      sale_total = #{saleTotal,jdbcType=DECIMAL},
+      interest_rate = #{interestRate,jdbcType=INTEGER},
+      income = #{income,jdbcType=DECIMAL},
+      income_rate = #{incomeRate,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -354,11 +417,15 @@
         fund_name as fundName,
         start_date as startDate,
         end_date as endDate,
+        cycle as cycle,
         unit,
         unit_price as unitPrice,
         sale_unit_price as saleUnitPrice,
+        sale_total as saleTotal,
         interest_rate as interestRate,
         total,
+        income,
+        income_rate as incomeRate,
         create_time as createTime
     FROM
         trustee_trade
@@ -376,7 +443,7 @@
   </select>
   <select id="findById" resultType="smart.stock.dto.TrusteeTradeDto">
         SELECT
-            id,
+                id,
             status,
             trustee_id as trusteeId,
             NAME,
@@ -384,11 +451,15 @@
             fund_name as fundName,
             start_date as startDate,
             end_date as endDate,
+            cycle as cycle,
             unit,
             unit_price as unitPrice,
             sale_unit_price as saleUnitPrice,
+            sale_total as saleTotal,
             interest_rate as interestRate,
             total,
+            income,
+            income_rate as incomeRate,
             create_time as createTime
         FROM
             trustee_trade

@@ -22,17 +22,21 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th class="col-md-1 text-center">编号</th>
-                                <th class="col-md-1">信托人</th>
-                                <th class="col-md-1">金额</th>
-                                <th class="col-md-1">利率</th>
-                                <th class="col-md-1">状态</th>
-                                <th class="col-md-1">认购价</th>
-                                <th class="col-md-1">赎回价</th>
-                                <th class="col-md-1">份额</th>
-                                <th class="col-md-2">锁定时间</th>
-                                <th class="col-md-1">时间</th>
-                                <th shiro:hasRole="admin" class="col-md-1">操作</th>
+                                <th class="text-center">编号</th>
+                                <th>信托人</th>
+                                <th>利率</th>
+                                <th>周期</th>
+                                <th>状态</th>
+                                <th>份额</th>
+                                <th>认购价</th>
+                                <th>认购金额</th>
+                                <th>赎回价</th>
+                                <th>赎回金额</th>
+                                <th>盈利</th>
+                                <th>盈利率</th>
+                                <th>锁定时间</th>
+                                <th>时间</th>
+                                <th shiro:hasRole="admin">操作</th>
                             </tr>
                             </thead>
                             <tbody id="tbody">
@@ -43,9 +47,16 @@
                                         {{pageSize*(page-1) + index + 1}}
                                     </td>
                                     <td>{{tab.name}}</td>
-                                    <td>{{tab.total}}</td>
                                     <td>{{tab.interestRateText}}</td>
+                                    <td>{{tab.cycle}} 年</td>
                                     <td>{{tab.statusText}}</td>
+                                    <td>
+                                        {{if tab.status == 0}}
+                                        待确认
+                                        {{else}}
+                                        {{tab.unit}}
+                                        {{/if}}
+                                    </td>
                                     <td>
                                         {{if tab.status == 0}}
                                             待确认
@@ -53,18 +64,33 @@
                                             {{tab.unitPrice}}
                                         {{/if}}
                                     </td>
+                                    <td>{{tab.total}}</td>
                                     <td>
-                                        {{if tab.status == 3}}
-                                            待开发
+                                        {{if tab.status == 2}}
+                                            {{tab.saleUnitPrice}}
                                         {{else}}
                                             -
                                         {{/if}}
                                     </td>
                                     <td>
-                                        {{if tab.status == 0}}
-                                            待确认
+                                        {{if tab.status == 2}}
+                                            {{tab.saleTotal}}
                                         {{else}}
-                                            {{tab.unit}}
+                                            -
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        {{if tab.status == 2}}
+                                            {{tab.income}}
+                                        {{else}}
+                                            -
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        {{if tab.status == 2}}
+                                            {{tab.incomeRate * 100}} %
+                                        {{else}}
+                                            -
                                         {{/if}}
                                     </td>
                                     <td>{{tab.startDate}} 至 {{tab.endDate}}</td>

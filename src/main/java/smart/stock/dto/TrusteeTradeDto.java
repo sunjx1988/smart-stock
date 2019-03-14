@@ -13,17 +13,16 @@ import java.util.Date;
 @Data
 public class TrusteeTradeDto extends TrusteeTrade {
 
-    //参数
-    //持有周期,单位年
-    private int cycle;
-
-    private String interestRateText;
-    private String statusText;
-
     //查询条件
     private int page = 1;
     private int rows = 10;
 
     private Date paramEndDateStart;
     private Date paramEndDateEnd;
+
+    //查询结果
+    private String interestRateText;
+    private String statusText;
+
+
 }

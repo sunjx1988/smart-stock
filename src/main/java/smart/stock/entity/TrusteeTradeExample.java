@@ -606,6 +606,66 @@ public class TrusteeTradeExample {
             return (Criteria) this;
         }
 
+        public Criteria andCycleIsNull() {
+            addCriterion("cycle is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleIsNotNull() {
+            addCriterion("cycle is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleEqualTo(Integer value) {
+            addCriterion("cycle =", value, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleNotEqualTo(Integer value) {
+            addCriterion("cycle <>", value, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleGreaterThan(Integer value) {
+            addCriterion("cycle >", value, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cycle >=", value, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleLessThan(Integer value) {
+            addCriterion("cycle <", value, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleLessThanOrEqualTo(Integer value) {
+            addCriterion("cycle <=", value, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleIn(List<Integer> values) {
+            addCriterion("cycle in", values, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleNotIn(List<Integer> values) {
+            addCriterion("cycle not in", values, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleBetween(Integer value1, Integer value2) {
+            addCriterion("cycle between", value1, value2, "cycle");
+            return (Criteria) this;
+        }
+
+        public Criteria andCycleNotBetween(Integer value1, Integer value2) {
+            addCriterion("cycle not between", value1, value2, "cycle");
+            return (Criteria) this;
+        }
+
         public Criteria andUnitIsNull() {
             addCriterion("unit is null");
             return (Criteria) this;
@@ -726,6 +786,66 @@ public class TrusteeTradeExample {
             return (Criteria) this;
         }
 
+        public Criteria andTotalIsNull() {
+            addCriterion("total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalIsNotNull() {
+            addCriterion("total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalEqualTo(BigDecimal value) {
+            addCriterion("total =", value, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalNotEqualTo(BigDecimal value) {
+            addCriterion("total <>", value, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalGreaterThan(BigDecimal value) {
+            addCriterion("total >", value, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("total >=", value, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalLessThan(BigDecimal value) {
+            addCriterion("total <", value, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("total <=", value, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalIn(List<BigDecimal> values) {
+            addCriterion("total in", values, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalNotIn(List<BigDecimal> values) {
+            addCriterion("total not in", values, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total between", value1, value2, "total");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total not between", value1, value2, "total");
+            return (Criteria) this;
+        }
+
         public Criteria andSaleUnitPriceIsNull() {
             addCriterion("sale_unit_price is null");
             return (Criteria) this;
@@ -783,6 +903,66 @@ public class TrusteeTradeExample {
 
         public Criteria andSaleUnitPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("sale_unit_price not between", value1, value2, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalIsNull() {
+            addCriterion("sale_total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalIsNotNull() {
+            addCriterion("sale_total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalEqualTo(BigDecimal value) {
+            addCriterion("sale_total =", value, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalNotEqualTo(BigDecimal value) {
+            addCriterion("sale_total <>", value, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalGreaterThan(BigDecimal value) {
+            addCriterion("sale_total >", value, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("sale_total >=", value, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalLessThan(BigDecimal value) {
+            addCriterion("sale_total <", value, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("sale_total <=", value, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalIn(List<BigDecimal> values) {
+            addCriterion("sale_total in", values, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalNotIn(List<BigDecimal> values) {
+            addCriterion("sale_total not in", values, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("sale_total between", value1, value2, "saleTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleTotalNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("sale_total not between", value1, value2, "saleTotal");
             return (Criteria) this;
         }
 
@@ -846,63 +1026,123 @@ public class TrusteeTradeExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalIsNull() {
-            addCriterion("total is null");
+        public Criteria andIncomeIsNull() {
+            addCriterion("income is null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalIsNotNull() {
-            addCriterion("total is not null");
+        public Criteria andIncomeIsNotNull() {
+            addCriterion("income is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalEqualTo(BigDecimal value) {
-            addCriterion("total =", value, "total");
+        public Criteria andIncomeEqualTo(BigDecimal value) {
+            addCriterion("income =", value, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNotEqualTo(BigDecimal value) {
-            addCriterion("total <>", value, "total");
+        public Criteria andIncomeNotEqualTo(BigDecimal value) {
+            addCriterion("income <>", value, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalGreaterThan(BigDecimal value) {
-            addCriterion("total >", value, "total");
+        public Criteria andIncomeGreaterThan(BigDecimal value) {
+            addCriterion("income >", value, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("total >=", value, "total");
+        public Criteria andIncomeGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("income >=", value, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalLessThan(BigDecimal value) {
-            addCriterion("total <", value, "total");
+        public Criteria andIncomeLessThan(BigDecimal value) {
+            addCriterion("income <", value, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("total <=", value, "total");
+        public Criteria andIncomeLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("income <=", value, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalIn(List<BigDecimal> values) {
-            addCriterion("total in", values, "total");
+        public Criteria andIncomeIn(List<BigDecimal> values) {
+            addCriterion("income in", values, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNotIn(List<BigDecimal> values) {
-            addCriterion("total not in", values, "total");
+        public Criteria andIncomeNotIn(List<BigDecimal> values) {
+            addCriterion("income not in", values, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("total between", value1, value2, "total");
+        public Criteria andIncomeBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("income between", value1, value2, "income");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("total not between", value1, value2, "total");
+        public Criteria andIncomeNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("income not between", value1, value2, "income");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateIsNull() {
+            addCriterion("income_rate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateIsNotNull() {
+            addCriterion("income_rate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateEqualTo(BigDecimal value) {
+            addCriterion("income_rate =", value, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateNotEqualTo(BigDecimal value) {
+            addCriterion("income_rate <>", value, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateGreaterThan(BigDecimal value) {
+            addCriterion("income_rate >", value, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("income_rate >=", value, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateLessThan(BigDecimal value) {
+            addCriterion("income_rate <", value, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("income_rate <=", value, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateIn(List<BigDecimal> values) {
+            addCriterion("income_rate in", values, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateNotIn(List<BigDecimal> values) {
+            addCriterion("income_rate not in", values, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("income_rate between", value1, value2, "incomeRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIncomeRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("income_rate not between", value1, value2, "incomeRate");
             return (Criteria) this;
         }
 
