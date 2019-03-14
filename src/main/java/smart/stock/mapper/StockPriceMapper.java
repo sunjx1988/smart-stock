@@ -29,4 +29,6 @@ public interface StockPriceMapper {
     int updateByPrimaryKey(StockPrice record);
 
     StockPrice getLastPrice(String code);
+
+    int insertBatch(List<StockPrice> list);
 }

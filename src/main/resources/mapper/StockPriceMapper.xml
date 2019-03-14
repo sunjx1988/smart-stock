@@ -143,7 +143,8 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="smart.stock.entity.StockPriceExample" resultType="java.lang.Long">
+
+    <select id="countByExample" parameterType="smart.stock.entity.StockPriceExample" resultType="java.lang.Long">
     select count(*) from stock_price
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -233,4 +234,12 @@
         create_time DESC
     LIMIT 1
   </select>
+  <insert id="insertBatch">
+    insert into stock_price (name, code, price, date, create_time)
+    values
+    <foreach collection="list" item="stockPrice" separator="," >
+      (#{stockPrice.name,jdbcType=VARCHAR}, #{stockPrice.code,jdbcType=VARCHAR}, #{stockPrice.price,jdbcType=DECIMAL},#{stockPrice.date,jdbcType=VARCHAR}, #{stockPrice.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+
+  </insert>
 </mapper>
