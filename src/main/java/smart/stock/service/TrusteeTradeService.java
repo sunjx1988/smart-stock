@@ -142,7 +142,6 @@ public class TrusteeTradeService {
         //更新信托人
         trustee.setPrincipal(trustee.getPrincipal().add(trusteeTradeDto.getTotal()));
         trustee.setTotalUnit(trustee.getTotalUnit() + trusteeTradeDto.getUnit());
-        trustee.setTotal(trustee.getTotal().add(trusteeTradeDto.getTotal()));
         trusteeMapper.updateByPrimaryKey(trustee);
         return trusteeTradeDto;
     }
@@ -151,19 +150,33 @@ public class TrusteeTradeService {
     @Transactional
     public TrusteeTradeDto sale(Long id){
         TrusteeTradeDto trusteeTradeDto = trusteeTradeMapper.findById(id);
-        trusteeTradeDto.setStatus(Constants.TrusteeTradeStatus.Sold.getKey());
-        trusteeTradeMapper.updateByPrimaryKey(trusteeTradeDto);
 
         //最新净值
         FundByDay fundByDay = fundByDayMapper.selectByLastDay(trusteeTradeDto.getFundId());
         Fund fund = fundMapper.selectByPrimaryKey(trusteeTradeDto.getFundId());
         Trustee trustee = trusteeMapper.selectByPrimaryKey(trusteeTradeDto.getTrusteeId());
 
-        //使用现金支付赎回金额 , 赎回金额 = 最新净值 * 份额
-        fund.setBanlance(fund.getBanlance().subtract(fundByDay.getNetUnitValue().multiply(new BigDecimal(trusteeTradeDto.getUnit()))));
+        if(null == fundByDay){
+            trusteeTradeDto.setSaleUnitPrice(BigDecimal.ONE);
+        }else {
+            trusteeTradeDto.setSaleUnitPrice(fundByDay.getNetUnitValue());
+        }
+
+        // 赎回总金额 = 最新净值 * 份额 + 本金 * 利率 * 年限
+
+        //使用现金支付赎回金额
+        fund.setBanlance(fund.getBanlance().subtract(trusteeTradeDto.getSaleUnitPrice().multiply(new BigDecimal(trusteeTradeDto.getUnit()))));
         fund.setPrincipal(fund.getPrincipal().subtract(trusteeTradeDto.getTotal()));
         fund.setTotalUnit(fund.getTotalUnit() - trusteeTradeDto.getUnit());
+        fundMapper.updateByPrimaryKey(fund);
 
+        //信托人本金\份额
+        trustee.setTotalUnit(trustee.getTotalUnit() - trusteeTradeDto.getUnit());
+        trustee.setPrincipal(trustee.getPrincipal().subtract(trusteeTradeDto.getTotal()));
+        trusteeMapper.updateByPrimaryKey(trustee);
+
+        trusteeTradeDto.setStatus(Constants.TrusteeTradeStatus.Sold.getKey());
+        trusteeTradeMapper.updateByPrimaryKey(trusteeTradeDto);
         return trusteeTradeDto;
     }
 

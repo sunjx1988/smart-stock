@@ -10,7 +10,6 @@ CREATE TABLE `trustee` (
 	`status` INT (1) NOT NULL COMMENT '持有状态 0持有 1不持有',
 	`principal` DECIMAL (10, 2) NOT NULL COMMENT '总投资额(本金)',
 	`total_unit` INT (8) NOT NULL COMMENT '份额',
-	`total` DECIMAL (10, 2) NOT NULL COMMENT '总资产',
 	`create_time` DATETIME NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '信托人表';
@@ -84,7 +83,8 @@ CREATE TABLE `trustee_trade` (
 	`start_date` DATETIME NULL COMMENT '日期',
 	`end_date` DATETIME NULL COMMENT '到期日期',
 	`unit` INT (8) NOT NULL COMMENT '交易份额',
-	`unit_price` DECIMAL (10, 2) NOT NULL COMMENT '交易价',
+	`unit_price` DECIMAL (10, 2) NOT NULL COMMENT '认购价',
+	`sale_unit_price` DECIMAL (10, 2) NOT NULL COMMENT '赎回价',
 	`interest_rate` INT (10) NOT NULL COMMENT '年化利率',
 	`total` DECIMAL (10, 2) NOT NULL COMMENT '总金额',
 	`create_time` DATETIME NOT NULL,

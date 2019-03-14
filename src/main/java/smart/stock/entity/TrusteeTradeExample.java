@@ -726,6 +726,66 @@ public class TrusteeTradeExample {
             return (Criteria) this;
         }
 
+        public Criteria andSaleUnitPriceIsNull() {
+            addCriterion("sale_unit_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceIsNotNull() {
+            addCriterion("sale_unit_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceEqualTo(BigDecimal value) {
+            addCriterion("sale_unit_price =", value, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceNotEqualTo(BigDecimal value) {
+            addCriterion("sale_unit_price <>", value, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceGreaterThan(BigDecimal value) {
+            addCriterion("sale_unit_price >", value, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("sale_unit_price >=", value, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceLessThan(BigDecimal value) {
+            addCriterion("sale_unit_price <", value, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("sale_unit_price <=", value, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceIn(List<BigDecimal> values) {
+            addCriterion("sale_unit_price in", values, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceNotIn(List<BigDecimal> values) {
+            addCriterion("sale_unit_price not in", values, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("sale_unit_price between", value1, value2, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleUnitPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("sale_unit_price not between", value1, value2, "saleUnitPrice");
+            return (Criteria) this;
+        }
+
         public Criteria andInterestRateIsNull() {
             addCriterion("interest_rate is null");
             return (Criteria) this;

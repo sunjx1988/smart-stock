@@ -12,6 +12,7 @@
     <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
     <result column="unit" jdbcType="INTEGER" property="unit" />
     <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="sale_unit_price" jdbcType="DECIMAL" property="saleUnitPrice" />
     <result column="interest_rate" jdbcType="INTEGER" property="interestRate" />
     <result column="total" jdbcType="DECIMAL" property="total" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -76,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, trustee_id, name, status, fund_id, fund_name, start_date, end_date, unit, unit_price,
-    interest_rate, total, create_time
+    sale_unit_price, interest_rate, total, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeTradeExample" resultMap="BaseResultMap">
     select
@@ -112,13 +113,13 @@
     insert into trustee_trade (trustee_id, name, status,
       fund_id, fund_name, start_date,
       end_date, unit, unit_price,
-      interest_rate, total, create_time
-      )
+      sale_unit_price, interest_rate, total,
+      create_time)
     values (#{trusteeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{fundId,jdbcType=BIGINT}, #{fundName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
       #{endDate,jdbcType=TIMESTAMP}, #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL},
-      #{interestRate,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{saleUnitPrice,jdbcType=DECIMAL}, #{interestRate,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL},
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeTrade" useGeneratedKeys="true">
     insert into trustee_trade
@@ -149,6 +150,9 @@
       </if>
       <if test="unitPrice != null">
         unit_price,
+      </if>
+      <if test="saleUnitPrice != null">
+        sale_unit_price,
       </if>
       <if test="interestRate != null">
         interest_rate,
@@ -187,6 +191,9 @@
       </if>
       <if test="unitPrice != null">
         #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleUnitPrice != null">
+        #{saleUnitPrice,jdbcType=DECIMAL},
       </if>
       <if test="interestRate != null">
         #{interestRate,jdbcType=INTEGER},
@@ -238,6 +245,9 @@
       <if test="record.unitPrice != null">
         unit_price = #{record.unitPrice,jdbcType=DECIMAL},
       </if>
+      <if test="record.saleUnitPrice != null">
+        sale_unit_price = #{record.saleUnitPrice,jdbcType=DECIMAL},
+      </if>
       <if test="record.interestRate != null">
         interest_rate = #{record.interestRate,jdbcType=INTEGER},
       </if>
@@ -264,6 +274,7 @@
       end_date = #{record.endDate,jdbcType=TIMESTAMP},
       unit = #{record.unit,jdbcType=INTEGER},
       unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      sale_unit_price = #{record.saleUnitPrice,jdbcType=DECIMAL},
       interest_rate = #{record.interestRate,jdbcType=INTEGER},
       total = #{record.total,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
@@ -301,6 +312,9 @@
       <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=DECIMAL},
       </if>
+      <if test="saleUnitPrice != null">
+        sale_unit_price = #{saleUnitPrice,jdbcType=DECIMAL},
+      </if>
       <if test="interestRate != null">
         interest_rate = #{interestRate,jdbcType=INTEGER},
       </if>
@@ -324,6 +338,7 @@
       end_date = #{endDate,jdbcType=TIMESTAMP},
       unit = #{unit,jdbcType=INTEGER},
       unit_price = #{unitPrice,jdbcType=DECIMAL},
+      sale_unit_price = #{saleUnitPrice,jdbcType=DECIMAL},
       interest_rate = #{interestRate,jdbcType=INTEGER},
       total = #{total,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP}
@@ -341,11 +356,22 @@
         end_date as endDate,
         unit,
         unit_price as unitPrice,
+        sale_unit_price as saleUnitPrice,
         interest_rate as interestRate,
         total,
         create_time as createTime
     FROM
         trustee_trade
+    WHERE 1=1
+    <if test="status != null">
+      AND `status` = #{status}
+    </if>
+    <if test="paramEndDateStart != null">
+      AND end_date <![CDATA[>=]]> #{paramEndDateStart}
+    </if>
+    <if test="paramEndDateEnd != null">
+      AND end_date <![CDATA[<=]]> #{paramEndDateEnd}
+    </if>
     order by create_time desc
   </select>
   <select id="findById" resultType="smart.stock.dto.TrusteeTradeDto">
@@ -360,6 +386,7 @@
             end_date as endDate,
             unit,
             unit_price as unitPrice,
+            sale_unit_price as saleUnitPrice,
             interest_rate as interestRate,
             total,
             create_time as createTime

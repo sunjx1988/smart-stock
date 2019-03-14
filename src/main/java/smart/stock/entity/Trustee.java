@@ -25,8 +25,6 @@ public class Trustee {
 
     private Integer totalUnit;
 
-    private BigDecimal total;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
@@ -92,14 +90,6 @@ public class Trustee {
 
     public void setTotalUnit(Integer totalUnit) {
         this.totalUnit = totalUnit;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
     }
 
     public Date getCreateTime() {

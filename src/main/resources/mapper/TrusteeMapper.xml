@@ -10,7 +10,6 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="principal" jdbcType="DECIMAL" property="principal" />
     <result column="total_unit" jdbcType="INTEGER" property="totalUnit" />
-    <result column="total" jdbcType="DECIMAL" property="total" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -72,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, phone, login_pwd, login_salt, status, principal, total_unit, total, create_time
+    id, name, phone, login_pwd, login_salt, status, principal, total_unit, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeExample" resultMap="BaseResultMap">
     select
@@ -107,12 +106,10 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Trustee" useGeneratedKeys="true">
     insert into trustee (name, phone, login_pwd,
       login_salt, status, principal,
-      total_unit, total, create_time
-      )
+      total_unit, create_time)
     values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR},
       #{loginSalt,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{principal,jdbcType=DECIMAL},
-      #{totalUnit,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{totalUnit,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.Trustee" useGeneratedKeys="true">
     insert into trustee
@@ -137,9 +134,6 @@
       </if>
       <if test="totalUnit != null">
         total_unit,
-      </if>
-      <if test="total != null">
-        total,
       </if>
       <if test="createTime != null">
         create_time,
@@ -166,9 +160,6 @@
       </if>
       <if test="totalUnit != null">
         #{totalUnit,jdbcType=INTEGER},
-      </if>
-      <if test="total != null">
-        #{total,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -208,9 +199,6 @@
       <if test="record.totalUnit != null">
         total_unit = #{record.totalUnit,jdbcType=INTEGER},
       </if>
-      <if test="record.total != null">
-        total = #{record.total,jdbcType=DECIMAL},
-      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -229,7 +217,6 @@
       status = #{record.status,jdbcType=INTEGER},
       principal = #{record.principal,jdbcType=DECIMAL},
       total_unit = #{record.totalUnit,jdbcType=INTEGER},
-      total = #{record.total,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -259,9 +246,6 @@
       <if test="totalUnit != null">
         total_unit = #{totalUnit,jdbcType=INTEGER},
       </if>
-      <if test="total != null">
-        total = #{total,jdbcType=DECIMAL},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -277,7 +261,6 @@
       status = #{status,jdbcType=INTEGER},
       principal = #{principal,jdbcType=DECIMAL},
       total_unit = #{totalUnit,jdbcType=INTEGER},
-      total = #{total,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -290,7 +273,6 @@
 	status,
 	principal,
 	total_unit AS totalUnit,
-	total,
 	create_time AS createTime
     FROM `trustee`
     ORDER BY create_time DESC
@@ -311,7 +293,6 @@
 	status,
 	principal,
 	total_unit as totalUnit,
-	total,
 	create_time AS createTime
     FROM `trustee`
     WHERE id = #{id}

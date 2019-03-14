@@ -28,6 +28,8 @@ public class TrusteeTrade {
 
     private BigDecimal unitPrice;
 
+    private BigDecimal saleUnitPrice;
+
     private Integer interestRate;
 
     private BigDecimal total;
@@ -113,6 +115,14 @@ public class TrusteeTrade {
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public BigDecimal getSaleUnitPrice() {
+        return saleUnitPrice;
+    }
+
+    public void setSaleUnitPrice(BigDecimal saleUnitPrice) {
+        this.saleUnitPrice = saleUnitPrice;
     }
 
     public Integer getInterestRate() {

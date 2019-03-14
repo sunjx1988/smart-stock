@@ -31,7 +31,7 @@
                                 <th class="col-md-1">赎回价</th>
                                 <th class="col-md-1">份额</th>
                                 <th class="col-md-2">锁定时间</th>
-                                <th class="col-md-2">时间</th>
+                                <th class="col-md-1">时间</th>
                                 <th shiro:hasRole="admin" class="col-md-1">操作</th>
                             </tr>
                             </thead>
@@ -69,9 +69,13 @@
                                     </td>
                                     <td>{{tab.startDate}} 至 {{tab.endDate}}</td>
                                     <td>{{tab.createTime}}</td>
-                                    <td shiro:hasRole="admin" class="text-center">
+                                    <td shiro:hasRole="admin">
                                         <div class='icon-flex'>
-                                            <a class="btn btn-default" href="javascript:;" onclick="confirmTrade({{tab.id}})">确认</a>
+                                            {{if tab.status == 0}}
+                                                <a class="btn btn-default" href="javascript:;" onclick="confirmTrade({{tab.id}})">确认</a>
+                                            {{else}}
+                                                -
+                                            {{/if}}
                                         </div>
                                     </td>
                                 </tr>

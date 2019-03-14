@@ -36,9 +36,8 @@
 页面数据渲染 art-template
 页面样式布局 bootstrap
 jquery
-分页 jquery-bootpag
-报表 Highcharts-7.0.3
-报表 Highcharts-Gantt-7.0.3
+前端分页 jquery-bootpag
+报表 https://echarts.baidu.com/echarts2/doc/example.html
 
 后端
 spring-boot

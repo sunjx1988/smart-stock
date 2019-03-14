@@ -109,6 +109,7 @@ public class Constants {
      * 信托交易状态
      */
     public enum TrusteeTradeStatus{
+        Cancel(-1,"取消"),
         Confirming(0,"确认中"),
         Confirmed(1,"已确认"),
         Sold(2,"已赎回"),

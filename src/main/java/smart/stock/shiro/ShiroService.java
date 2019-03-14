@@ -83,10 +83,6 @@ public class ShiroService {
                 user.setPrincipal(BigDecimal.ZERO);
             }
 
-            if(null == user.getTotal()){
-                user.setTotal(BigDecimal.ZERO);
-            }
-
             if(null == user.getTotalUnit()){
                 user.setTotalUnit(0);
             }
