@@ -106,7 +106,7 @@ http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=201
 ```
 - 可改进功能
     -
-```
+
 动态url权限控制 https://jinnianshilongnian.iteye.com/blog/2040929
 
 防止重复提交
@@ -117,8 +117,8 @@ http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=201
 
 信托的最多可卖
 
-基金卖出股票增加现金
-买入股票扣减现金
+[x]基金卖出股票增加现金
+[x]买入股票扣减现金
 
 基金方面：
 信托买入增加本金和现金
@@ -129,11 +129,10 @@ http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=201
 
 利率计算,分成计算
 
-定时任务：
-    爬虫任务
-    股票收盘价更新
-    认购自动确认
-    到期自动赎回
-    基金报表
-    信托人报表
-```
+爬虫任务
+股票收盘价更新
+认购自动确认
+到期自动赎回
+基金报表
+信托人报表
+

@@ -75,7 +75,7 @@ public class TrusteeByDayService {
                     trusteeByDayDto.setTotal(trusteeByDayDto.getNetUnitValue().multiply(new BigDecimal(trusteeByDayDto.getTotalUnit())));
                     //计算收益, 收益率
                     trusteeByDayDto.setIncome(trusteeByDayDto.getTotal().subtract(trusteeByDayDto.getPrincipal()));
-                    trusteeByDayDto.setRateOfReturn(trusteeByDayDto.getIncome().divide(trusteeByDayDto.getPrincipal(), 3, BigDecimal.ROUND_HALF_UP));
+                    trusteeByDayDto.setRateOfReturn(trusteeByDayDto.getIncome().divide(trusteeByDayDto.getPrincipal(), 3));
                 }else{
                     trusteeByDayDto.setTotalUnit(0);
                     trusteeByDayDto.setPrincipal(BigDecimal.ZERO);

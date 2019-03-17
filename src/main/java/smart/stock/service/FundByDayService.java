@@ -66,11 +66,11 @@ public class FundByDayService {
             }
 
             //计算净值
-            fundByDay.setNetUnitValue(fundByDay.getTotal().divide(new BigDecimal(fundByDay.getTotalUnit()), 3, BigDecimal.ROUND_HALF_UP));
+            fundByDay.setNetUnitValue(fundByDay.getTotal().divide(new BigDecimal(fundByDay.getTotalUnit()), 3));
             //计算盈利
             fundByDay.setIncome(fundByDay.getTotal().subtract(fundByDay.getPrincipal()));
             //计算盈利率
-            fundByDay.setRateOfReturn(fundByDay.getIncome().divide(fundByDay.getPrincipal(), 3, BigDecimal.ROUND_HALF_UP));
+            fundByDay.setRateOfReturn(fundByDay.getIncome().divide(fundByDay.getPrincipal(), 3));
         }
 
         fundByDayMapper.insert(fundByDay);
