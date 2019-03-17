@@ -145,7 +145,6 @@ public class TrusteeTradeService {
 
         //更新信托人
         trustee.setPrincipal(trustee.getPrincipal().add(trusteeTradeDto.getTotal()));
-        trustee.setTotalUnit(trustee.getTotalUnit() + trusteeTradeDto.getUnit());
         trusteeMapper.updateByPrimaryKey(trustee);
         return trusteeTradeDto;
     }
@@ -183,8 +182,7 @@ public class TrusteeTradeService {
         fund.setTotalUnit(fund.getTotalUnit() - trusteeTradeDto.getUnit());
         fundMapper.updateByPrimaryKey(fund);
 
-        //信托人本金\份额
-        trustee.setTotalUnit(trustee.getTotalUnit() - trusteeTradeDto.getUnit());
+        //信托人本金
         trustee.setPrincipal(trustee.getPrincipal().subtract(trusteeTradeDto.getTotal()));
         trusteeMapper.updateByPrimaryKey(trustee);
 

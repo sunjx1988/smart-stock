@@ -83,10 +83,6 @@ public class ShiroService {
                 user.setPrincipal(BigDecimal.ZERO);
             }
 
-            if(null == user.getTotalUnit()){
-                user.setTotalUnit(0);
-            }
-
             if(null == user.getStatus()){
                 user.setStatus(Constants.TrusteeStatus.Disabled.getKey());
             }
