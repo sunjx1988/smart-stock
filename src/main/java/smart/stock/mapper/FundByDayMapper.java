@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.FundByDayDto;
 import smart.stock.entity.FundByDay;
 import smart.stock.entity.FundByDayExample;
 
@@ -29,4 +30,6 @@ public interface FundByDayMapper {
     int updateByPrimaryKey(FundByDay record);
 
     FundByDay selectByLastDay(Long fundId);
+
+    List<FundByDayDto> list(FundByDayDto param);
 }

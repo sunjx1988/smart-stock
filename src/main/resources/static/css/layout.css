@@ -46,7 +46,7 @@ label{
 .wrapper {
     min-height: 100%;
     height:100%;
-    overflow: hidden;
+    overflow: scroll;
 }
 .content_top{
     height: 8%;
@@ -60,7 +60,6 @@ label{
 .content_left, .content_right{
     float:left;
     min-height: 100%;
-    height:100%;
     overflow: hidden;
     padding: 10px;
 }

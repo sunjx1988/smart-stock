@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import smart.stock.constant.Constants;
+import smart.stock.dto.FundByDayDto;
 import smart.stock.dto.FundDto;
 import smart.stock.dto.FundStockDto;
 import smart.stock.entity.Fund;
@@ -80,6 +81,10 @@ public class FundByDayService {
         fundByDayMapper.insert(fundByDay);
 
         return fundByDay;
+    }
+
+    public List<FundByDayDto> list(FundByDayDto param){
+        return fundByDayMapper.list(param);
     }
 
     private FundByDay initFundByDay(Fund fund){

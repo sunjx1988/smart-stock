@@ -381,9 +381,36 @@
     FROM
         fund_by_day
     WHERE
-        fund_id = ''
+        fund_id = #{fundId}
     ORDER BY
         create_time DESC
     LIMIT 1
+  </select>
+  <select id="list" resultType="smart.stock.dto.FundByDayDto">
+    SELECT
+        id,
+        fund_id as fundId,
+        date,
+        NAME,
+        banlance,
+        principal,
+        position,
+        total_unit as totalUnit,
+        num_of_trustee as numOfTrustee,
+        market_value as marketValue,
+        total,
+        net_unit_value as netUnitValue,
+        income,
+        rate_of_return as rateOfReturn,
+        create_time as createTime
+    FROM
+        fund_by_day
+    WHERE
+        1=1
+    <if test="fundId != null">
+       AND fund_id = #{fundId}
+    </if>
+    ORDER BY
+        create_time ASC
   </select>
 </mapper>

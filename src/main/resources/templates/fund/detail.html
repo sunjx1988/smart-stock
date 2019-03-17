@@ -82,9 +82,7 @@
             <a class="btn btn-primary" href="javascript:;" id="trusteeTradeBtn">信托人认购</a>
         </div>
         <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
-            <div class="col-md-12">
-                <p>报表,待开发...</p>
-            </div>
+            <div th:replace="fundbyday/list :: fundbyday" />
         </div>
 
         <div shiro:hasRole="admin" id="tradeStockModal" class="modal fade" tabindex="-1" role="dialog">
