@@ -65,8 +65,8 @@ public class StockPriceTask {
 
 
     //周六日两天无交易,所以这两天不执行收盘价任务,和报表统计
-//    @Scheduled(cron = "0 0 18 * * ?")
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
+//    @Scheduled(cron = "0 */1 * * * ?")
     public void task(){
         try {
             //收盘价任务不能失败,后续任务运行失败,不能影响此任务的成功
