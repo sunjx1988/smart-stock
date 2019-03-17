@@ -23,8 +23,8 @@ public class TrusteeService {
     @Autowired
     private TrusteeMapper trusteeMapper;
 
-    public List<TrusteeDto> list(){
-        List<TrusteeDto> list = trusteeMapper.list();
+    public List<TrusteeDto> list(TrusteeDto param){
+        List<TrusteeDto> list = trusteeMapper.list(param);
         if(CollectionUtils.isEmpty(list)){
            return null;
         }

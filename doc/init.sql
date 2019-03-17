@@ -10,7 +10,6 @@ CREATE TABLE `trustee` (
 	`login_salt` VARCHAR (255) NOT NULL COMMENT '加密盐',
 	`status` INT (1) NOT NULL COMMENT '持有状态 0持有 1不持有',
 	`principal` DECIMAL (10, 2) NOT NULL COMMENT '总投资额(本金)',
-	`total_unit` INT (8) NOT NULL COMMENT '份额',
 	`create_time` DATETIME NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '信托人表';
@@ -21,9 +20,11 @@ DROP TABLE IF EXISTS `trustee_by_day`;
 CREATE TABLE `trustee_by_day` (
 	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
 	`trustee_id` BIGINT (20) NOT NULL,
-	`date` VARCHAR (20) NOT NULL COMMENT '日期',
 	`name` VARCHAR (255) NOT NULL COMMENT '姓名',
-	`principal` DECIMAL (10, 2) NOT NULL COMMENT '总投资额(本金)',
+	`fund_id` BIGINT (20) NOT NULL,
+	`fund_name` VARCHAR (255) NOT NULL COMMENT '基金名',
+	`date` VARCHAR (20) NOT NULL COMMENT '日期',
+	`principal` DECIMAL (10, 2) NOT NULL COMMENT '投资额(本金)',
 	`total_unit` INT (8) NOT NULL COMMENT '份额',
 	`net_unit_value` DECIMAL (5, 2) NOT NULL COMMENT '净值',
 	`total` DECIMAL (10, 2) NOT NULL COMMENT '总资产',

@@ -1,6 +1,8 @@
 package smart.stock.mapper;
 
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Param;
 import smart.stock.dto.TrusteeTradeDto;
 import smart.stock.entity.TrusteeTrade;
@@ -32,4 +34,6 @@ public interface TrusteeTradeMapper {
     List<TrusteeTradeDto> list(TrusteeTradeDto trusteeTradeDto);
 
     TrusteeTradeDto findById(Long id);
+
+    Set<Long> fundIdsByTrusteeId(Long trusteeId);
 }

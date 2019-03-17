@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, trustee_id, date, name, principal, total_unit, net_unit_value, total, income, 
+    id, trustee_id, date, name, principal, total_unit, net_unit_value, total, income,
     rate_of_return, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeByDayExample" resultMap="BaseResultMap">
@@ -91,7 +91,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from trustee_by_day
     where id = #{id,jdbcType=BIGINT}
@@ -107,13 +107,13 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeByDay" useGeneratedKeys="true">
-    insert into trustee_by_day (trustee_id, date, name, 
-      principal, total_unit, net_unit_value, 
-      total, income, rate_of_return, 
+    insert into trustee_by_day (trustee_id, date, name,
+      principal, total_unit, net_unit_value,
+      total, income, rate_of_return,
       create_time)
-    values (#{trusteeId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{principal,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{netUnitValue,jdbcType=DECIMAL}, 
-      #{total,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, #{rateOfReturn,jdbcType=DECIMAL}, 
+    values (#{trusteeId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{principal,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{netUnitValue,jdbcType=DECIMAL},
+      #{total,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, #{rateOfReturn,jdbcType=DECIMAL},
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeByDay" useGeneratedKeys="true">
@@ -189,7 +189,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+
+    <update id="updateByExampleSelective" parameterType="map">
     update trustee_by_day
     <set>
       <if test="record.id != null">
@@ -297,4 +298,29 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="list" resultType="smart.stock.dto.TrusteeByDayDto">
+    SELECT * FROM
+        (
+            SELECT
+                id,
+                trustee_id AS trusteeId,
+                date,
+                NAME,
+                principal,
+                total_unit AS totalUnit,
+                net_unit_value AS netUnitValue,
+                total,
+                income,
+                rate_of_return AS rateOfReturn,
+                create_time AS createTime
+            FROM
+                trustee_by_day
+            WHERE 1 = 1
+            <if test="trusteeId != null">
+              AND trustee_id = #{trusteeId}
+            </if>
+            ORDER BY create_time DESC
+        )
+    ORDER BY createTime ASC
+  </select>
 </mapper>

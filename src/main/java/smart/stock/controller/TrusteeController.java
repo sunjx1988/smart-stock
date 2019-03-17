@@ -46,7 +46,7 @@ public class TrusteeController {
     @RequestMapping(value = "list", method = RequestMethod.POST)
     public PageInfo<TrusteeDto> list(TrusteeDto trusteeDto){
         PageHelper.startPage(trusteeDto.getPage(), trusteeDto.getRows());
-        return new PageInfo(trusteeService.list());
+        return new PageInfo(trusteeService.list(trusteeDto));
     }
 
     @RequestMapping(value = "{mode}/{id}", method = RequestMethod.GET)

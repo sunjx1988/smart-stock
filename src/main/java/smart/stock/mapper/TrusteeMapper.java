@@ -30,7 +30,7 @@ public interface TrusteeMapper {
 
     int updateByPrimaryKey(Trustee record);
 
-    List<TrusteeDto> list();
+    List<TrusteeDto> list(TrusteeDto param);
 
     //与其他人名字相同
     int countByNameAndId(Trustee user);

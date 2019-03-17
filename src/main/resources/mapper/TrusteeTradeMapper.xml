@@ -413,6 +413,7 @@
         status,
         trustee_id as trusteeId,
         NAME,
+        status,
         fund_id as fundId,
         fund_name as fundName,
         start_date as startDate,
@@ -442,27 +443,39 @@
     order by create_time desc
   </select>
   <select id="findById" resultType="smart.stock.dto.TrusteeTradeDto">
-        SELECT
-                id,
-            status,
-            trustee_id as trusteeId,
-            NAME,
-            fund_id as fundId,
-            fund_name as fundName,
-            start_date as startDate,
-            end_date as endDate,
-            cycle as cycle,
-            unit,
-            unit_price as unitPrice,
-            sale_unit_price as saleUnitPrice,
-            sale_total as saleTotal,
-            interest_rate as interestRate,
-            total,
-            income,
-            income_rate as incomeRate,
-            create_time as createTime
-        FROM
-            trustee_trade
-        WHERE id = #{id}
+    SELECT
+            id,
+        status,
+        trustee_id as trusteeId,
+        NAME,
+        status,
+        fund_id as fundId,
+        fund_name as fundName,
+        start_date as startDate,
+        end_date as endDate,
+        cycle as cycle,
+        unit,
+        unit_price as unitPrice,
+        sale_unit_price as saleUnitPrice,
+        sale_total as saleTotal,
+        interest_rate as interestRate,
+        total,
+        income,
+        income_rate as incomeRate,
+        create_time as createTime
+    FROM
+        trustee_trade
+    WHERE id = #{id}
+  </select>
+  <select id="fundIdsByTrusteeId" resultType="java.lang.Long">
+    SELECT
+        fund_id
+    FROM
+        trustee_trade
+    WHERE
+        trustee_id = #{trusteeId}
+    AND `status` = 1
+    GROUP BY
+        fund_id
   </select>
 </mapper>
