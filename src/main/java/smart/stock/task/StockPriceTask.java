@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 import smart.stock.constant.Constants;
-import smart.stock.dto.FundDto;
-import smart.stock.dto.TrusteeDto;
-import smart.stock.dto.TrusteeTradeDto;
+import smart.stock.dto.*;
 import smart.stock.entity.Stock;
 import smart.stock.entity.StockPrice;
 import smart.stock.mapper.StockMapper;
@@ -66,7 +64,9 @@ public class StockPriceTask {
     private TrusteeTradeService trusteeTradeService;
 
 
+    //周六日两天无交易,所以这两天不执行收盘价任务,和报表统计
     @Scheduled(cron = "0 0 18 * * ?")
+//    @Scheduled(cron = "0 */1 * * * ?")
     public void task(){
         try {
             //收盘价任务不能失败,后续任务运行失败,不能影响此任务的成功
@@ -106,35 +106,43 @@ public class StockPriceTask {
     @Transactional
     public void stockPriceTask(){
         log.info("收盘价定时任务 -> 开始");
+        int total = 0;
 
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(STOCK_PRICE_API_URL, String.class);
-        String responseEntityBody = responseEntity.getBody();
-        String[] stockLines = responseEntityBody.split("\\[\r\n\\[")[1].split("\\]\\]")[0].split("\\]\\,\r\n\\[");
-        List<StockPrice> list = new ArrayList<>();
+                //查询系统中所有股票
+        List<StockDto> allStocks = stockMapper.list(new StockDto());
 
-        Date now = new Date();
-        String nowString = DateFormatUtils.format(now, "yyyyMMdd");
+        if(!CollectionUtils.isEmpty(allStocks)){
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(STOCK_PRICE_API_URL, String.class);
+            String responseEntityBody = responseEntity.getBody();
+            String[] stockLines = responseEntityBody.split("\\[\r\n\\[")[1].split("\\]\\]")[0].split("\\]\\,\r\n\\[");
+            List<StockPrice> list = new ArrayList<>();
 
-        for(String line : stockLines){
-            // '代码','名称',收盘价,涨幅(%),昨收,今开,最高,最低,成交量(手),成交额(元),换手率(%),振幅(%),量比
-            String[] stockFeildArray = line.split("\\,");
+            Date now = new Date();
+            String nowString = DateFormatUtils.format(now, "yyyyMMdd");
 
-            //只记录stock表中的股票股价
-            int count = stockMapper.countByStockCode(stockFeildArray[0].split("'")[1]);
-            if(count == 0){
-                continue;
+            for(String line : stockLines){
+                // '代码','名称',收盘价,涨幅(%),昨收,今开,最高,最低,成交量(手),成交额(元),换手率(%),振幅(%),量比
+                String[] stockFeildArray = line.split("\\,");
+
+                //只记录stock表中的股票股价
+                secend:
+                for(StockDto dto: allStocks){
+                    if(!dto.getCode().equals(stockFeildArray[0].split("'")[1])){
+                        break secend;
+                    }
+                }
+
+                StockPrice stockPrice = new StockPrice();
+                stockPrice.setCode(stockFeildArray[0].split("'")[1]);
+                stockPrice.setName(stockFeildArray[1].split("'")[1]);
+                stockPrice.setPrice(new BigDecimal(stockFeildArray[2]));
+                stockPrice.setCreateTime(now);
+                stockPrice.setDate(nowString);
+                list.add(stockPrice);
             }
 
-            StockPrice stockPrice = new StockPrice();
-            stockPrice.setCode(stockFeildArray[0].split("'")[1]);
-            stockPrice.setName(stockFeildArray[1].split("'")[1]);
-            stockPrice.setPrice(new BigDecimal(stockFeildArray[2]));
-            stockPrice.setCreateTime(now);
-            stockPrice.setDate(nowString);
-            list.add(stockPrice);
+            total = stockPriceMapper.insertBatch(list);
         }
-
-        int total = stockPriceMapper.insertBatch(list);
 
         log.info("收盘价定时任务 -> 结束,结果: 成功{}", total);
     }

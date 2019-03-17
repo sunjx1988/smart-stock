@@ -38,5 +38,4 @@ public interface StockMapper {
 
     StockDto selectByCode(String code);
 
-    int countByStockCode(String code);
 }

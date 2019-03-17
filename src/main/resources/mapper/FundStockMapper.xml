@@ -348,11 +348,14 @@
     FROM
         fund_stock
     WHERE 1 = 1
-    <if test="fundId != null">
+    <if test="paramFundId != null">
       AND fund_id = #{paramFundId}
     </if>
     <if test="paramStatus != null">
       AND status = #{paramStatus}
+    </if>
+    <if test="paramCode != null">
+      AND code = #{paramCode}
     </if>
     ORDER BY create_time DESC
   </select>

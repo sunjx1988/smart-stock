@@ -17,4 +17,5 @@ public class FundStockDto extends FundStock {
 
     private Long paramFundId;
     private Integer paramStatus;
+    private String paramCode;
 }

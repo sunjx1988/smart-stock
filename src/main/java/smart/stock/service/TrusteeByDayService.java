@@ -72,15 +72,17 @@ public class TrusteeByDayService {
                     trusteeByDayDto.setTotalUnit(sumUnitAndTotal.getUnit());
                     trusteeByDayDto.setPrincipal(sumUnitAndTotal.getTotal());
                     trusteeByDayDto.setTotal(trusteeByDayDto.getNetUnitValue().multiply(new BigDecimal(trusteeByDayDto.getTotalUnit())));
+                    //计算收益, 收益率
+                    trusteeByDayDto.setIncome(trusteeByDayDto.getTotal().subtract(trusteeByDayDto.getPrincipal()));
+                    trusteeByDayDto.setRateOfReturn(trusteeByDayDto.getIncome().divide(trusteeByDayDto.getPrincipal(), 2, BigDecimal.ROUND_HALF_UP));
                 }else{
                     trusteeByDayDto.setTotalUnit(0);
                     trusteeByDayDto.setPrincipal(BigDecimal.ZERO);
                     trusteeByDayDto.setTotal(BigDecimal.ZERO);
+                    //计算收益, 收益率
+                    trusteeByDayDto.setIncome(BigDecimal.ZERO);
+                    trusteeByDayDto.setRateOfReturn(BigDecimal.ZERO);
                 }
-
-                //计算收益, 收益率
-                trusteeByDayDto.setIncome(trusteeByDayDto.getTotal().subtract(trusteeByDayDto.getPrincipal()));
-                trusteeByDayDto.setRateOfReturn(trusteeByDayDto.getIncome().divide(trusteeByDayDto.getPrincipal(), 2, BigDecimal.ROUND_HALF_UP));
 
                 trusteeByDayMapper.insert(trusteeByDayDto);
                 list.add(trusteeByDayDto);

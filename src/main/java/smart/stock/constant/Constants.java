@@ -8,6 +8,39 @@ package smart.stock.constant;
 public class Constants {
 
     /**
+     * 股票市场
+     */
+    public enum MarketType{
+        SH(6,"上海交易所"),
+        SZ(0,"深圳交易所"),
+        ;
+        private int key;
+        private String text;
+
+        MarketType(int key, String text) {
+            this.key = key;
+            this.text = text;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public static String getTextByKey(int key){
+            for (MarketType type :MarketType.values()){
+                if(type.key == key){
+                    return type.text;
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
      * 信托人状态
      */
     public enum TrusteeStatus{

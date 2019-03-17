@@ -111,8 +111,6 @@ CREATE TABLE `fund_stock` (
 	`unit` INT (8) NOT NULL COMMENT '数量',
 	`unit_price` DECIMAL (10, 2) NOT NULL COMMENT '成本价',
 	`total` DECIMAL (10, 2) NOT NULL COMMENT '总成本',
-	`now_unit_price` DECIMAL (10, 2) NOT NULL COMMENT '最新价',
-	`now_total` DECIMAL (10, 2) NOT NULL COMMENT '最新市值',
 	`create_time` DATETIME NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '基金股票份额';

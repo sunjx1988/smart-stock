@@ -387,7 +387,7 @@
     LIMIT 1
   </select>
   <select id="list" resultType="smart.stock.dto.FundByDayDto">
-    SELECT *
+    SELECT t1.*
     FROM (
       SELECT
       id,
@@ -414,7 +414,7 @@
       </if>
       ORDER BY
       create_time DESC
-    )
+    ) t1
     ORDER BY createTime ASC
   </select>
 </mapper>
