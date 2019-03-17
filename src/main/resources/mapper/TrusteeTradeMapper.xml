@@ -478,4 +478,16 @@
     GROUP BY
         fund_id
   </select>
+  <select id="sumUnitAndTotal" resultType="smart.stock.dto.TrusteeTradeDto">
+    SELECT
+        sum(tt.unit) AS unit,
+        sum(tt.total) AS total
+    FROM
+        trustee_trade tt
+    WHERE
+        tt.fund_id = ''
+    AND tt.trustee_id = ''
+    AND tt.`status` = 1
+    GROUP BY fund_id
+  </select>
 </mapper>

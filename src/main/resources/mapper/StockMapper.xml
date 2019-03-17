@@ -209,22 +209,29 @@
         stock
     WHERE id = #{id}
   </select>
-    <select id="options" resultType="smart.stock.dto.Options">
-        SELECT
-          code AS value,
-          NAME AS text
-        FROM
-            stock
-        ORDER BY name
-    </select>
+  <select id="options" resultType="smart.stock.dto.Options">
+    SELECT
+      code AS value,
+      NAME AS text
+    FROM
+        stock
+    ORDER BY name
+  </select>
   <select id="selectByCode" resultType="smart.stock.dto.StockDto">
-        SELECT
-            id,
-            NAME,
-            CODE,
-            create_time AS createTime
-        FROM
-            stock
-        WHERE code = #{code}
+    SELECT
+        id,
+        NAME,
+        CODE,
+        create_time AS createTime
+    FROM
+        stock
+    WHERE code = #{code}
+  </select>
+  <select id="countByStockCode" resultType="java.lang.Integer">
+    SELECT
+        count(0)
+    FROM
+        stock
+    WHERE code = #{code}
   </select>
 </mapper>

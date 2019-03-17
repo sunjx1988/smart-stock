@@ -36,4 +36,7 @@ public interface TrusteeTradeMapper {
     TrusteeTradeDto findById(Long id);
 
     Set<Long> fundIdsByTrusteeId(Long trusteeId);
+
+    TrusteeTradeDto sumUnitAndTotal(@Param("fundId") Long fundId,
+                                          @Param("trusteeId") Long trusteeId);
 }
