@@ -37,7 +37,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
-        <table tableName="trustee_by_day" domainObjectName="TrusteeByDay" >
+        <table tableName="fund_stock" domainObjectName="FundStock" >
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 

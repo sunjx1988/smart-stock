@@ -26,10 +26,6 @@ public class FundStock {
 
     private BigDecimal total;
 
-    private BigDecimal nowUnitPrice;
-
-    private BigDecimal nowTotal;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
@@ -111,22 +107,6 @@ public class FundStock {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
-    }
-
-    public BigDecimal getNowUnitPrice() {
-        return nowUnitPrice;
-    }
-
-    public void setNowUnitPrice(BigDecimal nowUnitPrice) {
-        this.nowUnitPrice = nowUnitPrice;
-    }
-
-    public BigDecimal getNowTotal() {
-        return nowTotal;
-    }
-
-    public void setNowTotal(BigDecimal nowTotal) {
-        this.nowTotal = nowTotal;
     }
 
     public Date getCreateTime() {

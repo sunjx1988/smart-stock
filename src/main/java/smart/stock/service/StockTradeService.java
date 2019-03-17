@@ -118,7 +118,7 @@ public class StockTradeService {
 
 
         //重新计算仓位 保留两位,四舍五入
-        fund.setPosition(fund.getPrincipal().subtract(fund.getBanlance()).divide(fund.getPrincipal(),2, BigDecimal.ROUND_HALF_UP));
+        fund.setPosition(fund.getPrincipal().subtract(fund.getBanlance()).divide(fund.getPrincipal(),3, BigDecimal.ROUND_HALF_UP));
         fundMapper.updateByPrimaryKey(fund);
 
         //更新fundstock记录
@@ -147,7 +147,7 @@ public class StockTradeService {
         fundStockDto.setUnit(stockTrade.getUnit() + fundStockDto.getUnit());
         fundStockDto.setTotal(fundStockDto.getTotal().add(stockTrade.getTotal()));
         //计算成本价
-        fundStockDto.setUnitPrice(fundStockDto.getTotal().divide(new BigDecimal(fundStockDto.getUnit()), 2, BigDecimal.ROUND_HALF_UP));
+        fundStockDto.setUnitPrice(fundStockDto.getTotal().divide(new BigDecimal(fundStockDto.getUnit()), 3, BigDecimal.ROUND_HALF_UP));
 
         if(fundStockDto.getId() == null){
             fundStockMapper.insert(fundStockDto);

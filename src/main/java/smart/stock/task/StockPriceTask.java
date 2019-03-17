@@ -65,8 +65,8 @@ public class StockPriceTask {
 
 
     //周六日两天无交易,所以这两天不执行收盘价任务,和报表统计
-    @Scheduled(cron = "0 0 18 * * ?")
-//    @Scheduled(cron = "0 */1 * * * ?")
+//    @Scheduled(cron = "0 0 18 * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void task(){
         try {
             //收盘价任务不能失败,后续任务运行失败,不能影响此任务的成功
@@ -108,7 +108,7 @@ public class StockPriceTask {
         log.info("收盘价定时任务 -> 开始");
         int total = 0;
 
-                //查询系统中所有股票
+        //查询系统中所有股票
         List<StockDto> allStocks = stockMapper.list(new StockDto());
 
         if(!CollectionUtils.isEmpty(allStocks)){
@@ -125,23 +125,24 @@ public class StockPriceTask {
                 String[] stockFeildArray = line.split("\\,");
 
                 //只记录stock表中的股票股价
-                secend:
+                first:
                 for(StockDto dto: allStocks){
-                    if(!dto.getCode().equals(stockFeildArray[0].split("'")[1])){
-                        break secend;
+                    if(dto.getCode().equals(stockFeildArray[0].split("'")[1])){
+                        StockPrice stockPrice = new StockPrice();
+                        stockPrice.setCode(stockFeildArray[0].split("'")[1]);
+                        stockPrice.setName(stockFeildArray[1].split("'")[1]);
+                        stockPrice.setPrice(new BigDecimal(stockFeildArray[2]));
+                        stockPrice.setCreateTime(now);
+                        stockPrice.setDate(nowString);
+                        list.add(stockPrice);
+                        break first;
                     }
                 }
-
-                StockPrice stockPrice = new StockPrice();
-                stockPrice.setCode(stockFeildArray[0].split("'")[1]);
-                stockPrice.setName(stockFeildArray[1].split("'")[1]);
-                stockPrice.setPrice(new BigDecimal(stockFeildArray[2]));
-                stockPrice.setCreateTime(now);
-                stockPrice.setDate(nowString);
-                list.add(stockPrice);
             }
 
-            total = stockPriceMapper.insertBatch(list);
+            if(list.size() > 0){
+                total = stockPriceMapper.insertBatch(list);
+            }
         }
 
         log.info("收盘价定时任务 -> 结束,结果: 成功{}", total);

@@ -227,7 +227,7 @@
         date,
         create_time AS createTime
     FROM
-        fund_stock
+        stock_price
     WHERE
         CODE = #{code}
     ORDER BY

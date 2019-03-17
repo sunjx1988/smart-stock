@@ -12,8 +12,6 @@
     <result column="unit" jdbcType="INTEGER" property="unit" />
     <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
     <result column="total" jdbcType="DECIMAL" property="total" />
-    <result column="now_unit_price" jdbcType="DECIMAL" property="nowUnitPrice" />
-    <result column="now_total" jdbcType="DECIMAL" property="nowTotal" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, code, market_type, status, fund_id, fund_name, unit, unit_price, total,
-    now_unit_price, now_total, create_time
+    create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.FundStockExample" resultMap="BaseResultMap">
     select
@@ -112,13 +110,11 @@
     insert into fund_stock (name, code, market_type,
       status, fund_id, fund_name,
       unit, unit_price, total,
-      now_unit_price, now_total, create_time
-      )
+      create_time)
     values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{marketType,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, #{fundId,jdbcType=BIGINT}, #{fundName,jdbcType=VARCHAR},
       #{unit,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL},
-      #{nowUnitPrice,jdbcType=DECIMAL}, #{nowTotal,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.FundStock" useGeneratedKeys="true">
     insert into fund_stock
@@ -149,12 +145,6 @@
       </if>
       <if test="total != null">
         total,
-      </if>
-      <if test="nowUnitPrice != null">
-        now_unit_price,
-      </if>
-      <if test="nowTotal != null">
-        now_total,
       </if>
       <if test="createTime != null">
         create_time,
@@ -188,12 +178,6 @@
       <if test="total != null">
         #{total,jdbcType=DECIMAL},
       </if>
-      <if test="nowUnitPrice != null">
-        #{nowUnitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="nowTotal != null">
-        #{nowTotal,jdbcType=DECIMAL},
-      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -205,7 +189,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map">
     update fund_stock
     <set>
       <if test="record.id != null">
@@ -238,12 +222,6 @@
       <if test="record.total != null">
         total = #{record.total,jdbcType=DECIMAL},
       </if>
-      <if test="record.nowUnitPrice != null">
-        now_unit_price = #{record.nowUnitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="record.nowTotal != null">
-        now_total = #{record.nowTotal,jdbcType=DECIMAL},
-      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -264,8 +242,6 @@
       unit = #{record.unit,jdbcType=INTEGER},
       unit_price = #{record.unitPrice,jdbcType=DECIMAL},
       total = #{record.total,jdbcType=DECIMAL},
-      now_unit_price = #{record.nowUnitPrice,jdbcType=DECIMAL},
-      now_total = #{record.nowTotal,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -301,12 +277,6 @@
       <if test="total != null">
         total = #{total,jdbcType=DECIMAL},
       </if>
-      <if test="nowUnitPrice != null">
-        now_unit_price = #{nowUnitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="nowTotal != null">
-        now_total = #{nowTotal,jdbcType=DECIMAL},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -324,12 +294,9 @@
       unit = #{unit,jdbcType=INTEGER},
       unit_price = #{unitPrice,jdbcType=DECIMAL},
       total = #{total,jdbcType=DECIMAL},
-      now_unit_price = #{nowUnitPrice,jdbcType=DECIMAL},
-      now_total = #{nowTotal,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <select id="list" resultType="smart.stock.dto.FundStockDto">
     SELECT
         id,
@@ -342,8 +309,6 @@
         unit,
         unit_price as unitPrice,
         total,
-        now_unit_price as nowUnitPrice,
-        now_total as nowTotal,
         create_time as createTime
     FROM
         fund_stock

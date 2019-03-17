@@ -50,7 +50,7 @@ public class TrusteeTradeService {
                 dto.setInterestRateText(Constants.InterestRate.getTextByKey(dto.getInterestRate()));
                 if(dto.getStatus() == Constants.TrusteeTradeStatus.Sold.getKey()){
                     dto.setIncome(dto.getSaleTotal().subtract(dto.getTotal()));
-                    dto.setIncomeRate(dto.getIncome().divide(dto.getTotal(), 2, BigDecimal.ROUND_HALF_UP));
+                    dto.setIncomeRate(dto.getIncome().divide(dto.getTotal(), 3, BigDecimal.ROUND_HALF_UP));
                 }
             }
         }
@@ -122,7 +122,7 @@ public class TrusteeTradeService {
         }
 
         //份额
-        trusteeTradeDto.setUnit(trusteeTradeDto.getTotal().divide(trusteeTradeDto.getUnitPrice(), 2, BigDecimal.ROUND_HALF_UP).intValue());
+        trusteeTradeDto.setUnit(trusteeTradeDto.getTotal().divide(trusteeTradeDto.getUnitPrice(), 3, BigDecimal.ROUND_HALF_UP).intValue());
         //状态为已确认
         trusteeTradeDto.setStatus(Constants.TrusteeTradeStatus.Confirmed.getKey());
         trusteeTradeMapper.updateByPrimaryKey(trusteeTradeDto);
@@ -135,7 +135,7 @@ public class TrusteeTradeService {
 
         if(fund.getPrincipal().compareTo(BigDecimal.ZERO) > 0){
             //重新计算仓位 保留两位,四舍五入
-            fund.setPosition(fund.getPrincipal().subtract(fund.getBanlance()).divide(fund.getPrincipal(), 2, BigDecimal.ROUND_HALF_UP));
+            fund.setPosition(fund.getPrincipal().subtract(fund.getBanlance()).divide(fund.getPrincipal(), 3, BigDecimal.ROUND_HALF_UP));
         }else{
             fund.setPosition(BigDecimal.ZERO);
         }
@@ -169,12 +169,12 @@ public class TrusteeTradeService {
         trusteeTradeDto.setSaleTotal(trusteeTradeDto.getSaleUnitPrice().multiply(new BigDecimal(trusteeTradeDto.getUnit())));
         trusteeTradeDto.setSaleTotal(trusteeTradeDto.getSaleTotal()
                 .add(trusteeTradeDto.getTotal()
-                        .multiply(new BigDecimal(trusteeTradeDto.getInterestRate()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP))
+                        .multiply(new BigDecimal(trusteeTradeDto.getInterestRate()).divide(new BigDecimal(100), 3, BigDecimal.ROUND_HALF_UP))
                         .multiply(new BigDecimal(trusteeTradeDto.getCycle()))));
 
         //计算盈利 \ 盈利率
         trusteeTradeDto.setIncome(trusteeTradeDto.getSaleTotal().subtract(trusteeTradeDto.getTotal()));
-        trusteeTradeDto.setIncomeRate(trusteeTradeDto.getIncome().divide(trusteeTradeDto.getTotal(), 2, BigDecimal.ROUND_HALF_UP));
+        trusteeTradeDto.setIncomeRate(trusteeTradeDto.getIncome().divide(trusteeTradeDto.getTotal(), 3, BigDecimal.ROUND_HALF_UP));
 
         //使用现金支付赎回金额
         fund.setBanlance(fund.getBanlance().subtract(trusteeTradeDto.getSaleTotal()));

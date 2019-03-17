@@ -485,8 +485,8 @@
     FROM
         trustee_trade tt
     WHERE
-        tt.fund_id = ''
-    AND tt.trustee_id = ''
+        tt.fund_id = #{fundId}
+    AND tt.trustee_id = #{trusteeId}
     AND tt.`status` = 1
     GROUP BY fund_id
   </select>

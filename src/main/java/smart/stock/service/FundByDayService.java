@@ -59,23 +59,18 @@ public class FundByDayService {
                 //查询最新价格
                 StockPrice lastPrice = stockPriceMapper.getLastPrice(fundStock.getCode());
                 if(null != lastPrice){
-                    //更新基金持有股票的股价,总市值
-                    fundStock.setNowUnitPrice(lastPrice.getPrice());
-                    fundStock.setNowTotal(lastPrice.getPrice().multiply(new BigDecimal(fundStock.getUnit())));
-                    fundStockMapper.updateByPrimaryKey(fundStock);
-
                     //每日报表 市值 , 总资产
-                    fundByDay.setMarketValue(fundByDay.getMarketValue().add(fundStock.getNowTotal()));
-                    fundByDay.setTotal(fundByDay.getTotal().add(fundStock.getNowTotal()));
+                    fundByDay.setMarketValue(fundByDay.getMarketValue().add(lastPrice.getPrice().multiply(new BigDecimal(fundStock.getUnit()))));
+                    fundByDay.setTotal(fundByDay.getTotal().add(lastPrice.getPrice().multiply(new BigDecimal(fundStock.getUnit()))));
                 }
             }
 
             //计算净值
-            fundByDay.setNetUnitValue(fundByDay.getTotal().divide(new BigDecimal(fundByDay.getTotalUnit()), 2, BigDecimal.ROUND_HALF_UP));
+            fundByDay.setNetUnitValue(fundByDay.getTotal().divide(new BigDecimal(fundByDay.getTotalUnit()), 3, BigDecimal.ROUND_HALF_UP));
             //计算盈利
             fundByDay.setIncome(fundByDay.getTotal().subtract(fundByDay.getPrincipal()));
             //计算盈利率
-            fundByDay.setRateOfReturn(fundByDay.getIncome().divide(fundByDay.getPrincipal(), 2, BigDecimal.ROUND_HALF_UP));
+            fundByDay.setRateOfReturn(fundByDay.getIncome().divide(fundByDay.getPrincipal(), 3, BigDecimal.ROUND_HALF_UP));
         }
 
         fundByDayMapper.insert(fundByDay);
