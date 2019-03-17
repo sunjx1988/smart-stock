@@ -221,7 +221,7 @@ CREATE TABLE `stock` (
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '股票';
 
 -- 测试数据 phone:100 pwd:000
-INSERT INTO `trustee` VALUES ('1', 'sun', '100', 'sunjx1988@163.com', '0cLUnxHdkemzwUwhCmSYhW4J4hey+mgrFW4onKmMbcw=', 'GdrucpP6szbow28+aFOXSw==', '1', '0.00', '0', '2019-03-08 21:05:54');
+INSERT INTO `trustee` VALUES ('1', 'sun', '100', 'sunjx1988@163.com', '0cLUnxHdkemzwUwhCmSYhW4J4hey+mgrFW4onKmMbcw=', 'GdrucpP6szbow28+aFOXSw==', '1', '0.00', '2019-03-08 21:05:54');
 INSERT INTO `role` VALUES ('1', '系统管理员', 'admin', '0', '2019-03-08 22:06:53');
 INSERT INTO `trustee_role` VALUES ('1', '1', '1', '2019-03-08 22:07:03');
 

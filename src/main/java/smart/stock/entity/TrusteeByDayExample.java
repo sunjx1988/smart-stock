@@ -226,76 +226,6 @@ public class TrusteeByDayExample {
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNull() {
-            addCriterion("date is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateIsNotNull() {
-            addCriterion("date is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateEqualTo(String value) {
-            addCriterion("date =", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotEqualTo(String value) {
-            addCriterion("date <>", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateGreaterThan(String value) {
-            addCriterion("date >", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateGreaterThanOrEqualTo(String value) {
-            addCriterion("date >=", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateLessThan(String value) {
-            addCriterion("date <", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateLessThanOrEqualTo(String value) {
-            addCriterion("date <=", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateLike(String value) {
-            addCriterion("date like", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotLike(String value) {
-            addCriterion("date not like", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateIn(List<String> values) {
-            addCriterion("date in", values, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotIn(List<String> values) {
-            addCriterion("date not in", values, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateBetween(String value1, String value2) {
-            addCriterion("date between", value1, value2, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotBetween(String value1, String value2) {
-            addCriterion("date not between", value1, value2, "date");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -363,6 +293,206 @@ public class TrusteeByDayExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdIsNull() {
+            addCriterion("fund_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdIsNotNull() {
+            addCriterion("fund_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdEqualTo(Long value) {
+            addCriterion("fund_id =", value, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdNotEqualTo(Long value) {
+            addCriterion("fund_id <>", value, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdGreaterThan(Long value) {
+            addCriterion("fund_id >", value, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("fund_id >=", value, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdLessThan(Long value) {
+            addCriterion("fund_id <", value, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdLessThanOrEqualTo(Long value) {
+            addCriterion("fund_id <=", value, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdIn(List<Long> values) {
+            addCriterion("fund_id in", values, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdNotIn(List<Long> values) {
+            addCriterion("fund_id not in", values, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdBetween(Long value1, Long value2) {
+            addCriterion("fund_id between", value1, value2, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundIdNotBetween(Long value1, Long value2) {
+            addCriterion("fund_id not between", value1, value2, "fundId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameIsNull() {
+            addCriterion("fund_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameIsNotNull() {
+            addCriterion("fund_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameEqualTo(String value) {
+            addCriterion("fund_name =", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameNotEqualTo(String value) {
+            addCriterion("fund_name <>", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameGreaterThan(String value) {
+            addCriterion("fund_name >", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameGreaterThanOrEqualTo(String value) {
+            addCriterion("fund_name >=", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameLessThan(String value) {
+            addCriterion("fund_name <", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameLessThanOrEqualTo(String value) {
+            addCriterion("fund_name <=", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameLike(String value) {
+            addCriterion("fund_name like", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameNotLike(String value) {
+            addCriterion("fund_name not like", value, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameIn(List<String> values) {
+            addCriterion("fund_name in", values, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameNotIn(List<String> values) {
+            addCriterion("fund_name not in", values, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameBetween(String value1, String value2) {
+            addCriterion("fund_name between", value1, value2, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundNameNotBetween(String value1, String value2) {
+            addCriterion("fund_name not between", value1, value2, "fundName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateIsNull() {
+            addCriterion("date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateIsNotNull() {
+            addCriterion("date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateEqualTo(String value) {
+            addCriterion("date =", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotEqualTo(String value) {
+            addCriterion("date <>", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateGreaterThan(String value) {
+            addCriterion("date >", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateGreaterThanOrEqualTo(String value) {
+            addCriterion("date >=", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateLessThan(String value) {
+            addCriterion("date <", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateLessThanOrEqualTo(String value) {
+            addCriterion("date <=", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateLike(String value) {
+            addCriterion("date like", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotLike(String value) {
+            addCriterion("date not like", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateIn(List<String> values) {
+            addCriterion("date in", values, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotIn(List<String> values) {
+            addCriterion("date not in", values, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateBetween(String value1, String value2) {
+            addCriterion("date between", value1, value2, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotBetween(String value1, String value2) {
+            addCriterion("date not between", value1, value2, "date");
             return (Criteria) this;
         }
 

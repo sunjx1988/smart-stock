@@ -4,8 +4,10 @@
   <resultMap id="BaseResultMap" type="smart.stock.entity.TrusteeByDay">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="trustee_id" jdbcType="BIGINT" property="trusteeId" />
-    <result column="date" jdbcType="VARCHAR" property="date" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fund_id" jdbcType="BIGINT" property="fundId" />
+    <result column="fund_name" jdbcType="VARCHAR" property="fundName" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
     <result column="principal" jdbcType="DECIMAL" property="principal" />
     <result column="total_unit" jdbcType="INTEGER" property="totalUnit" />
     <result column="net_unit_value" jdbcType="DECIMAL" property="netUnitValue" />
@@ -73,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, trustee_id, date, name, principal, total_unit, net_unit_value, total, income,
-    rate_of_return, create_time
+    id, trustee_id, name, fund_id, fund_name, date, principal, total_unit, net_unit_value,
+    total, income, rate_of_return, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.TrusteeByDayExample" resultMap="BaseResultMap">
     select
@@ -107,14 +109,16 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeByDay" useGeneratedKeys="true">
-    insert into trustee_by_day (trustee_id, date, name,
-      principal, total_unit, net_unit_value,
-      total, income, rate_of_return,
-      create_time)
-    values (#{trusteeId,jdbcType=BIGINT}, #{date,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-      #{principal,jdbcType=DECIMAL}, #{totalUnit,jdbcType=INTEGER}, #{netUnitValue,jdbcType=DECIMAL},
-      #{total,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, #{rateOfReturn,jdbcType=DECIMAL},
-      #{createTime,jdbcType=TIMESTAMP})
+    insert into trustee_by_day (trustee_id, name, fund_id,
+      fund_name, date, principal,
+      total_unit, net_unit_value, total,
+      income, rate_of_return, create_time
+      )
+    values (#{trusteeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{fundId,jdbcType=BIGINT},
+      #{fundName,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{principal,jdbcType=DECIMAL},
+      #{totalUnit,jdbcType=INTEGER}, #{netUnitValue,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL},
+      #{income,jdbcType=DECIMAL}, #{rateOfReturn,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.TrusteeByDay" useGeneratedKeys="true">
     insert into trustee_by_day
@@ -122,11 +126,17 @@
       <if test="trusteeId != null">
         trustee_id,
       </if>
-      <if test="date != null">
-        date,
-      </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="fundId != null">
+        fund_id,
+      </if>
+      <if test="fundName != null">
+        fund_name,
+      </if>
+      <if test="date != null">
+        date,
       </if>
       <if test="principal != null">
         principal,
@@ -154,11 +164,17 @@
       <if test="trusteeId != null">
         #{trusteeId,jdbcType=BIGINT},
       </if>
-      <if test="date != null">
-        #{date,jdbcType=VARCHAR},
-      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fundId != null">
+        #{fundId,jdbcType=BIGINT},
+      </if>
+      <if test="fundName != null">
+        #{fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
       </if>
       <if test="principal != null">
         #{principal,jdbcType=DECIMAL},
@@ -189,8 +205,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-
-    <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map">
     update trustee_by_day
     <set>
       <if test="record.id != null">
@@ -199,11 +214,17 @@
       <if test="record.trusteeId != null">
         trustee_id = #{record.trusteeId,jdbcType=BIGINT},
       </if>
-      <if test="record.date != null">
-        date = #{record.date,jdbcType=VARCHAR},
-      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundId != null">
+        fund_id = #{record.fundId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fundName != null">
+        fund_name = #{record.fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=VARCHAR},
       </if>
       <if test="record.principal != null">
         principal = #{record.principal,jdbcType=DECIMAL},
@@ -235,8 +256,10 @@
     update trustee_by_day
     set id = #{record.id,jdbcType=BIGINT},
       trustee_id = #{record.trusteeId,jdbcType=BIGINT},
-      date = #{record.date,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
+      fund_id = #{record.fundId,jdbcType=BIGINT},
+      fund_name = #{record.fundName,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
       principal = #{record.principal,jdbcType=DECIMAL},
       total_unit = #{record.totalUnit,jdbcType=INTEGER},
       net_unit_value = #{record.netUnitValue,jdbcType=DECIMAL},
@@ -254,11 +277,17 @@
       <if test="trusteeId != null">
         trustee_id = #{trusteeId,jdbcType=BIGINT},
       </if>
-      <if test="date != null">
-        date = #{date,jdbcType=VARCHAR},
-      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fundId != null">
+        fund_id = #{fundId,jdbcType=BIGINT},
+      </if>
+      <if test="fundName != null">
+        fund_name = #{fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
       </if>
       <if test="principal != null">
         principal = #{principal,jdbcType=DECIMAL},
@@ -287,8 +316,10 @@
   <update id="updateByPrimaryKey" parameterType="smart.stock.entity.TrusteeByDay">
     update trustee_by_day
     set trustee_id = #{trusteeId,jdbcType=BIGINT},
-      date = #{date,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
+      fund_id = #{fundId,jdbcType=BIGINT},
+      fund_name = #{fundName,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
       principal = #{principal,jdbcType=DECIMAL},
       total_unit = #{totalUnit,jdbcType=INTEGER},
       net_unit_value = #{netUnitValue,jdbcType=DECIMAL},

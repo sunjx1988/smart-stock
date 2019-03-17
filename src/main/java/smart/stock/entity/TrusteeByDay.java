@@ -10,9 +10,13 @@ public class TrusteeByDay {
 
     private Long trusteeId;
 
-    private String date;
-
     private String name;
+
+    private Long fundId;
+
+    private String fundName;
+
+    private String date;
 
     private BigDecimal principal;
 
@@ -45,20 +49,36 @@ public class TrusteeByDay {
         this.trusteeId = trusteeId;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date == null ? null : date.trim();
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Long getFundId() {
+        return fundId;
+    }
+
+    public void setFundId(Long fundId) {
+        this.fundId = fundId;
+    }
+
+    public String getFundName() {
+        return fundName;
+    }
+
+    public void setFundName(String fundName) {
+        this.fundName = fundName == null ? null : fundName.trim();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date == null ? null : date.trim();
     }
 
     public BigDecimal getPrincipal() {
