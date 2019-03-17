@@ -636,66 +636,6 @@ public class TrusteeExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalUnitIsNull() {
-            addCriterion("total_unit is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitIsNotNull() {
-            addCriterion("total_unit is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitEqualTo(Integer value) {
-            addCriterion("total_unit =", value, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitNotEqualTo(Integer value) {
-            addCriterion("total_unit <>", value, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitGreaterThan(Integer value) {
-            addCriterion("total_unit >", value, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitGreaterThanOrEqualTo(Integer value) {
-            addCriterion("total_unit >=", value, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitLessThan(Integer value) {
-            addCriterion("total_unit <", value, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitLessThanOrEqualTo(Integer value) {
-            addCriterion("total_unit <=", value, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitIn(List<Integer> values) {
-            addCriterion("total_unit in", values, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitNotIn(List<Integer> values) {
-            addCriterion("total_unit not in", values, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitBetween(Integer value1, Integer value2) {
-            addCriterion("total_unit between", value1, value2, "totalUnit");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalUnitNotBetween(Integer value1, Integer value2) {
-            addCriterion("total_unit not between", value1, value2, "totalUnit");
-            return (Criteria) this;
-        }
-
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
