@@ -13,6 +13,7 @@ import smart.stock.constant.Constants;
 import smart.stock.dto.*;
 import smart.stock.entity.Stock;
 import smart.stock.entity.StockPrice;
+import smart.stock.mapper.FundStockMapper;
 import smart.stock.mapper.StockMapper;
 import smart.stock.mapper.StockPriceMapper;
 import smart.stock.service.*;
@@ -35,7 +36,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class StockPriceTask {
+public class MainTask {
 
     private static final String STOCK_PRICE_API_URL = "http://quote.tool.hexun.com/hqzx/quote.aspx?type=2&market=0&sorttype=0&updown=down&page=1&count=5000&time=";
 
@@ -62,6 +63,9 @@ public class StockPriceTask {
 
     @Autowired
     private TrusteeTradeService trusteeTradeService;
+
+    @Autowired
+    private FundStockMapper fundStockMapper;
 
 
     //周六日两天无交易,所以这两天不执行收盘价任务,和报表统计
@@ -108,10 +112,10 @@ public class StockPriceTask {
         log.info("收盘价定时任务 -> 开始");
         int total = 0;
 
-        //查询系统中所有股票
-        List<StockDto> allStocks = stockMapper.list(new StockDto());
+        //查询基金持有股票
+        List<FundStockDto> fundStocks = fundStockMapper.list(new FundStockDto());
 
-        if(!CollectionUtils.isEmpty(allStocks)){
+        if(!CollectionUtils.isEmpty(fundStocks)){
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(STOCK_PRICE_API_URL, String.class);
             String responseEntityBody = responseEntity.getBody();
             String[] stockLines = responseEntityBody.split("\\[\r\n\\[")[1].split("\\]\\]")[0].split("\\]\\,\r\n\\[");
@@ -124,9 +128,8 @@ public class StockPriceTask {
                 // '代码','名称',收盘价,涨幅(%),昨收,今开,最高,最低,成交量(手),成交额(元),换手率(%),振幅(%),量比
                 String[] stockFeildArray = line.split("\\,");
 
-                //只记录stock表中的股票股价
-                first:
-                for(StockDto dto: allStocks){
+                //只记录fundstock表中的股票股价
+                for(FundStockDto dto: fundStocks){
                     if(dto.getCode().equals(stockFeildArray[0].split("'")[1])){
                         StockPrice stockPrice = new StockPrice();
                         stockPrice.setCode(stockFeildArray[0].split("'")[1]);
@@ -135,7 +138,7 @@ public class StockPriceTask {
                         stockPrice.setCreateTime(now);
                         stockPrice.setDate(nowString);
                         list.add(stockPrice);
-                        break first;
+                        break ;
                     }
                 }
             }

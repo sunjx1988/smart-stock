@@ -208,6 +208,7 @@ CREATE TABLE `role_permission` (
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '角色权限表';
 
+-- 股票表
 DROP TABLE IF EXISTS `stock`;
 
 CREATE TABLE `stock` (
@@ -217,6 +218,22 @@ CREATE TABLE `stock` (
 	`create_time` DATETIME NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '股票';
+
+-- 股票财务信息
+DROP TABLE IF EXISTS `stock_finance`;
+
+CREATE TABLE `stock_finance` (
+	`id` BIGINT (20) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR (6) NOT NULL COMMENT '股票名称',
+	`code` VARCHAR (6) NOT NULL COMMENT '股票代码',
+	`date` VARCHAR (10) NOT NULL COMMENT '日期',
+	`date_type` INT(1) NOT NULL COMMENT '1 第一季报表 2 半年报表 3 前三季报表 4 全年报表',
+	`type` VARCHAR(10) NOT NULL COMMENT 'ZXCWZB 最新财务指标, CWBL 财务比率, ZCFZ 资产负债, LR 利润表, XJLL 现金流量, ZYSRFB 主营收入, ZCJZ 资产减值, YSZK 应收账款, QTYSZK 其他应收账款',
+	`info` VARCHAR (2000) NULL COMMENT 'JSON',
+	`info_version` INT(2) NULL COMMENT 'JSON数据版本',
+	`create_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '股票财务信息';
 
 -- 测试数据 phone:100 pwd:000
 INSERT INTO `trustee` VALUES ('1', 'sun', '100', 'sunjx1988@163.com', '0cLUnxHdkemzwUwhCmSYhW4J4hey+mgrFW4onKmMbcw=', 'GdrucpP6szbow28+aFOXSw==', '1', '0.00', '2019-03-08 21:05:54');

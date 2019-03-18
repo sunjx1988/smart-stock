@@ -13,7 +13,9 @@ public class StockFinance {
 
     private String date;
 
-    private Integer type;
+    private Integer dateType;
+
+    private String type;
 
     private String info;
 
@@ -54,12 +56,20 @@ public class StockFinance {
         this.date = date == null ? null : date.trim();
     }
 
-    public Integer getType() {
+    public Integer getDateType() {
+        return dateType;
+    }
+
+    public void setDateType(Integer dateType) {
+        this.dateType = dateType;
+    }
+
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getInfo() {

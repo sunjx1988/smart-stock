@@ -375,6 +375,66 @@ public class StockFinanceExample {
             return (Criteria) this;
         }
 
+        public Criteria andDateTypeIsNull() {
+            addCriterion("date_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeIsNotNull() {
+            addCriterion("date_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeEqualTo(Integer value) {
+            addCriterion("date_type =", value, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeNotEqualTo(Integer value) {
+            addCriterion("date_type <>", value, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeGreaterThan(Integer value) {
+            addCriterion("date_type >", value, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("date_type >=", value, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeLessThan(Integer value) {
+            addCriterion("date_type <", value, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("date_type <=", value, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeIn(List<Integer> values) {
+            addCriterion("date_type in", values, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeNotIn(List<Integer> values) {
+            addCriterion("date_type not in", values, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeBetween(Integer value1, Integer value2) {
+            addCriterion("date_type between", value1, value2, "dateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("date_type not between", value1, value2, "dateType");
+            return (Criteria) this;
+        }
+
         public Criteria andTypeIsNull() {
             addCriterion("type is null");
             return (Criteria) this;
@@ -385,52 +445,62 @@ public class StockFinanceExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Integer value) {
+        public Criteria andTypeEqualTo(String value) {
             addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Integer value) {
+        public Criteria andTypeNotEqualTo(String value) {
             addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Integer value) {
+        public Criteria andTypeGreaterThan(String value) {
             addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
             addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Integer value) {
+        public Criteria andTypeLessThan(String value) {
             addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+        public Criteria andTypeLessThanOrEqualTo(String value) {
             addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Integer> values) {
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<String> values) {
             addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Integer> values) {
+        public Criteria andTypeNotIn(List<String> values) {
             addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Integer value1, Integer value2) {
+        public Criteria andTypeBetween(String value1, String value2) {
             addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andTypeNotBetween(String value1, String value2) {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }

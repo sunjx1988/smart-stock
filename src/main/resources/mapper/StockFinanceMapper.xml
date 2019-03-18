@@ -6,7 +6,8 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="date" jdbcType="VARCHAR" property="date" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="date_type" jdbcType="INTEGER" property="dateType" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="info" jdbcType="VARCHAR" property="info" />
     <result column="info_version" jdbcType="INTEGER" property="infoVersion" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, code, date, type, info, info_version, create_time
+    id, name, code, date, date_type, type, info, info_version, create_time
   </sql>
   <select id="selectByExample" parameterType="smart.stock.entity.StockFinanceExample" resultMap="BaseResultMap">
     select
@@ -104,11 +105,11 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockFinance" useGeneratedKeys="true">
     insert into stock_finance (name, code, date,
-      type, info, info_version,
-      create_time)
+      date_type, type, info,
+      info_version, create_time)
     values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR},
-      #{type,jdbcType=INTEGER}, #{info,jdbcType=VARCHAR}, #{infoVersion,jdbcType=INTEGER},
-      #{createTime,jdbcType=TIMESTAMP})
+      #{dateType,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR},
+      #{infoVersion,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="smart.stock.entity.StockFinance" useGeneratedKeys="true">
     insert into stock_finance
@@ -121,6 +122,9 @@
       </if>
       <if test="date != null">
         date,
+      </if>
+      <if test="dateType != null">
+        date_type,
       </if>
       <if test="type != null">
         type,
@@ -145,8 +149,11 @@
       <if test="date != null">
         #{date,jdbcType=VARCHAR},
       </if>
+      <if test="dateType != null">
+        #{dateType,jdbcType=INTEGER},
+      </if>
       <if test="type != null">
-        #{type,jdbcType=INTEGER},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="info != null">
         #{info,jdbcType=VARCHAR},
@@ -159,7 +166,7 @@
       </if>
     </trim>
   </insert>
-    <select id="countByExample" parameterType="smart.stock.entity.StockFinanceExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="smart.stock.entity.StockFinanceExample" resultType="java.lang.Long">
     select count(*) from stock_finance
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -180,8 +187,11 @@
       <if test="record.date != null">
         date = #{record.date,jdbcType=VARCHAR},
       </if>
+      <if test="record.dateType != null">
+        date_type = #{record.dateType,jdbcType=INTEGER},
+      </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.info != null">
         info = #{record.info,jdbcType=VARCHAR},
@@ -203,7 +213,8 @@
       name = #{record.name,jdbcType=VARCHAR},
       code = #{record.code,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
+      date_type = #{record.dateType,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
       info = #{record.info,jdbcType=VARCHAR},
       info_version = #{record.infoVersion,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
@@ -223,8 +234,11 @@
       <if test="date != null">
         date = #{date,jdbcType=VARCHAR},
       </if>
+      <if test="dateType != null">
+        date_type = #{dateType,jdbcType=INTEGER},
+      </if>
       <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+        type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="info != null">
         info = #{info,jdbcType=VARCHAR},
@@ -243,7 +257,8 @@
     set name = #{name,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
       date = #{date,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+      date_type = #{dateType,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
       info = #{info,jdbcType=VARCHAR},
       info_version = #{infoVersion,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
