@@ -40,7 +40,7 @@ spring:
   thymeleaf:
     cache: false
   aop:
-    proxy-target-class: true
+    proxy-target-class: false
 shiro:
   loginUrl: /login
   unauthorizedUrl: /403

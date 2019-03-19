@@ -30,4 +30,8 @@ public interface StockFinanceMapper {
     int updateByPrimaryKey(StockFinance record);
 
     Integer insertBatch(List<StockFinanceDto> list);
+
+    int deleteByCodeAndTypeAndDateType(@Param("code") String code,
+                                       @Param("type") String type,
+                                       @Param("date") String date);
 }

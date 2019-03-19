@@ -273,4 +273,7 @@
       (#{name}, #{code}, #{date}, #{type}, #{info}, #{infoVersion}, #{createTime})
     </foreach>
   </insert>
+  <delete id="deleteByCodeAndTypeAndDateType">
+    delete from stock_finance where code = #{code} and type = #{type} and date = #{date}
+  </delete>
 </mapper>

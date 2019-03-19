@@ -16,12 +16,16 @@ import us.codecraft.webmagic.processor.PageProcessor;
 @Component
 public abstract class StockFinanceSpider implements PageProcessor {
 
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(10000);
+    private Site site = Site.me()
+            .setRetryTimes(3)
+            .setSleepTime(3000)
+            .setTimeOut(10000);
 
     protected void run(String url, String code, String date, Pipeline pipeline){
         Spider.create(this)
                 .addUrl(String.format(url, code, date))
-                .thread(10)
+                .thread(5)
+
                 .addPipeline(pipeline)
                 .run();
     }

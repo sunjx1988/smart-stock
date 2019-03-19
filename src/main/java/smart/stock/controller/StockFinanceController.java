@@ -23,9 +23,16 @@ public class StockFinanceController {
     private StockFinanceService stockFinanceService;
 
     @ResponseBody
-    @RequestMapping(value = "finance_spider", method = RequestMethod.POST)
-    public BaseResult financeSpider(StockFinanceDto param){
-        stockFinanceService.financeSpider(param);
+    @RequestMapping(value = "admin/finance_fetch", method = RequestMethod.POST)
+    public BaseResult financeFetch(StockFinanceDto param){
+        stockFinanceService.financeFetch(param);
+        return BaseResult.success(null);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "admin/finance_fetch_all", method = RequestMethod.POST)
+    public BaseResult financeFetchAll(){
+        stockFinanceService.financeFetchAll();
         return BaseResult.success(null);
     }
 }

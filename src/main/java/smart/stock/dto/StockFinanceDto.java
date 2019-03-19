@@ -15,8 +15,12 @@ public class StockFinanceDto extends StockFinance {
     private int rows = 10;
 
     //spider 抓取条件
+    //股票代码
     private String spiderParamStockCode;
+    //日期type <= 0 查全部的
     private int spiderParamDateType;
+    //年份
     private String spiderParamYear;
+    //财务指标类型type
     private String spiderParamType;
 }

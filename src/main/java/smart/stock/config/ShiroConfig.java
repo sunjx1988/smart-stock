@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
  * @Description:
  */
 @Configuration
-@AutoConfigureBefore({DataBaseConfig.class, DruidConfig.class,MvcConfig.class})
+@AutoConfigureBefore({DataBaseConfig.class, DruidConfig.class})
 public class ShiroConfig {
 
     @Bean
@@ -41,6 +41,7 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/*/edit/**", "authc, roles[admin]");
         chainDefinition.addPathDefinition("/*/delete/**", "authc, roles[admin]");
         chainDefinition.addPathDefinition("/*/save/**", "authc, roles[admin]");
+        chainDefinition.addPathDefinition("/*/admin/**", "authc, roles[admin]");
 
         chainDefinition.addPathDefinition("/css/**", "anon");
         chainDefinition.addPathDefinition("/js/**", "anon");
