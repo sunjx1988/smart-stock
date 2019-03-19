@@ -193,6 +193,7 @@ $.fn.selecter = function (options) {
         $.ajax({
             url: defaults.url,
             type: defaults.type,
+            data: defaults.param,
             success: function (ret) {
                 if(ret.code = '0000' && ret.data != null && ret.data.length > 0){
                     defaults.data = defaults.data.concat(ret.data);

@@ -2,6 +2,7 @@ package smart.stock.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import smart.stock.dto.Options;
 import smart.stock.dto.StockFinanceDto;
 import smart.stock.entity.StockFinance;
 import smart.stock.entity.StockFinanceExample;
@@ -36,4 +37,6 @@ public interface StockFinanceMapper {
                                        @Param("date") String date);
 
     List<StockFinanceDto> list(StockFinanceDto param);
+
+    List<Options> dateOptions(String code);
 }

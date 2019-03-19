@@ -211,19 +211,20 @@ public class Constants {
      */
     public enum FinanceDateTypes{
         //第一季日期后缀
-        ONE_QUARTER_DATE_SUFFIX(1, ".03.15"),
+        ONE_QUARTER_DATE_SUFFIX(1, ".03.15", "第一季报"),
 
         //半年日期后缀
-        HALF_YEAR_DATE_SUFFIX(2, ".06.30"),
+        HALF_YEAR_DATE_SUFFIX(2, ".06.30", "半年报"),
 
         //前三季日期后缀
-        THREE_QUARTER_DATE_SUFFIX(3, ".09.30"),
+        THREE_QUARTER_DATE_SUFFIX(3, ".09.30", "前三季报"),
 
         //年报日期后缀
-        FULL_YEAR_DATE_SUFFIX(4, ".12.31")
+        FULL_YEAR_DATE_SUFFIX(4, ".12.31", "全年报")
         ;
         private int key;
         private String text;
+        private String title;
 
         public int getKey() {
             return key;
@@ -233,9 +234,14 @@ public class Constants {
             return text;
         }
 
-        FinanceDateTypes(int key, String text) {
+        public String getTitle() {
+            return title;
+        }
+
+        FinanceDateTypes(int key, String text, String title) {
             this.key = key;
             this.text = text;
+            this.title = title;
         }
 
         public static String getTextByKey(int key){

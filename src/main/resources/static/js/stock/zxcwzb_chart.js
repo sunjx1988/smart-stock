@@ -1,6 +1,5 @@
-var ChartPage = (function(){
+var ZxcwzbChartPage = (function(){
     var data;
-    var dateData = [];
     var title = [
         "营业收入",
         "净利润（元)",
@@ -17,18 +16,52 @@ var ChartPage = (function(){
         "境外会计准则净利润（元)",
         "扣除非经常性损益后的每股收益(元)"
     ];
-    var chartData = [];
-    var series = [];
+    var dateData;
+    var chartData;
+    var series;
+    var myChart;
+
+    function getParam() {
+        var param = $("#zxcwzbForm").serializeObject();
+        param.paramStockId = $("#id").val();
+        return param;
+    }
+
+    function initEvents() {
+        $("#zxcwzbSearchBtn").on("click", function () {
+            initChart();
+        });
+
+        $("#zxcwzbForm #paramStartYear").selecter({
+            url: "/stock_finance/date_options",
+            param:{
+                stockId :$("#id").val()
+            }
+        });
+
+        $("#zxcwzbForm #paramEndYear").selecter({
+            url: "/stock_finance/date_options",
+            param:{
+                stockId :$("#id").val()
+            }
+        });
+
+        $("#zxcwzbForm #paramDateType").selecter({
+            url: "/stock_finance/date_type_options"
+        });
+    }
 
     function initChart() {
         $.ajax({
             url: '/stock_finance/list',
             type: 'POST',
-            data:{
-                paramStockId : $("#id").val()
-            },
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify(getParam()),
             success: function (ret) {
                 data = ret.data;
+                dateData = [];
+                chartData = [];
+                series = [];
                 if(data){
                     for(var i in data){
                         dateData.push(data[i].date);
@@ -53,8 +86,6 @@ var ChartPage = (function(){
                             data: chartData[i]
                         });
                     }
-                    console.log(chartData);
-                    console.log(series);
                 }
                 draw();
             }
@@ -62,10 +93,9 @@ var ChartPage = (function(){
     }
 
     function draw() {
-        var myChart = echarts.init(document.getElementById('lineChart'));
         var option = {
             title : {
-                text: '最新财务指标',
+                text: '',
                 subtext: ''
             },
             tooltip : {
@@ -102,18 +132,19 @@ var ChartPage = (function(){
             ],
             series : series
         };
-
-        myChart.setOption(option);
+        myChart.setOption(option, true);
     }
 
     return {
         init: function () {
+            myChart = echarts.init(document.getElementById('zxcwzbChart'));
             initChart();
+            initEvents();
         }
     }
 })();
 
 $(function () {
-    ChartPage.init();
+    ZxcwzbChartPage.init();
 });
 

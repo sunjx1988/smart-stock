@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import smart.stock.constant.Constants;
+import smart.stock.dto.Options;
 import smart.stock.dto.StockDto;
 import smart.stock.dto.StockFinanceDto;
 import smart.stock.entity.Stock;
@@ -133,10 +134,26 @@ public class StockFinanceService {
             param.setParamCode(stockDto.getCode());
         }
 
-        if(StringUtils.isEmpty(param.getParamYear())
+        if(!StringUtils.isEmpty(param.getParamYear())
                 && null != param.getDateType() && param.getDateType() > 0){
             param.setParamDate(param.getParamYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
         }
+
+        if(!StringUtils.isEmpty(param.getParamStartYear())
+                && null != param.getDateType() && param.getDateType() > 0){
+            param.setParamStartYear(param.getParamStartYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
+        }
+
+        if(!StringUtils.isEmpty(param.getParamEndYear())
+                && null != param.getDateType() && param.getDateType() > 0){
+            param.setParamEndYear(param.getParamEndYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
+        }
+
         return stockFinanceMapper.list(param);
+    }
+
+    public List<Options> dateOptions(Long stockId) {
+        Stock stock = stockMapper.selectByPrimaryKey(stockId);
+        return stockFinanceMapper.dateOptions(stock.getCode());
     }
 }

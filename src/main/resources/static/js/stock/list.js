@@ -14,7 +14,9 @@ function fetchAllFinanceInfo() {
             url: '/stock_finance/admin/finance_fetch_all',
             type: 'POST',
             success: function (ret) {
-                message(ret.msg);
+                if(ret.code != '0000'){
+                    message(ret.msg);
+                }
             }
         })
     })

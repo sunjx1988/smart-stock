@@ -296,6 +296,12 @@
     <if test="paramDate != null">
       AND date = #{paramDate}
     </if>
+    <if test="paramStartYear != null">
+      AND date <![CDATA[>=]]> #{paramStartYear}
+    </if>
+    <if test="paramEndYear != null">
+      AND date <![CDATA[<=]]> #{paramEndYear}
+    </if>
     <if test="paramDateType != null and paramDateType > 0">
       AND date_type = #{paramDateType}
     </if>
@@ -303,5 +309,13 @@
       AND type = #{paramType}
     </if>
     ORDER BY date ASC
+  </select>
+  <select id="dateOptions" resultType="smart.stock.dto.Options">
+    SELECT
+        date AS value,
+        date AS text
+    FROM stock_finance
+    GROUP BY date
+    ORDER BY date asc
   </select>
 </mapper>
