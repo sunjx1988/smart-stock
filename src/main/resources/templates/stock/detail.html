@@ -48,9 +48,7 @@
         </div>
 
         <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
-            <div class="col-md-12">
-                <p>报表,待开发...</p>
-            </div>
+            <div th:if="${mode == 'detail'}" th:replace="/stock/chart :: chart" />
         </div>
     </section>
 </div>

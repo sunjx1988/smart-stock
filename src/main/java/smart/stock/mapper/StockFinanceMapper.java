@@ -34,4 +34,6 @@ public interface StockFinanceMapper {
     int deleteByCodeAndTypeAndDateType(@Param("code") String code,
                                        @Param("type") String type,
                                        @Param("date") String date);
+
+    List<StockFinanceDto> list(StockFinanceDto param);
 }

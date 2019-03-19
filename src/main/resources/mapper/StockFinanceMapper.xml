@@ -276,4 +276,32 @@
   <delete id="deleteByCodeAndTypeAndDateType">
     delete from stock_finance where code = #{code} and type = #{type} and date = #{date}
   </delete>
+  <select id="list" resultType="smart.stock.dto.StockFinanceDto">
+    SELECT
+        id,
+        NAME,
+        CODE,
+        date,
+        date_type AS dateType,
+        type,
+        info,
+        info_version AS infoVersion,
+        create_time AS createTime
+    FROM
+        stock_finance
+    WHERE 1 = 1
+    <if test="paramCode != null">
+      AND code = #{paramCode}
+    </if>
+    <if test="paramDate != null">
+      AND date = #{paramDate}
+    </if>
+    <if test="paramDateType != null and paramDateType > 0">
+      AND date_type = #{paramDateType}
+    </if>
+    <if test="paramType != null">
+      AND type = #{paramType}
+    </if>
+    ORDER BY date ASC
+  </select>
 </mapper>

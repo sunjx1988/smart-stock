@@ -125,4 +125,18 @@ public class StockFinanceService {
             }
         }
     }
+
+    public List<StockFinanceDto> list(StockFinanceDto param) {
+        if(!StringUtils.isEmpty(param.getParamStockId())
+                && StringUtils.isEmpty(param.getParamCode())){
+            StockDto stockDto = stockMapper.detail(param.getParamStockId());
+            param.setParamCode(stockDto.getCode());
+        }
+
+        if(StringUtils.isEmpty(param.getParamYear())
+                && null != param.getDateType() && param.getDateType() > 0){
+            param.setParamDate(param.getParamYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
+        }
+        return stockFinanceMapper.list(param);
+    }
 }
