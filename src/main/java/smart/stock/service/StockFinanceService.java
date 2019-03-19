@@ -16,8 +16,7 @@ import smart.stock.mapper.StockMapper;
 import smart.stock.spider.ZxcwzbSpider;
 import smart.stock.util.DateUtil;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Auther: sunjx
@@ -139,14 +138,12 @@ public class StockFinanceService {
             param.setParamDate(param.getParamYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
         }
 
-        if(!StringUtils.isEmpty(param.getParamStartYear())
-                && null != param.getDateType() && param.getDateType() > 0){
-            param.setParamStartYear(param.getParamStartYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
+        if(!StringUtils.isEmpty(param.getParamStartYear()) && param.getParamDateType() > 0){
+            param.setParamStartYear(param.getParamStartYear() + Constants.FinanceDateTypes.getTextByKey(param.getParamDateType()));
         }
 
-        if(!StringUtils.isEmpty(param.getParamEndYear())
-                && null != param.getDateType() && param.getDateType() > 0){
-            param.setParamEndYear(param.getParamEndYear() + Constants.FinanceDateTypes.getTextByKey(param.getDateType()));
+        if(!StringUtils.isEmpty(param.getParamEndYear()) && param.getParamDateType() > 0){
+            param.setParamEndYear(param.getParamEndYear() + Constants.FinanceDateTypes.getTextByKey(param.getParamDateType()));
         }
 
         return stockFinanceMapper.list(param);
@@ -154,6 +151,17 @@ public class StockFinanceService {
 
     public List<Options> dateOptions(Long stockId) {
         Stock stock = stockMapper.selectByPrimaryKey(stockId);
-        return stockFinanceMapper.dateOptions(stock.getCode());
+        List<Options> list = stockFinanceMapper.dateOptions(stock.getCode());
+
+        if(!CollectionUtils.isEmpty(list)){
+            for(int i = 0 ; i < list.size() ; i ++){
+                Options option = list.get(i);
+                option.setText(option.getText().split("\\.")[0]);
+                option.setValue(option.getText());
+            }
+            Set<Options> set = new HashSet<>(list);
+            return new ArrayList<>(set);
+        }
+        return null;
     }
 }
