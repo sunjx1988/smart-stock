@@ -111,6 +111,9 @@ var ZxcwzbChartPage = (function(){
             tooltip : {
                 trigger: 'axis'
             },
+            grid:{
+                y:100
+            },
             legend: {
                 data:title,
                 selected: {

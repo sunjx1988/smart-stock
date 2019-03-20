@@ -23,8 +23,6 @@ import java.util.List;
 @RequestMapping("/stock_finance")
 public class StockFinanceController {
 
-    private static final String ZXCWZB_CHART = "stock/zxcwzb_chart";
-
     @Autowired
     private StockFinanceService stockFinanceService;
 
@@ -72,10 +70,5 @@ public class StockFinanceController {
             options.add(new Options(String.valueOf(type.getKey()), type.getTitle()));
         }
         return BaseResult.success(options);
-    }
-
-    @RequestMapping(value = "zxcwzb_chart", method = RequestMethod.GET)
-    public String zxcwzbChart(Model model){
-        return ZXCWZB_CHART;
     }
 }
