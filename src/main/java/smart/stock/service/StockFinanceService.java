@@ -14,8 +14,7 @@ import smart.stock.dto.StockFinanceDto;
 import smart.stock.entity.Stock;
 import smart.stock.mapper.StockFinanceMapper;
 import smart.stock.mapper.StockMapper;
-import smart.stock.spider.CwblSpider;
-import smart.stock.spider.ZxcwzbSpider;
+import smart.stock.spider.*;
 import smart.stock.util.DateUtil;
 
 import java.util.*;
@@ -39,6 +38,20 @@ public class StockFinanceService {
     private ZxcwzbSpider zxcwzbSpider;
     @Autowired
     private CwblSpider cwblSpider;
+    @Autowired
+    private CfzSpider cfzSpider;
+    @Autowired
+    private LrSpider lrSpider;
+    @Autowired
+    private XjllSpider xjllSpider;
+    @Autowired
+    private ZysrfbSpider zysrfbSpider;
+    @Autowired
+    private ZcjzSpider zcjzSpider;
+    @Autowired
+    private YszkSpider yszkSpider;
+    @Autowired
+    private QtyszkSpider qtyszkSpider;
 
     @Autowired
     private StockMapper stockMapper;
@@ -53,28 +66,36 @@ public class StockFinanceService {
             throw BaseException.error("股票代码不能为空", param);
         }
 
+        //财务指标类型为空查全部
         if(StringUtils.isEmpty(param.getSpiderParamType())){
-            //TODO 财务指标类型为空查全部
             zxcwzbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
             cwblSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            cfzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            lrSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            xjllSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            zysrfbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            zcjzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            yszkSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            qtyszkSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.ZXCWZB.getKey())){
             zxcwzbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.CWBL.getKey())){
             cwblSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.CFZ.getKey())){
-
+            cfzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.LR.getKey())){
-
+            lrSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.XJLL.getKey())){
-
+            xjllSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.ZYSRFB.getKey())){
-
+            zysrfbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.ZCJZ.getKey())){
-
+            zcjzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.YSZK.getKey())){
-
+            yszkSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.QTYSZK.getKey())){
-
+            qtyszkSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }
     }
 
