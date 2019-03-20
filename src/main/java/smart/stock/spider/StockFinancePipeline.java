@@ -36,7 +36,8 @@ public abstract class StockFinancePipeline implements Pipeline {
         String dateParamSuffix = dateParam.substring(4);
         StockDto stockDto = stockMapper.selectByCode(code);
 
-        if (!CollectionUtils.isEmpty(resultItems.getAll())) {
+        if (!CollectionUtils.isEmpty(resultItems.getAll())
+                && !"{}".equals(JSON.toJSONString(resultItems.getAll()))) {
             StockFinanceDto stockFinance = new StockFinanceDto();
             stockFinance.setName(stockDto.getName());
             stockFinance.setCode(code);

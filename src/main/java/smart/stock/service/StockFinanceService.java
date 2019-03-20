@@ -39,7 +39,7 @@ public class StockFinanceService {
     @Autowired
     private CwblSpider cwblSpider;
     @Autowired
-    private CfzSpider cfzSpider;
+    private ZcfzSpider zcfzSpider;
     @Autowired
     private LrSpider lrSpider;
     @Autowired
@@ -70,7 +70,7 @@ public class StockFinanceService {
         if(StringUtils.isEmpty(param.getSpiderParamType())){
             zxcwzbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
             cwblSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
-            cfzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            zcfzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
             lrSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
             xjllSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
             zysrfbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
@@ -82,8 +82,8 @@ public class StockFinanceService {
             zxcwzbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.CWBL.getKey())){
             cwblSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
-        }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.CFZ.getKey())){
-            cfzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+        }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.ZCFZ.getKey())){
+            zcfzSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.LR.getKey())){
             lrSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.XJLL.getKey())){

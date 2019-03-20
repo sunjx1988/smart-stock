@@ -269,8 +269,8 @@ public class Constants {
     public enum FinanceInfoTypes{
         ZXCWZB ("ZXCWZB", "最新财务指标", "http://stockdata.stock.hexun.com/2008/zxcwzb.aspx?stockid=%s&accountdate=%s"),
         CWBL ("CWBL", "财务比率", "http://stockdata.stock.hexun.com/2008/cwbl.aspx?stockid=%s&accountdate=%s"),
-        CFZ ("CFZ", "资产负债", "http://stockdata.stock.hexun.com/2008/zcfz.aspx?stockid=%s&accountdate=%s"),
         LR ("LR", "利润表", "http://stockdata.stock.hexun.com/2008/lr.aspx?stockid=%s&accountdate=%s"),
+        ZCFZ ("ZCFZ", "资产负债", "http://stockdata.stock.hexun.com/2008/zcfz.aspx?stockid=%s&accountdate=%s"),
         XJLL ("XJLL", "现金流量", "http://stockdata.stock.hexun.com/2008/xjll.aspx?stockid=%s&accountdate=%s"),
         ZYSRFB ("ZYSRFB", "主营收入", "http://stockdata.stock.hexun.com/2008/zysrfb.aspx?stockid=%s&accountdate=%s"),
         ZCJZ ("ZCJZ", "资产减值", "http://stockdata.stock.hexun.com/2008/zcjz.aspx?stockid=%s&accountdate=%s"),

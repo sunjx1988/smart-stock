@@ -15,16 +15,16 @@ import smart.stock.constant.Constants;
 public class XjllSpider extends StockFinanceSpider {
 
     @Autowired
-    private CfzPipeline cfzPipeline;
+    private XjllPipeline xjllPipeline;
 
 
     @Override
     protected StockFinancePipeline getStockFinancePipeline() {
-        return cfzPipeline;
+        return xjllPipeline;
     }
 
     @Override
     protected Constants.FinanceInfoTypes getFinanceInfoTypes() {
-        return Constants.FinanceInfoTypes.CFZ;
+        return Constants.FinanceInfoTypes.XJLL;
     }
 }

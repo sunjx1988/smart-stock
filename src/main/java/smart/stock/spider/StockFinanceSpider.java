@@ -2,6 +2,7 @@ package smart.stock.spider;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import smart.stock.constant.Constants;
@@ -13,6 +14,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: sunjx
@@ -24,13 +26,16 @@ import java.util.List;
 public abstract class StockFinanceSpider implements PageProcessor {
 
     private Site site = Site.me()
+            .addHeader("X-AspNet-Version","4.0.30319")
+            .addHeader("X-Via-JSL","5e011f7,-")
+            .addHeader("X-Cache","bypass")
             .setRetryTimes(3)
             .setSleepTime(3000)
             .setTimeOut(10000);
 
     @Override
     public void process(Page page) {
-        Selectable tbody = page.getHtml().$("div#zaiyaocontent table.web2 tbody");
+        Selectable tbody = page.getHtml().$("div#zaiyaocontent table tbody");
         if(null != tbody){
             Selectable trListSelectable = tbody.$("tr");
             if(null != trListSelectable){
@@ -62,11 +67,21 @@ public abstract class StockFinanceSpider implements PageProcessor {
 
     protected abstract Constants.FinanceInfoTypes getFinanceInfoTypes();
 
+    protected Map<String, String> getHeaders(){
+        return null;
+    }
+
     private void run(String url, String code, String date, Pipeline pipeline){
+        Map<String, String> headers = getHeaders();
+        if(!MapUtils.isEmpty(headers)){
+            for(Map.Entry<String, String> entry: headers.entrySet()){
+                getSite().addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+
         Spider.create(this)
                 .addUrl(String.format(url, code, date))
                 .thread(5)
-
                 .addPipeline(pipeline)
                 .run();
     }

@@ -11,10 +11,10 @@ import smart.stock.constant.Constants;
  */
 @Slf4j
 @Component
-public class CfzPipeline extends StockFinancePipeline{
+public class ZcfzPipeline extends StockFinancePipeline{
     @Override
     protected Constants.FinanceInfoTypes getFinanceInfoType() {
-        return Constants.FinanceInfoTypes.CFZ;
+        return Constants.FinanceInfoTypes.ZCFZ;
     }
 
 }
