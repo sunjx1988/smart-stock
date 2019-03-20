@@ -2,6 +2,7 @@ package smart.stock.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -26,6 +27,9 @@ import java.util.*;
 @Slf4j
 @Service
 public class StockFinanceService {
+    //财务数据抓取的起始年份
+    @Value("${setting.fetch-begin-year:2010}")
+    private int fetchFinanceInfoBeginYear;
 
     @Autowired
     private StockFinanceMapper stockFinanceMapper;
@@ -84,7 +88,7 @@ public class StockFinanceService {
     //抓取某股票全部报表
     public void financeFetchByCode(String code) {
         //遍历年份
-        int[] years = DateUtil.allYears();
+        int[] years = DateUtil.allYears(fetchFinanceInfoBeginYear);
         for(int year: years){
             StockFinanceDto param = new StockFinanceDto();
             param.setCode(code);
@@ -112,7 +116,7 @@ public class StockFinanceService {
         //遍历股票
         List<StockDto> stocks = stockMapper.list(null);
         //遍历年份
-        int[] years = DateUtil.allYears();
+        int[] years = DateUtil.allYears(fetchFinanceInfoBeginYear);
 
         if(!CollectionUtils.isEmpty(stocks)){
             for(int year: years){

@@ -1,7 +1,6 @@
 var ZxcwzbChartPage = (function(){
     var data;
     var title = [
-        "营业收入",
         "净利润（元)",
         "利润总额（元)",
         "扣除非经常性损益后的净利润（元)",
@@ -74,7 +73,7 @@ var ZxcwzbChartPage = (function(){
                             if(isNaN(num)){
                                 chartData[j].push(0);
                             }else{
-                                chartData[j].push(num);
+                                chartData[j].push(Number(num));
                             }
                         }
                     }
@@ -83,7 +82,18 @@ var ZxcwzbChartPage = (function(){
                         series.push({
                             name: title[i],
                             type:'line',
-                            data: chartData[i]
+                            data: chartData[i],
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: '平均值'}
+                                ]
+                            }
                         });
                     }
                 }
@@ -102,7 +112,22 @@ var ZxcwzbChartPage = (function(){
                 trigger: 'axis'
             },
             legend: {
-                data:title
+                data:title,
+                selected: {
+                    "净利润（元)": false,
+                    "利润总额（元)": false,
+                    "扣除非经常性损益后的净利润（元)": false,
+                    "总资产（元)": false,
+                    "股东权益（元)": false,
+                    "经营活动产生的现金流量净额（元)": false,
+                    "基本每股收益（元)": true,
+                    "净资产收益率（摊薄)(%)": false,
+                    "每股经营活动产生的现金流量净额（元)": true,
+                    "每股净资产（元)": true,
+                    "调整后每股净资产（元)": false,
+                    "境外会计准则净利润（元)": false,
+                    "扣除非经常性损益后的每股收益(元)": false
+                }
             },
             toolbox: {
                 show : false,

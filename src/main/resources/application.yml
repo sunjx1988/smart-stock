@@ -45,5 +45,8 @@ shiro:
   loginUrl: /login
   unauthorizedUrl: /403
 
+setting:
+  #财务数据抓取的起始年份
+  fetch-begin-year: 2010
 
 

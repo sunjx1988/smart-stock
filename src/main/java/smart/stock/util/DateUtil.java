@@ -14,8 +14,7 @@ public class DateUtil {
     /**
      * 从2010年至今的全部年份
      */
-    public static int[] allYears(){
-        int start = 2010;
+    public static int[] allYears(int start){
         int end = DateUtils.createNow().get(Calendar.YEAR);
         int [] all = new int[end - start + 1];
 
