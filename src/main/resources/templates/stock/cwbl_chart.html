@@ -4,15 +4,15 @@
 <body>
 <div th:fragment="chart" class="col-md-12" >
     <script th:src="@{/plugins/echarts/echarts-all.js}"></script>
-    <script th:src="@{/js/stock/zxcwzb_chart.js}"></script>
+    <script th:src="@{/js/stock/cwbl_chart.js}"></script>
     <div class="row">
         <div class="col-md-12">
-            <h3>基本财务指标</h3>
+            <h3>财务比率</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form id="zxcwzbForm" class="form-inline">
+            <form id="cwblForm" class="form-inline">
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label class="col-md-3 control-label" for="paramStartYear">年份<i style="color: red">*</i></label>
@@ -37,13 +37,13 @@
                 </div>
             </form>
             <div class="btns">
-                <a class="btn btn-primary" href="javascript:;" id="zxcwzbSearchBtn">查询</a>
+                <a class="btn btn-primary" href="javascript:;" id="cwblSearchBtn">查询</a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="zxcwzbChart" style="height: 500px; width: 100%">
+            <div id="cwblChart" style="height: 500px; width: 100%">
             </div>
         </div>
     </div>

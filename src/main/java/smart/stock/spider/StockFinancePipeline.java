@@ -30,7 +30,7 @@ public abstract class StockFinancePipeline implements Pipeline {
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        List<String> params = processCodeAndDate(resultItems.getRequest().getUrl(), SpiderUrlConst.ZXCWZB);
+        List<String> params = SpiderUtil.getParamFromTemplate(resultItems.getRequest().getUrl(), getFinanceInfoType().getUrl());
         String code = params.get(0);
         String dateParam = params.get(1);
         String dateParamSuffix = dateParam.substring(4);
@@ -40,7 +40,7 @@ public abstract class StockFinancePipeline implements Pipeline {
             StockFinanceDto stockFinance = new StockFinanceDto();
             stockFinance.setName(stockDto.getName());
             stockFinance.setCode(code);
-            stockFinance.setType(Constants.FinanceInfoTypes.ZXCWZB.getKey());
+            stockFinance.setType(getFinanceInfoType().getKey());
             stockFinance.setDate(dateParam);
             stockFinance.setDateType(Constants.FinanceDateTypes.getKeyByText(dateParamSuffix));
             stockFinance.setInfo(JSON.toJSONString(resultItems.getAll()));
@@ -52,6 +52,7 @@ public abstract class StockFinancePipeline implements Pipeline {
         }
     }
 
-    //返回code 和 日期
-    protected abstract List<String> processCodeAndDate(String url, String urlTemplate);
+    //抓取页面Url template
+    protected abstract Constants.FinanceInfoTypes getFinanceInfoType();
+
 }

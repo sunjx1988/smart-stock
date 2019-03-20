@@ -2,7 +2,9 @@ package smart.stock.spider;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import smart.stock.constant.Constants;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -42,7 +44,25 @@ public abstract class StockFinanceSpider implements PageProcessor {
         }
     }
 
-    protected void run(String url, String code, String date, Pipeline pipeline){
+    //最新财务指标
+    @Async
+    public void fetch(String code, String year, int type){
+
+        if(type > 0){
+            run(getFinanceInfoTypes().getUrl(), code, year + Constants.FinanceDateTypes.getTextByKey(type), getStockFinancePipeline());
+        }else{
+            //时期类型小于等于0查全部
+            for(Constants.FinanceDateTypes value : Constants.FinanceDateTypes.values()){
+                run(getFinanceInfoTypes().getUrl(), code, year + value.getText(), getStockFinancePipeline());
+            }
+        }
+    }
+
+    protected abstract StockFinancePipeline getStockFinancePipeline();
+
+    protected abstract Constants.FinanceInfoTypes getFinanceInfoTypes();
+
+    private void run(String url, String code, String date, Pipeline pipeline){
         Spider.create(this)
                 .addUrl(String.format(url, code, date))
                 .thread(5)

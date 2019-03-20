@@ -18,7 +18,6 @@ function download(url, data, method){
 function modal(content, title, sureEvent){
     $("#modal").html(template("modal-tpl",{title: title, content: content})).modal('show');
     $("#sureBtn").on("click", sureEvent);
-    $("#modal").modal('hide');
 }
 
 //关闭模态框

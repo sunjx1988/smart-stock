@@ -14,6 +14,7 @@ import smart.stock.dto.StockFinanceDto;
 import smart.stock.entity.Stock;
 import smart.stock.mapper.StockFinanceMapper;
 import smart.stock.mapper.StockMapper;
+import smart.stock.spider.CwblSpider;
 import smart.stock.spider.ZxcwzbSpider;
 import smart.stock.util.DateUtil;
 
@@ -36,6 +37,8 @@ public class StockFinanceService {
 
     @Autowired
     private ZxcwzbSpider zxcwzbSpider;
+    @Autowired
+    private CwblSpider cwblSpider;
 
     @Autowired
     private StockMapper stockMapper;
@@ -52,11 +55,12 @@ public class StockFinanceService {
 
         if(StringUtils.isEmpty(param.getSpiderParamType())){
             //TODO 财务指标类型为空查全部
-            zxcwzbSpider.zxcwzb(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            zxcwzbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            cwblSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.ZXCWZB.getKey())){
-            zxcwzbSpider.zxcwzb(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
+            zxcwzbSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.CWBL.getKey())){
-
+            cwblSpider.fetch(param.getSpiderParamStockCode(), param.getSpiderParamYear(), param.getSpiderParamDateType());
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.CFZ.getKey())){
 
         }else if(param.getSpiderParamType().equals(Constants.FinanceInfoTypes.LR.getKey())){

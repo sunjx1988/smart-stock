@@ -267,18 +267,19 @@ public class Constants {
      * 财务报表数据类型
      */
     public enum FinanceInfoTypes{
-        ZXCWZB ("ZXCWZB", "最新财务指标"),
-        CWBL ("CWBL", "财务比率"),
-        CFZ ("CFZ", "资产负债"),
-        LR ("LR", "利润表"),
-        XJLL ("XJLL", "现金流量"),
-        ZYSRFB ("ZYSRFB", "主营收入"),
-        ZCJZ ("ZCJZ", "资产减值"),
-        YSZK ("YSZK", "应收账款"),
-        QTYSZK ("QTYSZK", "其他应收账款"),
+        ZXCWZB ("ZXCWZB", "最新财务指标", "http://stockdata.stock.hexun.com/2008/zxcwzb.aspx?stockid=%s&accountdate=%s"),
+        CWBL ("CWBL", "财务比率", "http://stockdata.stock.hexun.com/2008/cwbl.aspx?stockid=%s&accountdate=%s"),
+        CFZ ("CFZ", "资产负债", "http://stockdata.stock.hexun.com/2008/zcfz.aspx?stockid=%s&accountdate=%s"),
+        LR ("LR", "利润表", "http://stockdata.stock.hexun.com/2008/lr.aspx?stockid=%s&accountdate=%s"),
+        XJLL ("XJLL", "现金流量", "http://stockdata.stock.hexun.com/2008/xjll.aspx?stockid=%s&accountdate=%s"),
+        ZYSRFB ("ZYSRFB", "主营收入", "http://stockdata.stock.hexun.com/2008/zysrfb.aspx?stockid=%s&accountdate=%s"),
+        ZCJZ ("ZCJZ", "资产减值", "http://stockdata.stock.hexun.com/2008/zcjz.aspx?stockid=%s&accountdate=%s"),
+        YSZK ("YSZK", "应收账款", "http://stockdata.stock.hexun.com/2008/yszk.aspx?stockid=%s&accountdate=%s"),
+        QTYSZK ("QTYSZK", "其他应收账款", "http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=%s&accountdate=%s"),
         ;
         private String key;
         private String text;
+        private String url;
 
         public String getKey() {
             return key;
@@ -288,9 +289,14 @@ public class Constants {
             return text;
         }
 
-        FinanceInfoTypes(String key, String text) {
+        public String getUrl() {
+            return url;
+        }
+
+        FinanceInfoTypes(String key, String text, String url) {
             this.key = key;
             this.text = text;
+            this.url = url;
         }
     }
 

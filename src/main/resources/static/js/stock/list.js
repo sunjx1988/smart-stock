@@ -17,6 +17,7 @@ function fetchAllFinanceInfo() {
                 if(ret.code != '0000'){
                     message(ret.msg);
                 }
+                closeModal();
             }
         })
     })

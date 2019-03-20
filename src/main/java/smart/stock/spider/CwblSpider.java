@@ -2,6 +2,7 @@ package smart.stock.spider;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import smart.stock.constant.Constants;
 
@@ -12,18 +13,19 @@ import smart.stock.constant.Constants;
  */
 @Slf4j
 @Component
-public class ZxcwzbSpider extends StockFinanceSpider {
+public class CwblSpider extends StockFinanceSpider {
 
     @Autowired
-    private ZxcwzbPipeline zxcwzbPipeline;
+    private CwblPipeline cwblPipeline;
+
 
     @Override
     protected StockFinancePipeline getStockFinancePipeline() {
-        return zxcwzbPipeline;
+        return cwblPipeline;
     }
 
     @Override
     protected Constants.FinanceInfoTypes getFinanceInfoTypes() {
-        return Constants.FinanceInfoTypes.ZXCWZB;
+        return Constants.FinanceInfoTypes.CWBL;
     }
 }
