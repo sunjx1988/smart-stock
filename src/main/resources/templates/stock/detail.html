@@ -47,16 +47,16 @@
             </div>
         </div>
 
-        <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
+        <div th:if="${mode == 'detail'}" class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
             <div th:if="${mode == 'detail'}" th:replace="/stock/zxcwzb_chart :: chart" />
         </div>
 
-        <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
-            <div th:if="${mode == 'detail'}" th:replace="/stock/cwbl_chart :: chart" />
+        <div th:if="${mode == 'detail'}" class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
+            <div th:replace="/stock/cwbl_chart :: chart" />
         </div>
 
-        <div class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
-            <div th:if="${mode == 'detail'}" th:replace="/stock/zcfz_chart :: chart" />
+        <div th:if="${mode == 'detail'}" class="row" style="margin-top: 30px; border-top: 1px solid #ccc">
+            <div th:replace="/stock/zcfz_chart :: chart" />
         </div>
     </section>
 </div>
