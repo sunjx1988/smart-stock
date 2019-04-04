@@ -122,13 +122,22 @@ public class StockTradeService {
         fundMapper.updateByPrimaryKey(fund);
 
         //更新fundstock记录
-        FundStockDto fundStockDto;
+        FundStockDto fundStockDto = null;
         FundStockDto fundStockParam = new FundStockDto();
         fundStockParam.setParamFundId(fund.getId());
         fundStockParam.setCode(stock.getCode());
         List<FundStockDto> fundStockList = fundStockMapper.list(fundStockParam);
 
-        if(CollectionUtils.isEmpty(fundStockList)){
+        if(!CollectionUtils.isEmpty(fundStockList)){
+            for(FundStockDto fundStock: fundStockList){
+                if(fundStock.getCode().equals(stock.getCode())){
+                    fundStockDto = fundStock;
+                    break;
+                }
+            }
+        }
+
+        if(null == fundStockDto){
             fundStockDto = new FundStockDto();
             fundStockDto.setName(stock.getName());
             fundStockDto.setCode(stock.getCode());
@@ -140,8 +149,6 @@ public class StockTradeService {
             fundStockDto.setCreateTime(new Date());
             fundStockDto.setMarketType(-1);
             fundStockDto.setStatus(Constants.FundStockStatus.Holding.getKey());
-        }else{
-            fundStockDto = fundStockList.get(0);
         }
 
         fundStockDto.setUnit(stockTrade.getUnit() + fundStockDto.getUnit());

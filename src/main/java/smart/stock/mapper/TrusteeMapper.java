@@ -41,5 +41,5 @@ public interface TrusteeMapper {
 
     List<Options> options();
 
-    int trusteeNum(Long fundId);
+    int trusteeNum();
 }

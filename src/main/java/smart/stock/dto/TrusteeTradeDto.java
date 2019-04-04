@@ -17,8 +17,10 @@ public class TrusteeTradeDto extends TrusteeTrade {
     private int page = 1;
     private int rows = 10;
 
+    private Long paramTrusteeId;
     private Date paramEndDateStart;
     private Date paramEndDateEnd;
+    private Integer paramStatus;
 
     //查询结果
     private String interestRateText;

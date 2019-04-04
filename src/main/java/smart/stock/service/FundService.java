@@ -48,7 +48,7 @@ public class FundService {
     @Transactional
     public void trusteeNum(Long fundId) {
         //查询份额不为0的信托人数
-        int trusteeNum = trusteeMapper.trusteeNum(fundId);
+        int trusteeNum = trusteeMapper.trusteeNum();
         Fund fund = fundMapper.selectByPrimaryKey(fundId);
         fund.setNumOfTrustee(trusteeNum);
         fundMapper.updateByPrimaryKey(fund);

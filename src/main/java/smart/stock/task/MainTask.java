@@ -47,9 +47,6 @@ public class MainTask {
     private StockPriceMapper stockPriceMapper;
 
     @Autowired
-    private StockMapper stockMapper;
-
-    @Autowired
     private FundService fundService;
 
     @Autowired
@@ -69,7 +66,8 @@ public class MainTask {
 
 
     //周六日两天无交易,所以这两天不执行收盘价任务,和报表统计
-    @Scheduled(cron = "0 0 18 * * ?")
+//    @Scheduled(cron = "0 0 18 * * ?")
+    @Scheduled(cron = "0 10 18 * * ?")
 //    @Scheduled(cron = "0 */1 * * * ?")
     public void task(){
         try {
@@ -209,7 +207,7 @@ public class MainTask {
         int fail = 0;
         //查询今天0点前的未确认认购记录
         TrusteeTradeDto param = new TrusteeTradeDto();
-        param.setStatus(Constants.TrusteeTradeStatus.Confirming.getKey());
+        param.setParamStatus(Constants.TrusteeTradeStatus.Confirming.getKey());
         List<TrusteeTradeDto> list = trusteeTradeService.list(param);
 
         if(!CollectionUtils.isEmpty(list)){
@@ -245,7 +243,7 @@ public class MainTask {
         //查询今天0点前的未确认认购记录
         TrusteeTradeDto param = new TrusteeTradeDto();
         param.setParamEndDateEnd(new Date());
-        param.setStatus(Constants.TrusteeTradeStatus.Confirmed.getKey());
+        param.setParamStatus(Constants.TrusteeTradeStatus.Confirmed.getKey());
         List<TrusteeTradeDto> list = trusteeTradeService.list(param);
 
         if(!CollectionUtils.isEmpty(list)){

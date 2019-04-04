@@ -74,8 +74,8 @@ public class TrusteeTradeService {
         }
 
         //利率
-        if(0 == trusteeTradeDto.getCycle()){
-            throw BaseException.error("利率不能为空",null);
+        if(null == trusteeTradeDto.getInterestRate()){
+            trusteeTradeDto.setInterestRate(0);
         }
 
         //金额

@@ -145,4 +145,6 @@ http://stockdata.stock.hexun.com/2008/qtyszk.aspx?stockid=000536&accountdate=201
 
 股票下方添加,个人分析日志记录功能
 
+基金ADMIN盈利计算
+
 ```

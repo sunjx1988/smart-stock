@@ -317,7 +317,6 @@
     FROM
         trustee t
     WHERE
-        t.fund_id = #{fundId}
-        AND t.total_unit &gt; 0
+        t.principal &gt; 0
   </select>
 </mapper>

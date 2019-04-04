@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import smart.stock.constant.Constants;
 import smart.stock.dto.TrusteeByDayDto;
 import smart.stock.dto.TrusteeDto;
 import smart.stock.dto.TrusteeTradeDto;
@@ -14,12 +15,10 @@ import smart.stock.entity.Fund;
 import smart.stock.entity.FundByDay;
 import smart.stock.entity.TrusteeTrade;
 import smart.stock.mapper.*;
+import smart.stock.util.DateUtil;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Auther: sunjx
@@ -60,6 +59,12 @@ public class TrusteeByDayService {
                 Fund fund = fundMapper.selectByPrimaryKey(fundId);
                 trusteeByDayDto.setFundId(fundId);
                 trusteeByDayDto.setFundName(fund.getName());
+                trusteeByDayDto.setTotalUnit(0);
+                trusteeByDayDto.setPrincipal(BigDecimal.ZERO);
+                trusteeByDayDto.setTotal(BigDecimal.ZERO);
+                //计算收益, 收益率
+                trusteeByDayDto.setIncome(BigDecimal.ZERO);
+                trusteeByDayDto.setRateOfReturn(BigDecimal.ZERO);
 
                 if(null != fundByDay){
                     trusteeByDayDto.setNetUnitValue(fundByDay.getNetUnitValue());
@@ -69,20 +74,51 @@ public class TrusteeByDayService {
 
                 //总份额, 总本金, 总资产
                 TrusteeTradeDto sumUnitAndTotal = trusteeTradeMapper.sumUnitAndTotal(fundId, trusteeId);
+
                 if(null != sumUnitAndTotal){
                     trusteeByDayDto.setTotalUnit(sumUnitAndTotal.getUnit());
                     trusteeByDayDto.setPrincipal(sumUnitAndTotal.getTotal());
-                    trusteeByDayDto.setTotal(trusteeByDayDto.getNetUnitValue().multiply(new BigDecimal(trusteeByDayDto.getTotalUnit())));
+
+                    //认购记录
+                    TrusteeTradeDto trusteeTradeParam = new TrusteeTradeDto();
+                    trusteeTradeParam.setParamTrusteeId(trusteeId);
+                    trusteeTradeParam.setParamStatus(Constants.TrusteeTradeStatus.Confirmed.getKey());
+                    trusteeTradeParam.setParamEndDateStart(new Date());
+                    List<TrusteeTradeDto> trusteeTradeRecord = trusteeTradeMapper.list(trusteeTradeParam);
+
+                    if(!CollectionUtils.isEmpty(trusteeTradeRecord)){
+                        for(TrusteeTradeDto tt : trusteeTradeRecord){
+                            //锁定已满年数
+                            int year = DateUtil.floorDiffYear(new Date(), tt.getStartDate());
+
+                            //基金的分红率
+                            BigDecimal fundShareRate = trusteeByDayDto.getNetUnitValue()
+                                    .subtract(BigDecimal.ONE)
+                                    .subtract(new BigDecimal(tt.getInterestRate() * year))
+                                    .multiply(new BigDecimal(0.6));
+
+                            //如果净值小于1,基金无分红
+                            if(trusteeByDayDto.getNetUnitValue().compareTo(BigDecimal.ONE) < 0){
+                                fundShareRate = BigDecimal.ZERO;
+                            }
+
+                            //总资产需要扣除基金分红
+
+                            //基金的分红率 = (基金净值 - 1 - (利息率 * 锁定已满年数)) * 0.6
+                            //基金净值 - 1 表示基金盈利率
+                            //盈利率 - (利息率 * 锁定已满年数) 表示基金扣除利息部分后的盈利率
+                            //基金扣除利息部分后的盈利率 * 0.6 表示盈利扣除利息率后,基金的分红率
+
+                            //如果基金分红率 <= 0, 则信托人净值 = 1 + (利息率 * 锁定已满年数)
+
+                            //累加 (扣除基金分红后的净值 * 份额) 得到总资产
+                            trusteeByDayDto.setTotal(trusteeByDayDto.getTotal().add(new BigDecimal(tt.getUnit()).multiply(trusteeByDayDto.getNetUnitValue().subtract(fundShareRate))));
+                        }
+                    }
+
                     //计算收益, 收益率
                     trusteeByDayDto.setIncome(trusteeByDayDto.getTotal().subtract(trusteeByDayDto.getPrincipal()));
                     trusteeByDayDto.setRateOfReturn(trusteeByDayDto.getIncome().divide(trusteeByDayDto.getPrincipal(), 3));
-                }else{
-                    trusteeByDayDto.setTotalUnit(0);
-                    trusteeByDayDto.setPrincipal(BigDecimal.ZERO);
-                    trusteeByDayDto.setTotal(BigDecimal.ZERO);
-                    //计算收益, 收益率
-                    trusteeByDayDto.setIncome(BigDecimal.ZERO);
-                    trusteeByDayDto.setRateOfReturn(BigDecimal.ZERO);
                 }
 
                 trusteeByDayMapper.insert(trusteeByDayDto);

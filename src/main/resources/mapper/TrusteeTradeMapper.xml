@@ -431,8 +431,11 @@
     FROM
         trustee_trade
     WHERE 1=1
-    <if test="status != null">
-      AND `status` = #{status}
+    <if test="paramTrusteeId != null">
+      AND trustee_id = #{paramTrusteeId}
+    </if>
+    <if test="paramStatus != null">
+      AND `status` = #{paramStatus}
     </if>
     <if test="paramEndDateStart != null">
       AND end_date <![CDATA[>=]]> #{paramEndDateStart}

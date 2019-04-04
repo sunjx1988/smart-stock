@@ -20,6 +20,7 @@ import smart.stock.mapper.TrusteeMapper;
 import smart.stock.service.BaseException;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -86,6 +87,7 @@ public class ShiroService {
             if(null == user.getStatus()){
                 user.setStatus(Constants.TrusteeStatus.Disabled.getKey());
             }
+            user.setCreateTime(new Date());
             trusteeMapper.insert(user);
         }else{
             trusteeMapper.updateByPrimaryKeySelective(user);

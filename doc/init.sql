@@ -240,6 +240,4 @@ INSERT INTO `trustee` VALUES ('1', 'sun', '100', 'sunjx1988@163.com', '0cLUnxHdk
 INSERT INTO `role` VALUES ('1', '系统管理员', 'admin', '0', '2019-03-08 22:06:53');
 INSERT INTO `trustee_role` VALUES ('1', '1', '1', '2019-03-08 22:07:03');
 
-INSERT INTO `fund` VALUES ('1', '企业号', '0.00', '0.00', '0.00', '0', '0', '2019-03-10 15:56:17', '2019-03-10 15:56:13');
-INSERT INTO `stock` VALUES ('1', '浦发银行', '600000', '2019-03-10 18:23:28');
-INSERT INTO `stock` VALUES ('2', '平安银行', '000001', '2019-03-10 18:23:28');
+INSERT INTO `fund` VALUES ('1', '企业号', '0.00', '0.00', '0.00', '0', '0', '2019-03-01 00:00:00', '2019-03-01 00:00:00');
